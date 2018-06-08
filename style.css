@@ -34,7 +34,7 @@ body {
 	margin: 0px 0px 0px 0px;
 	background-color: #EDEFED;
 	width: 100%;
-	height: 600px;
+	height: 330px;
 	overflow: hidden;
 }
 
@@ -48,4 +48,27 @@ body {
 	overflow: hidden;
 	max-width: 80%;
 	min-width: 20%;
+}
+
+#ButtonEntreeField {
+	border-radius: 5px;
+	width: 10%;
+	margin-left: 45%;
+	margin-top: 15px;
+	background-color: #118488;
+	border:solid black 0.5px;
+	height: 30px;
+
+}
+
+
+
+/*Output Area */
+
+#DivOutputField {
+	margin: 0px 0px 0px 0px;
+	background-color: yellow;
+	width: 100%;
+	height: 330px;
+	overflow: hidden;
 }
