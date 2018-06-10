@@ -14,26 +14,61 @@
 
 </head>
 <body>
+
 <div id="top"></div>
-
-
 	<div id="header">
 		 <img id="HeaderImage" src="kitchen.jpg" alt="Airbnb kitchen"> 
 	</div>	
 
 
+<!-- Input Area -->
 <div id=DivEntreeField>
 <textarea id="EntreeField" name="Entreefield" placeholder="Go to the Nova reservation page and select Snapshot on the bottom of the page. 
 Copy all the text on that page, and paste it in here"></textarea>	
 <button id="ButtonEntreeField" onclick="transformtext()">Click Me!</button>
 </div>
 
-<div id="DivOutputField"></div>
-<table>
-	<tr>
-		<td>Cancellation policy</td>	
-		<td id=cancel_policy>2</td>	
-	</tr>
-</table>
+
+
+<!-- Output Area -->
+<div id="DivOutputField">
+
+
+	<!-- Booking Policy -->
+	<div id="BookingDetails">
+		<table class="tables">
+			<tr>
+				<td class="NameTable">Reservation code</td>	
+				<td class="DataTable" id=reservation_code></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Created at</td>	
+				<td class="DataTable" id=created_at></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Pending Began at</td>	
+				<td class="DataTable" id=pending_began_at></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Pending Expired at</td>	
+				<td class="DataTable" id=pending_expires_at></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Host Responded at</td>	
+				<td class="DataTable" id=host_Responded_at></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Canceled at</td>	
+				<td class="DataTable" id=canceled_at></td>	
+			</tr>
+			<tr>
+				<td class="NameTable">Cancelation policy</td>	
+				<td class="DataTable" id=cancel_policy></td>	
+			</tr>
+		</table>
+	</div>
+
+
+</div>
 </body>
 </html>

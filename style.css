@@ -73,11 +73,30 @@ body {
 	height: 330px;
 }
 
-table {
-	margin-left:20%;
-	top:50px;
+
+#BookingDetails{
+	width: 400px;
+	margin-left: 20%;
+	margin-top: 50px;
 }
 
-table, th, td {
+table {
+	width:100%;
+	padding:0px;
+	display: none;
+}
+
+tr {
+}
+
+table, tr, td {
     border: 1px solid black;
+}
+
+.NameTable {
+	width:200px;
+}
+
+.DataTable {
+	width:200px;
 }
