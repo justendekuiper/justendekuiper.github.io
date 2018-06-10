@@ -23,8 +23,10 @@
 
 <!-- Input Area -->
 <div id=DivEntreeField>
-<textarea id="EntreeField" name="Entreefield" placeholder="Go to the Nova reservation page and select Snapshot on the bottom of the page. 
-Copy all the text on that page, and paste it in here"></textarea>	
+<textarea id="EntreeField" name="Entreefield" placeholder="To use the tool, follow these steps:
+1. Go to the reservation page in Nova and select view Snapshots (bottom of the screen).
+2. Select all text (CTR + A  /  CMD + A) and copy text.
+3. Paste all text inside here."></textarea>	
 <button id="ButtonEntreeField" onclick="transformtext()">Click Me!</button>
 </div>
 
@@ -32,10 +34,10 @@ Copy all the text on that page, and paste it in here"></textarea>
 
 <!-- Output Area -->
 <div id="DivOutputField">
-
+	<div id="DropdownReservationDetails" onclick="collapseReservationDetails()"><h4>Details</h4> </div>
 
 	<!-- Booking Policy -->
-	<div id="BookingDetails">
+	<div id="BookingDetails" style="display: none;">
 		<table class="tables">
 			<tr>
 				<td class="NameTable">Reservation code</td>	
@@ -67,6 +69,49 @@ Copy all the text on that page, and paste it in here"></textarea>
 			</tr>
 		</table>
 	</div>
+
+
+
+
+
+	<!-- Pricing Data -->
+	<div id="DropdownReservationPricing" onclick="collapseReservationPrice()"><h4>Pricing</h4> </div>
+
+	<div id="PricingData" style="display: none;">
+		<table class="tables">
+			<tr>
+				<td class="NameTableNight">Night 1</td>	
+				<td class="DataTableNight" id=DateNighght1></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 2</td>	
+				<td class="DataTableNight" id=DateNighght2></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 3</td>	
+				<td class="DataTableNight" id=DateNighght3></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 4</td>	
+				<td class="DataTableNight" id=DateNighght4></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 5</td>	
+				<td class="DataTableNight" id=DateNighght5></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 6</td>	
+				<td class="DataTableNight" id=DateNighght6></td>	
+			</tr>
+			<tr>
+				<td class="NameTableNight">Night 7</td>	
+				<td class="DataTableNight" id=DateNighght7></td>	
+			</tr>
+		</table>
+	</div>
+
+
+</div>
 
 
 </div>

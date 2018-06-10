@@ -16,8 +16,28 @@ $(document).ready(function () {
 
 
 
+/* Clicking on Dropdown menu */
+
+/* Details */
+function collapseReservationDetails() {
+    var x = document.getElementById("BookingDetails");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
 
+/* Pricing */
+function collapseReservationPrice() {
+    var x = document.getElementById("PricingData");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
 
 
@@ -34,7 +54,8 @@ $(document).ready(function () {
 
 /*changing inserted text*/
 function transformtext() {
- document.getElementsByClassName('tables')[0].style.display = "block";
+document.getElementsByClassName('tables')[0].style.display = "block";
+document.getElementsByClassName('tables')[1].style.display = "block"
 
 
 var insertedtext = document.getElementById("EntreeField").value;

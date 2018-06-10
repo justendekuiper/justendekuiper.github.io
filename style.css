@@ -59,6 +59,7 @@ body {
 	background-color: #118488;
 	border:solid black 0.5px;
 	height: 30px;
+	display: block;
 
 }
 
@@ -67,23 +68,51 @@ body {
 /*Output Area */
 
 #DivOutputField {
+	position: relative;
 	margin: 0px 0px 0px 0px;
 	background-color: white;
 	width: 100%;
-	height: 330px;
+	height: 630px;
+
+}
+
+
+h4 {
+	position: relative;
+	bottom:50%;
+	text-align: center;
+}
+
+#DropdownReservationDetails{
+	position: relative;
+	left: 20%;
+	width: 60%;
+	height: 30px;
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: #80bfff;
+	border: solid darkblue 2px;
+}
+
+#DropdownReservationDetails:hover{
+	cursor: pointer;
+	background-color: #66b3ff;
 }
 
 
 #BookingDetails{
-	width: 400px;
-	margin-left: 20%;
-	margin-top: 50px;
+	position: relative;
+	width: 35%;
+	left: 15%;
+	padding-top: 10px;
+	margin: 0px 0px 0px 0px;
+	border: solid yellow 1px;
 }
 
 table {
 	width:100%;
 	padding:0px;
-	display: none;
+	display: block;
 }
 
 tr {
@@ -94,9 +123,39 @@ table, tr, td {
 }
 
 .NameTable {
-	width:200px;
+	width: 1%;
 }
 
 .DataTable {
-	width:200px;
+	width: 1%;
+}
+
+
+
+#DropdownReservationPricing{
+	position: relative;
+	left: 20%;
+	width: 60%;
+	height: 30px;
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: #80bfff;
+	border: solid darkblue 2px;
+}
+
+#DropdownReservationPricing:hover{
+	cursor: pointer;
+	background-color: #66b3ff;
+}
+
+
+#PricingData {
+	position: relative;
+	width: 35%;
+	left: 15%;
+	top:20px;
+	border: solid black 1px;
+	margin: 0px 0px 0px 0px;
+	display: block;
+
 }
