@@ -1,5 +1,9 @@
-/*Inserted textfield expander */
+$(document).ready(function () {
+document.getElementById('HeaderImage').ondragstart = function() { return false; };
+});
 
+
+/*Inserted textfield expander */
 $(document).ready(function () {
   $('#EntreeField').each(function () {
     h(this);
@@ -204,7 +208,7 @@ if (insertedtext.includes("cancel_policy")) {
  
 
 
-/* Cleaning Fee */
+/* Get Cleaning Fee */
 cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
 cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
     replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
@@ -215,6 +219,45 @@ cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_
     replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
 
   
+/* Get Extra Guest Fee */
+extra_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+extra_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+
+/* Get Airbnb Guest Fee */
+airbnb_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+airbnb_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+
+/* Get FX Fee */
+fx_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+fx_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+/* Get Airbnb Host Fee */
+airbnb_host_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+
 
 
   while (replacedtext.includes("amount_micros_usd")) {
@@ -258,7 +301,7 @@ cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_
 
 
 
-
+/* Write Cleaning Fee */
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -273,19 +316,111 @@ cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_
 
 
     var a = document.createElement("td");
+    cleaning_fee_price = parseInt(cleaning_fee_price) / 1000000;
     var anode = document.createTextNode("$" + cleaning_fee_price);
     a.appendChild(anode);
     x.appendChild(a);
 
     document.getElementById("PricingTable").appendChild(x);
 
+
+
+
+/* Write Extra Guest Fee */
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    extra_guest_fee_type = extra_guest_fee_type.toLowerCase();
+    extra_guest_fee_type = extra_guest_fee_type.replace(/_/g," ");
+    extra_guest_fee_type = extra_guest_fee_type.charAt(0).toUpperCase() + extra_guest_fee_type.slice(1);
+    var anode = document.createTextNode(extra_guest_fee_type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    extra_guest_fee_price = parseInt(extra_guest_fee_price) / 1000000;
+    var anode = document.createTextNode("$" + extra_guest_fee_price);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+
+/* Write Airbnb Guest Fee */
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    airbnb_guest_fee_type = airbnb_guest_fee_type.toLowerCase();
+    airbnb_guest_fee_type = airbnb_guest_fee_type.replace(/_/g," ");
+    airbnb_guest_fee_type = airbnb_guest_fee_type.charAt(0).toUpperCase() + airbnb_guest_fee_type.slice(1);
+    var anode = document.createTextNode(airbnb_guest_fee_type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    airbnb_guest_fee_price = parseInt(airbnb_guest_fee_price) / 1000000;
+    var anode = document.createTextNode("$" + airbnb_guest_fee_price);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+
+/* Write FX Fee */
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    fx_fee_type = fx_fee_type.toLowerCase();
+    fx_fee_type = fx_fee_type.replace(/_/g," ");
+    fx_fee_type = fx_fee_type.charAt(0).toUpperCase() + fx_fee_type.slice(1);
+    var anode = document.createTextNode(fx_fee_type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    fx_fee_price = parseInt(fx_fee_price) / 1000000;
+    var anode = document.createTextNode("$" + fx_fee_price);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+
+/* Write Airbnb Host Fee */
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    airbnb_host_fee_type = airbnb_host_fee_type.toLowerCase();
+    airbnb_host_fee_type = airbnb_host_fee_type.replace(/_/g," ");
+    airbnb_host_fee_type = airbnb_host_fee_type.charAt(0).toUpperCase() + airbnb_host_fee_type.slice(1);
+    var anode = document.createTextNode(airbnb_host_fee_type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    airbnb_host_fee_price = parseInt(airbnb_host_fee_price) / 1000000;
+    var anode = document.createTextNode("$" + airbnb_host_fee_price);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+
+
+
 }
-
-
-
-
-
-
 
 
 
