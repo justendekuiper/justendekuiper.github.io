@@ -26,7 +26,14 @@ body {
 	height: 0px;
 	}
 
-
+#Copyright {
+	position: relative;
+	border: solid black 1px;
+	background-color: white;
+	position: relative;
+	top: 375px;
+	display: inline-block;
+}
 
 
 /*Entree Field */
@@ -92,6 +99,7 @@ h4 {
 	border-radius: 10px;
 	background-color: #80bfff;
 	border: solid darkblue 2px;
+	display: none;
 }
 
 #DropdownReservationDetails:hover{
@@ -141,6 +149,7 @@ table, tr, td {
 	border-radius: 10px;
 	background-color: #80bfff;
 	border: solid darkblue 2px;
+	display: none;
 }
 
 #DropdownReservationPricing:hover{

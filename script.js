@@ -54,13 +54,13 @@ function collapseReservationPrice() {
 
 /*changing inserted text*/
 function transformtext() {
-document.getElementsByClassName('tables')[0].style.display = "block";
-document.getElementsByClassName('tables')[1].style.display = "block"
+document.getElementById("DropdownReservationDetails").style.display = "block";
+document.getElementById("DropdownReservationPricing").style.display = "block"
 
 
 var insertedtext = document.getElementById("EntreeField").value;
 var insertedtoptext =  insertedtext.substring(insertedtext.indexOf("admin_notes") + 1,insertedtext.indexOf("reservation_schedule2s")-2);
-
+var insertedPricingText = insertedtext.substring(insertedtext.indexOf("pricing_snapshot_data") ,insertedtext.indexOf("admin_points")-2);
 
 /* Reservation Code */
 if (insertedtext.includes("confirmation_code")&&insertedtext.includes("coupon_id")) {
@@ -194,8 +194,92 @@ if (insertedtext.includes("cancel_policy")) {
  }
 	document.getElementById("cancel_policy").innerText = cancel_policy;
 
-}
 
+
+/* Pricing Details */
+
+  var table = document.getElementById("PricingTable");
+  var replacedtext = insertedPricingText
+  var amount_micros_usd = "";
+ 
+
+
+/* Cleaning Fee */
+cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+  
+
+
+  while (replacedtext.includes("amount_micros_usd")) {
+    
+    type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+
+    amount_micros_usd = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+
+    /* Deleting keyword from Var */
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+    var amount_usd = parseInt(amount_micros_usd) / 1000000;
+
+
+
+/* Creating table and rows */
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    type = type.toLowerCase();
+    type = type.replace(/_/g," ");
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+    var anode = document.createTextNode(type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode("$" + amount_usd);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+  }
+
+
+
+
+    var num = document.getElementById("PricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    cleaning_fee_type = cleaning_fee_type.toLowerCase();
+    cleaning_fee_type = cleaning_fee_type.replace(/_/g," ");
+    cleaning_fee_type = cleaning_fee_type.charAt(0).toUpperCase() + cleaning_fee_type.slice(1);
+    var anode = document.createTextNode(cleaning_fee_type);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode("$" + cleaning_fee_price);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("PricingTable").appendChild(x);
+
+}
 
 
 
