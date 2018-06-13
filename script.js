@@ -382,12 +382,13 @@ var num = document.getElementById("DailyPricingTable").rows.length;
     var x = document.createElement("tr");
 
 
-    var a = document.createElement("td");
+    var a = document.createElement("div");
     var anode = document.createTextNode(amenity);
     a.appendChild(anode);
+    x.className="amenityName";
     x.appendChild(a);
 
-    document.getElementById("AmenitiesTable").appendChild(x);
+    document.getElementById("AmenitiesData").appendChild(x);
 }
 
 
