@@ -486,6 +486,32 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
 
     while (replacedInsertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       var eachDiscountLine = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(':"DAILY_DISCOUNT"')+2,replacedInsertedPricingText.indexOf('"payment_pricing_item_meta":{"type"'));
+      
+      var discountNight = eachDiscountLine.substring(eachDiscountLine.indexOf('start_date')+13,eachDiscountLine.indexOf('nights')-3);
+      
+      var discountType = eachDiscountLine.replace('type":"')
+      discountType = discountType.replace('type":"')
+      discountType = discountType.substring( discountType.indexOf('type":"')+7, discountType.indexOf('price_factor'))
+      discountType = discountType.substring( 0 , discountType.indexOf('"'))
+      discountType = discountType.toLowerCase();
+      discountType = discountType.replace(/_/g," ");
+      discountType = discountType.charAt(0).toUpperCase() + discountType.slice(1);
+
+      var discountPercentage = eachDiscountLine.substring(eachDiscountLine.indexOf('price_factor')+14,eachDiscountLine.indexOf('guest_amount_currency'));
+      discountPercentage = discountPercentage.substring(discountPercentage.indexOf('.')+1,discountPercentage.indexOf(',"'));
+      discountPercentage = parseInt(discountPercentage);
+      
+      if (discountPercentage === 0) {
+        discountPercentage = 100;
+      }
+      else if (discountPercentage === 1||discountPercentage === 2||discountPercentage === 3||discountPercentage === 4||discountPercentage === 5||discountPercentage === 6||discountPercentage === 7||discountPercentage === 8||discountPercentage === 9) {
+        discountPercentage = discountPercentage *10;
+    }
+      else {
+        discountPercentage === discountPercentage;
+      }
+
+      discountPercentage = 100 - discountPercentage;
 
       replacedInsertedPricingText = replacedInsertedPricingText.replace (':"DAILY_DISCOUNT"',"X-X");
       replacedInsertedPricingText = replacedInsertedPricingText.replace ('"payment_pricing_item_meta":{"type"',"X-X");
@@ -498,7 +524,17 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
 
 
     var a = document.createElement("td");
-    var anode = document.createTextNode(eachDiscountLine);
+    var anode = document.createTextNode(discountNight);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode(discountType);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode(discountPercentage +"%");
     a.appendChild(anode);
     x.appendChild(a);
 
