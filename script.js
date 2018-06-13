@@ -480,13 +480,15 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
 
 
-if (insertedPricingText.includes("\"daily_discount\"")) {
-    var replacedInsertedPricingText = insertedPricingText
 
-    while (replacedInsertedPricingText.includes(/"daily_discount"/)) {
-      var typeDiscount = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(/"daily_discount"/)+1,replacedInsertedPricingText.indexOf(/,"amount_micro_guest":/));
+if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
+    var replacedInsertedPricingText = insertedPricingText.substring(insertedPricingText.indexOf(':"DAILY_DISCOUNT"')-2, insertedPricingText.indexOf('[{"type"'));
 
-      replacedInsertedPricingText = replacedInsertedPricingText.replace (/"daily_discount"/,"X-X");
+    while (replacedInsertedPricingText.includes(':"DAILY_DISCOUNT"')) {
+      var eachDiscountLine = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(':"DAILY_DISCOUNT"')+2,replacedInsertedPricingText.indexOf('"payment_pricing_item_meta":{"type"'));
+
+      replacedInsertedPricingText = replacedInsertedPricingText.replace (':"DAILY_DISCOUNT"',"X-X");
+      replacedInsertedPricingText = replacedInsertedPricingText.replace ('"payment_pricing_item_meta":{"type"',"X-X");
       replacedInsertedPricingText = replacedInsertedPricingText.replace (/,"amount_micro_guest":/,"X-X");
       replacedInsertedPricingText = replacedInsertedPricingText.replace (/,"amount_micro_guest":/,"X-X");
 
@@ -496,7 +498,7 @@ if (insertedPricingText.includes("\"daily_discount\"")) {
 
 
     var a = document.createElement("td");
-    var anode = document.createTextNode(typeDiscount);
+    var anode = document.createTextNode(eachDiscountLine);
     a.appendChild(anode);
     x.appendChild(a);
 
@@ -504,12 +506,14 @@ if (insertedPricingText.includes("\"daily_discount\"")) {
 
 
     }
+    }
+else {
+  var replacedInsertedPricingText = "";
+  };
 
 
-  }
 
 }  /* End of If - Checking Snapshot Type */
-
 
 
 
