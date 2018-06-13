@@ -178,53 +178,155 @@ if (insertedtext.includes("cancel_policy")) {
         if (cancel_policy_raw == "3") {
           cancel_policy = "Flexible";
         }
+        else if (cancel_policy_raw == "0") {
+        cancel_policy = "Deprecated Full Refund Before Arrival";
+        }
+        else if (cancel_policy_raw == "1") {
+        cancel_policy = "Full Refund between 5-75 day cancellation";
+        }
+        else if (cancel_policy_raw == "2") {
+        cancel_policy = "Full First 5 days None,Last 5 -75 days otherwise, ";
+        }
         else if (cancel_policy_raw == "4") {
-          cancel_policy = "Moderate";
+        cancel_policy = "Moderate";
         }
-          else if (cancel_policy_raw == "5") {
-          cancel_policy = "Strict";
+        else if (cancel_policy_raw == "5") {
+        cancel_policy = "Strict";
         }
-          else if (cancel_policy_raw == "44 With grace period") {
-          cancel_policy = "Strict with grace period";
+        else if (cancel_policy_raw == "44") {
+        cancel_policy = "Strict with Grace Period";
         }
-          else if (cancel_policy_raw == "44") {
-          cancel_policy = "Strict with grace period";
+        else if (cancel_policy_raw == "6") {
+        cancel_policy = "Super Strict 30";
         }
-          else if (cancel_policy_raw == "6") {
-          cancel_policy = "Super Strict 30";
+        else if (cancel_policy_raw == "7") {
+        cancel_policy = "No Refund";
         }
-          else if (cancel_policy_raw == "7") {
-          cancel_policy = "No Refunds";
+        else if (cancel_policy_raw == "8") {
+        cancel_policy = "Long Term";
         }
-          else if (cancel_policy_raw == "8") {
-          cancel_policy = "Long Term";
+        else if (cancel_policy_raw == "9") {
+        cancel_policy = "Super Strict 60";
         }
-          else if (cancel_policy_raw == "9") {
-          cancel_policy = "Super Strict 60";
+        else if (cancel_policy_raw == "10") {
+        cancel_policy = "New Flexible";
         }
-          else if (cancel_policy_raw=="10") {
-          cancel_policy="New Flexible";
+        else if (cancel_policy_raw == "11") {
+        cancel_policy = "New Moderate";
         }
-          else if (cancel_policy_raw=="11") {
-          cancel_policy="New Moderate";
+        else if (cancel_policy_raw == "12") {
+        cancel_policy = "New Strict";
         }
-          else if (cancel_policy_raw=="12") {
-          cancel_policy="New Strict";
+        else if (cancel_policy_raw == "13") {
+        cancel_policy = "New Super Strict 30";
         }
-          else if (cancel_policy_raw=="13") {
-          cancel_policy="New Super Strict 30";
+        else if (cancel_policy_raw == "14") {
+        cancel_policy = "New Super Strict 60";
         }
-          else if (cancel_policy_raw=="14") {
-          cancel_policy="New Super Strict 60";
+        else if (cancel_policy_raw == "15") {
+        cancel_policy = "New Long Term";
         }
-          else if (cancel_policy_raw=="15") {
-          cancel_policy="New Long Term";
+        else if (cancel_policy_raw == "40") {
+        cancel_policy = "Beyond Moderate";
         }
-          else {
+        else if (cancel_policy_raw == "41") {
+        cancel_policy = "Beyond Super Strict 95";
+        }
+        else if (cancel_policy_raw == "42") {
+        cancel_policy = "Beyond Super Strict 125";
+        }
+        else if (cancel_policy_raw == "43") {
+        cancel_policy = "No Refund";
+        }
+        else if (cancel_policy_raw == "44") {
+        cancel_policy = "48hr Grace Period Strict with 14 day cut off";
+        }
+        else if (cancel_policy_raw == "45") {
+        cancel_policy = "48 hr Grace Period Strict with mobile";
+        }
+        else if (cancel_policy_raw == "46") {
+        cancel_policy = "48hr Grace Period Strict Full Refund on mobile";
+        }
+        else if (cancel_policy_raw == "51") {
+        cancel_policy = "Tiered Pricing Non Refundable";
+        }
+        else if (cancel_policy_raw == "16") {
+        cancel_policy = "(Test) Flexible Grace Period";
+        }
+        else if (cancel_policy_raw == "17") {
+        cancel_policy = "(Test)Moderate Grace Period";
+        }
+        else if (cancel_policy_raw == "18") {
+        cancel_policy = "Strict Grace Period";
+        }
+        else if (cancel_policy_raw == "19") {
+        cancel_policy = "(Test) Super Strict 30 Grace Period";
+        }
+        else if (cancel_policy_raw == "20") {
+        cancel_policy = "(Test) Super Strict 60 Grace Period";
+        }
+        else if (cancel_policy_raw == "21") {
+        cancel_policy = "(Test) Long Term Grace Period";
+        }
+        else if (cancel_policy_raw == "22") {
+        cancel_policy = "(Test) Flexible No Refunds";
+        }
+        else if (cancel_policy_raw == "23") {
+        cancel_policy = "(Test) Moderate No Refunds";
+        }
+        else if (cancel_policy_raw == "24") {
+        cancel_policy = "(Test) Strict No Refunds";
+        }
+        else if (cancel_policy_raw == "25") {
+        cancel_policy = "(Test) Super Strict 30 No Refunds";
+        }
+        else if (cancel_policy_raw == "26") {
+        cancel_policy = "(Test) SUperstrict 60 No Refunds";
+        }
+        else if (cancel_policy_raw == "27") {
+        cancel_policy = "(Test) Long Term No Refunds";
+        }
+        else if (cancel_policy_raw == "28") {
+        cancel_policy = "(Test) Flexible Full Refunds";
+        }
+        else if (cancel_policy_raw == "29") {
+        cancel_policy = "(Test) Moderate Full Refunds";
+        }
+        else if (cancel_policy_raw == "30") {
+        cancel_policy = "(Test) Strict Full Refunds";
+        }
+        else if (cancel_policy_raw == "31") {
+        cancel_policy = "(Test) Super Strict 30 Full Refunds";
+        }
+        else if (cancel_policy_raw == "32") {
+        cancel_policy = "(Test) Super Strict 60 Full Refunds";
+        }
+        else if (cancel_policy_raw == "33") {
+        cancel_policy = "(Test) Long Term Full Refunds";
+        }
+        else if (cancel_policy_raw == "34") {
+        cancel_policy = "(Test) New Flexible FUll Refunds";
+        }
+        else if (cancel_policy_raw == "35") {
+        cancel_policy = "(Test) New Moderate Full Refunds";
+        }
+        else if (cancel_policy_raw == "36") {
+        cancel_policy = "(Test) New Strict Full Refunds";
+        }
+        else if (cancel_policy_raw == "37") {
+        cancel_policy = "(Test) New Super Strict 30 Full Refunds";
+        }
+        else if (cancel_policy_raw == "38") {
+        cancel_policy = "(Test) New Super Strict 60 Full Refunds";
+        }
+        else if (cancel_policy_raw == "39") {
+        cancel_policy = "(Test)New Long Term Full Refunds";
+        }
+        else {
             cancel_policy = cancel_policy_raw
           }
       }
-  else {
+    else {
     cancel_policy="";
  }
 	document.getElementById("cancel_policy").innerText = cancel_policy;
@@ -256,6 +358,8 @@ document.getElementById("ListingBeds").innerText = ListingBeds;
 var ListingBaths = insertedtext.substring(insertedtext.indexOf('bathroom_type'),insertedtext.indexOf('bed_type')+15);
 ListingBaths = ListingBaths.substring(ListingBaths.indexOf('bathrooms')+11,ListingBaths.indexOf('bed_type')-2);
 document.getElementById("ListingBaths").innerText = ListingBaths;
+
+
 
 
 /* Listing Description */
@@ -367,47 +471,6 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
 
 
-/* Daily Price 
-
-  while (replacedtext.includes('payment_pricing_item_meta":{"type":')) {
-    
-    type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type":') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-
-    amount_micros_usd = replacedtext.substring(replacedtext.indexOf('"reservation_price_version_item":{"amount_micros_usd":') +54,replacedtext.indexOf(',"created_at":"'));
-
-    /* Deleting keyword from Var  
-    replacedtext = replacedtext.replace('"reservation_price_version_item":{"amount_micros_usd":', "X-X");
-    replacedtext = replacedtext.replace(',"created_at":"', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type":', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
-
-    var amount_usd = parseInt(amount_micros_usd) / 1000000; 
-
-
-/* Creating table and rows  /
-
-    var num = document.getElementById("DailyPricingTable").rows.length;
-    var x = document.createElement("tr");
-
-
-    var a = document.createElement("td");
-    type = type.toLowerCase();
-    type = type.replace(/_/g," ");
-    type = type.charAt(0).toUpperCase() + type.slice(1);
-    var anode = document.createTextNode(type);
-    a.appendChild(anode);
-    x.appendChild(a);
-
-
-    var a = document.createElement("td");
-    var anode = document.createTextNode("$" + amount_usd);
-    a.appendChild(anode);
-    x.appendChild(a);
-
-
-    document.getElementById("DailyPricingTable").appendChild(x);
-
-  }
 
 /* Get Cleaning Fee 
 cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
