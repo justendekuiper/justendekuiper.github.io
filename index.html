@@ -75,9 +75,19 @@
 
 	<!-- Daily Pricing Data -->
 	<div id="DropdownReservationPricing" onclick="collapseReservationPrice()"><h4>Pricing</h4> </div>
-
-	<div id="DailyPricingData" style="display: none;">
+<div id="DivPricingDetails" style="display: none;">
+	<div id="DailyPricingData">
 		<table class="tables" id="DailyPricingTable">
+			<tr>
+				<th class="NameTableNight">Night</th>	
+				<th class="DataTableNight">Price</th>	
+			</tr>
+
+		</table>
+	</div>
+
+	<div id="DiscountsPricingData">
+		<table class="tables" id="DiscountsPricingTable">
 			<tr>
 				<th class="NameTableNight">Night</th>	
 				<th class="DataTableNight">Price</th>	
@@ -88,6 +98,7 @@
 
 
 
+</div>
 
 	<!-- Daily Listing Details -->
 	<div id="DropdownListingDetails" onclick="collapseReservationListingDetails()"><h4>Listing Details</h4> </div>

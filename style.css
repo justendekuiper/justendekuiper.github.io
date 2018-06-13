@@ -159,20 +159,29 @@ table, tr, td {
 	background-color: #66b3ff;
 }
 
+#DivPricingDetails {
+	width: 50%;
+	margin-left: 25%;
+	margin-left: 25%;
+
+}
 
 #DailyPricingData {
 	position: relative;
-	width: 35%;
-	left: 15%;
 	border: solid black 1px;
 	margin: 10px 0px 10px 0px;
 	display: block;
-
-
 }
 
 
 
+
+
+
+
+
+
+/* Lising Details */
 #DropdownListingDetails{
 	position: relative;
 	left: 20%;
@@ -197,6 +206,9 @@ table, tr, td {
 	margin-left: 25%;
 
 }
+
+
+
 
 #HeaderListingDetails {
 	font-weight: bold;

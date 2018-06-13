@@ -37,7 +37,7 @@ function collapseReservationDetails() {
 
 /* Pricing */
 function collapseReservationPrice() {
-    var x = document.getElementById("DailyPricingData");
+    var x = document.getElementById("DivPricingDetails");
     if (x.style.display === "none") {
         x.style.display = "block";
         $('html,body').animate({
@@ -393,7 +393,15 @@ var num = document.getElementById("DailyPricingTable").rows.length;
 
 
 
-/* Pricing Details */
+
+
+
+
+
+
+/* !! Pricing Details !! */
+
+
 
   var table = document.getElementById("DailyPricingTable");
   var amount_micros_usd = "";
@@ -404,6 +412,9 @@ var num = document.getElementById("DailyPricingTable").rows.length;
 if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
   var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
 }
+ 
+
+/* Snapshot Type 1 */
   else {
     var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
     var replacedtext = insertedDailyPricingText;
@@ -465,9 +476,45 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
     document.getElementById("DailyPricingTable").appendChild(x);
 
-  }}
+  }
 
 
+
+if (insertedPricingText.includes("\"daily_discount\"")) {
+    var replacedInsertedPricingText = insertedPricingText
+
+    while (replacedInsertedPricingText.includes(/"daily_discount"/)) {
+      var typeDiscount = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(/"daily_discount"/)+1,replacedInsertedPricingText.indexOf(/,"amount_micro_guest":/));
+
+      replacedInsertedPricingText = replacedInsertedPricingText.replace (/"daily_discount"/,"X-X");
+      replacedInsertedPricingText = replacedInsertedPricingText.replace (/,"amount_micro_guest":/,"X-X");
+      replacedInsertedPricingText = replacedInsertedPricingText.replace (/,"amount_micro_guest":/,"X-X");
+
+
+    var num = document.getElementById("DiscountsPricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode(typeDiscount);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("DiscountsPricingTable").appendChild(x);
+
+
+    }
+
+
+  }
+
+}  /* End of If - Checking Snapshot Type */
+
+
+
+
+
+} /* End of Function TransformText */
 
 
 
@@ -644,7 +691,6 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
 
 */
 
-}
 
 
 
