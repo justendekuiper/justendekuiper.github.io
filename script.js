@@ -19,7 +19,6 @@ $(document).ready(function () {
 
 
 
-
 /* Clicking on Dropdown menu */
 
 /* Details */
@@ -27,6 +26,9 @@ function collapseReservationDetails() {
     var x = document.getElementById("BookingDetails");
     if (x.style.display === "none") {
         x.style.display = "block";
+        $('html,body').animate({
+        scrollTop: $("#DropdownReservationDetails").offset().top + (-10)},
+        'slow');
     } else {
         x.style.display = "none";
     }
@@ -35,15 +37,31 @@ function collapseReservationDetails() {
 
 /* Pricing */
 function collapseReservationPrice() {
-    var x = document.getElementById("PricingData");
+    var x = document.getElementById("DailyPricingData");
     if (x.style.display === "none") {
         x.style.display = "block";
+        $('html,body').animate({
+        scrollTop: $("#DropdownReservationPricing").offset().top + (-10)},
+        'slow');
     } else {
         x.style.display = "none";
     }
 }
 
 
+/* Listing Details */
+  function collapseReservationListingDetails() {
+    var x = document.getElementById("DivListingDetails");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        $('html,body').animate({
+        scrollTop: $("#DropdownListingDetails").offset().top + (-10)},
+        'slow');
+    } else {
+        x.style.display = "none";
+    }
+}   
+  
 
 
 /*function transformtext() {
@@ -58,8 +76,21 @@ function collapseReservationPrice() {
 
 /*changing inserted text*/
 function transformtext() {
+
 document.getElementById("DropdownReservationDetails").style.display = "block";
-document.getElementById("DropdownReservationPricing").style.display = "block"
+document.getElementById("DropdownReservationPricing").style.display = "block";
+document.getElementById("DropdownListingDetails").style.display = "block";
+
+
+
+        /* Scroll To Output */
+        $('html,body').animate({
+        scrollTop: $("#DropdownReservationDetails").offset().top + (-50)},
+        'slow');
+
+
+
+
 
 
 var insertedtext = document.getElementById("EntreeField").value;
@@ -199,85 +230,163 @@ if (insertedtext.includes("cancel_policy")) {
 	document.getElementById("cancel_policy").innerText = cancel_policy;
 
 
+/* Listing Details */
+
+/* Listing title */
+var listingTitle = insertedtext.substring(insertedtext.indexOf('main_photo_is_dirty'),insertedtext.indexOf('place_recommendations_count'));
+listingTitle = listingTitle.substring(listingTitle.indexOf('monthly_price_native'),listingTitle.indexOf('native_currency')-1);
+listingTitle = listingTitle.substring(listingTitle.indexOf('name')+6);
+document.getElementById("HeaderListingDetails").innerText = listingTitle;
+
+
+
+/* Listing Icon Numbers */
+var listingGuests = insertedtext.substring(insertedtext.indexOf('person_capacity')-1,insertedtext.indexOf('phone_country'));
+listingGuests = listingGuests.substring(listingGuests.indexOf('person_capacity')+17,listingGuests.indexOf('phone')-2);
+document.getElementById("ListingGuests").innerText = listingGuests;
+
+var listingBedrooms = insertedtext.substring(insertedtext.indexOf('bed_type')-1,insertedtext.indexOf('bookmarks_count'));
+listingBedrooms = listingBedrooms.substring(listingBedrooms.indexOf('bedrooms')+10,listingBedrooms.indexOf('beds')-2);
+document.getElementById("ListingBedrooms").innerText = listingBedrooms;
+
+var ListingBeds = insertedtext.substring(insertedtext.indexOf('bed_type'),insertedtext.indexOf('bookmarks_count')+20);
+ListingBeds = ListingBeds.substring(ListingBeds.indexOf('beds')+6,ListingBeds.indexOf('bookmarks_count')-2);
+document.getElementById("ListingBeds").innerText = ListingBeds;
+
+var ListingBaths = insertedtext.substring(insertedtext.indexOf('bathroom_type'),insertedtext.indexOf('bed_type')+15);
+ListingBaths = ListingBaths.substring(ListingBaths.indexOf('bathrooms')+11,ListingBaths.indexOf('bed_type')-2);
+document.getElementById("ListingBaths").innerText = ListingBaths;
+
+
+/* Listing Description */
+var listingDescription = insertedtext.substring(insertedtext.indexOf('craigslist_provide_reminder'),insertedtext.indexOf('display_exact_location'));
+listingDescription = listingDescription.substring(listingDescription.indexOf('deleted_at'),listingDescription.indexOf('directions'));
+listingDescription = listingDescription.substring(listingDescription.indexOf('description') +13);
+document.getElementById("DescriptionListingDetails").innerText = listingDescription;
+
+
+
+/* Listing Amenities */
+var amenitiesTotal = insertedtext.substring(insertedtext.indexOf('amenities_with_names'),insertedtext.indexOf('price_usd'));
+  amenitiesTotal = amenitiesTotal.replace("\n","XXX")
+while (amenitiesTotal.includes("-")) {
+  var amenity = amenitiesTotal.substring(amenitiesTotal.indexOf("-")+2,amenitiesTotal.indexOf("\n"));
+  amenitiesTotal = amenitiesTotal.replace("-","XXX")
+  amenitiesTotal = amenitiesTotal.replace("\n","XXX")
+
+var num = document.getElementById("DailyPricingTable").rows.length;
+    var x = document.createElement("tr");
+
+
+    var a = document.createElement("td");
+    var anode = document.createTextNode(amenity);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+    document.getElementById("AmenitiesTable").appendChild(x);
+}
+
+
+
 
 /* Pricing Details */
 
-  var table = document.getElementById("PricingTable");
-  var replacedtext = insertedPricingText
+  var table = document.getElementById("DailyPricingTable");
   var amount_micros_usd = "";
- 
-
-
-/* Get Cleaning Fee */
-cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
-
-  
-/* Get Extra Guest Fee */
-extra_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-extra_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
 
 
 
-/* Get Airbnb Guest Fee */
-airbnb_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-airbnb_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+/* Creating Daily pricing Line */
+if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
+  var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
+}
+  else {
+    var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
+    var replacedtext = insertedDailyPricingText;
+    var listingCurrency = insertedPricingText.substring(insertedPricingText.indexOf('"listing_currency":"')+20,insertedPricingText.indexOf('"listing_currency":"')+23)
+
+    /*Daily Price */
+    while (replacedtext.includes('[{"type":')) {
+    start_date = replacedtext.substring(replacedtext.indexOf('start_date') +13 , replacedtext.indexOf('start_date') +23);
+    type = replacedtext.substring(replacedtext.indexOf('[{"type":') +10,replacedtext.indexOf('","start_date":"'));
+    amount_micros_usd = replacedtext.substring(replacedtext.indexOf('original_amount_micro_usd') +27,replacedtext.indexOf('applied_amount_micro_usd')-2);
+    original_amount_micro_listing = replacedtext.substring(replacedtext.indexOf('original_amount_micro_listing')+31, replacedtext.indexOf('applied_amount_micro_listing')-2);
+
+
+    replacedtext = replacedtext.replace('start_date','X-X');
+    replacedtext = replacedtext.replace('start_date','X-X'); 
+    replacedtext = replacedtext.replace('start_date','X-X'); 
+    replacedtext = replacedtext.replace('[{"type":', "X-X");
+    replacedtext = replacedtext.replace('original_amount_micro_usd', "X-X");
+    replacedtext = replacedtext.replace('applied_amount_micro_usd', "X-X");
+    replacedtext = replacedtext.replace('original_amount_micro_listing','X-X');
+    replacedtext = replacedtext.replace('applied_amount_micro_listing','X-X'); 
+
+    var amount_usd =  parseInt(amount_micros_usd) / 1000000; 
+    var original_amount_listing =  parseInt(original_amount_micro_listing) / 1000000; 
 
 
 
-/* Get FX Fee */
-fx_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-fx_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+/* Creating table and rows  */
+    var num = document.getElementById("DailyPricingTable").rows.length;
+    var x = document.createElement("tr");
 
 
-/* Get Airbnb Host Fee */
-airbnb_host_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+    var a = document.createElement("td");
+    var anode = document.createTextNode(start_date);
+    a.appendChild(anode);
+    x.appendChild(a);
 
 
+    var a = document.createElement("td");
+    type = type.toLowerCase();
+    type = type.replace(/_/g," ");
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+    var anode = document.createTextNode(type);
+    a.appendChild(anode);
+    x.appendChild(a);
 
-
-
-  while (replacedtext.includes("amount_micros_usd")) {
     
-    type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+    var a = document.createElement("td");
+    var anode = document.createTextNode(listingCurrency + " " + original_amount_listing);
+    a.appendChild(anode);
+    x.appendChild(a);
 
-    amount_micros_usd = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
 
-    /* Deleting keyword from Var */
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    var a = document.createElement("td");
+    var anode = document.createTextNode("US$" + amount_usd);
+    a.appendChild(anode);
+    x.appendChild(a);
+
+
+    document.getElementById("DailyPricingTable").appendChild(x);
+
+  }}
+
+
+
+
+
+/* Daily Price 
+
+  while (replacedtext.includes('payment_pricing_item_meta":{"type":')) {
+    
+    type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type":') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+
+    amount_micros_usd = replacedtext.substring(replacedtext.indexOf('"reservation_price_version_item":{"amount_micros_usd":') +54,replacedtext.indexOf(',"created_at":"'));
+
+    /* Deleting keyword from Var  
+    replacedtext = replacedtext.replace('"reservation_price_version_item":{"amount_micros_usd":', "X-X");
+    replacedtext = replacedtext.replace(',"created_at":"', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type":', "X-X");
     replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
 
-    var amount_usd = parseInt(amount_micros_usd) / 1000000;
+    var amount_usd = parseInt(amount_micros_usd) / 1000000; 
 
 
+/* Creating table and rows  /
 
-/* Creating table and rows */
-    var num = document.getElementById("PricingTable").rows.length;
+    var num = document.getElementById("DailyPricingTable").rows.length;
     var x = document.createElement("tr");
 
 
@@ -295,13 +404,65 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     a.appendChild(anode);
     x.appendChild(a);
 
-    document.getElementById("PricingTable").appendChild(x);
+
+    document.getElementById("DailyPricingTable").appendChild(x);
 
   }
 
+/* Get Cleaning Fee 
+cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+  
+/* Get Extra Guest Fee 
+extra_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+extra_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
 
 
-/* Write Cleaning Fee */
+
+/* Get Airbnb Guest Fee 
+airbnb_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+airbnb_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+
+/* Get FX Fee
+fx_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+fx_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+/* Get Airbnb Host Fee
+airbnb_host_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
+airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
+    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
+    replacedtext = replacedtext.replace('created_at', "X-X");
+    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
+    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+
+
+
+
+
+
+/* Write Cleaning Fee 
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -326,7 +487,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
 
 
 
-/* Write Extra Guest Fee */
+/* Write Extra Guest Fee 
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -349,7 +510,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     document.getElementById("PricingTable").appendChild(x);
 
 
-/* Write Airbnb Guest Fee */
+/* Write Airbnb Guest Fee 
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -372,7 +533,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     document.getElementById("PricingTable").appendChild(x);
 
 
-/* Write FX Fee */
+/* Write FX Fee 
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -395,7 +556,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     document.getElementById("PricingTable").appendChild(x);
 
 
-/* Write Airbnb Host Fee */
+/* Write Airbnb Host Fee 
     var num = document.getElementById("PricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -403,7 +564,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     var a = document.createElement("td");
     airbnb_host_fee_type = airbnb_host_fee_type.toLowerCase();
     airbnb_host_fee_type = airbnb_host_fee_type.replace(/_/g," ");
-    airbnb_host_fee_type = airbnb_host_fee_type.charAt(0).toUpperCase() + airbnb_host_fee_type.slice(1);
+    airbnb_host_fee_type = airbnb_host_fee_type.charAt(0).toUpperCase() + fx_fee_type.slice(1);
     var anode = document.createTextNode(airbnb_host_fee_type);
     a.appendChild(anode);
     x.appendChild(a);
@@ -418,7 +579,7 @@ airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micr
     document.getElementById("PricingTable").appendChild(x);
 
 
-
+*/
 
 }
 

@@ -26,9 +26,9 @@
 1. Go to the reservation page in Nova and select view Snapshots (bottom of the screen).
 2. Select all text (CTR + A  /  CMD + A) and copy text.
 3. Paste all text inside here."></textarea>	
-<button id="ButtonEntreeField" onclick="transformtext()">Click Me!</button>
+<button id="ButtonEntreeField" onclick="transformtext()">View Snapshot</button>
 </div>
-
+<!-- onfocus="this.value=''"  for onclick remove inserted text -->
 
 
 <!-- Output Area -->
@@ -37,7 +37,7 @@
 
 	<!-- Booking Policy -->
 	<div id="BookingDetails" style="display: none;">
-		<table class="tables">
+		<table class="tables" id="BookingDetailsTable">
 			<tr>
 				<td class="NameTable">Reservation code</td>	
 				<td class="DataTable" id=reservation_code></td>	
@@ -73,11 +73,11 @@
 
 
 
-	<!-- Pricing Data -->
+	<!-- Daily Pricing Data -->
 	<div id="DropdownReservationPricing" onclick="collapseReservationPrice()"><h4>Pricing</h4> </div>
 
-	<div id="PricingData" style="display: none;">
-		<table class="tables" id="PricingTable">
+	<div id="DailyPricingData" style="display: none;">
+		<table class="tables" id="DailyPricingTable">
 			<tr>
 				<th class="NameTableNight">Night</th>	
 				<th class="DataTableNight">Price</th>	
@@ -87,8 +87,36 @@
 	</div>
 
 
+
+
+	<!-- Daily Listing Details -->
+	<div id="DropdownListingDetails" onclick="collapseReservationListingDetails()"><h4>Listing Details</h4> </div>
+
+
+<div id="DivListingDetails"  style="display: none;">
+
+<div id="HeaderListingDetails"></div>
+<div class = "divIconsListing"><img class="iconslisting" src="images/Guests.png"><div id="ListingGuests" class="listinIconCount"></div></div>
+<div class = "divIconsListing"><img class="iconslisting" src="images/Bedrooms.png"><div id="ListingBedrooms" class="listinIconCount"></div></div>
+<div class = "divIconsListing"><img class="iconslisting" src="images/Beds.png"><div id="ListingBeds" class="listinIconCount"></div></div>
+<div class = "divIconsListing"><img class="iconslisting" src="images/Baths.png"><div id="ListingBaths" class="listinIconCount"></div></div>
+<div id="DescriptionListingDetails"></div>
+<div id="HouseRulesListingDetails"></div>
+	<!-- Amenities Data -->
+	<div id="AmenitiesData">
+		<table class="tables" id="AmenitiesTable">
+
+		</table>
+	</div>
+
 </div>
 
+
+
+
+</div>
+
+<!--  <div id="test"></div> -->
 
 </div>
 </body>

@@ -31,8 +31,10 @@ body {
 	border: solid black 1px;
 	background-color: white;
 	position: relative;
-	top: 375px;
+	top: 374px;
 	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 
@@ -95,7 +97,7 @@ h4 {
 	left: 20%;
 	width: 60%;
 	height: 30px;
-	margin-top: 10px;
+	margin: 5px 0px 5px 0px;
 	border-radius: 10px;
 	background-color: #80bfff;
 	border: solid darkblue 2px;
@@ -145,7 +147,7 @@ table, tr, td {
 	left: 20%;
 	width: 60%;
 	height: 30px;
-	margin-top: 10px;
+	margin: 5px 0px 5px 0px;
 	border-radius: 10px;
 	background-color: #80bfff;
 	border: solid darkblue 2px;
@@ -158,7 +160,86 @@ table, tr, td {
 }
 
 
-#PricingData {
+#DailyPricingData {
+	position: relative;
+	width: 35%;
+	left: 15%;
+	border: solid black 1px;
+	margin: 10px 0px 10px 0px;
+	display: block;
+
+
+}
+
+
+
+#DropdownListingDetails{
+	position: relative;
+	left: 20%;
+	width: 60%;
+	height: 30px;
+	margin: 5px 0px 5px 0px;
+	border-radius: 10px;
+	background-color: #80bfff;
+	border: solid darkblue 2px;
+	display: none;
+}
+
+
+#DropdownListingDetails:hover{
+	cursor: pointer;
+	background-color: #66b3ff;
+}
+
+#DivListingDetails {
+	border:solid black 1px;
+	width: 50%;
+	margin-left: 25%;
+	margin-left: 25%;
+
+}
+
+#HeaderListingDetails {
+	font-weight: bold;
+	font-size: 1em;
+	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+	margin: 20px 0px 20px 0px;
+}
+
+
+/* Listing Icons */
+.divIconsListing {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+
+.iconslisting {
+	height: 25px;
+	width: 25px;
+}
+
+
+.listinIconCount { 
+	display: inline-block;
+	height: 25px;
+	margin:0px 0px 5px 5px;
+	text-align: center;
+	vertical-align: middle;
+ }
+
+
+
+#DescriptionListingDetails {
+	font-size: 16px;
+	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+	font-weight: normal;
+	margin: 10px 0px 10px 0px;
+}
+
+
+
+#AmenitiesData {
 	position: relative;
 	width: 35%;
 	left: 15%;
@@ -166,5 +247,15 @@ table, tr, td {
 	border: solid black 1px;
 	margin: 0px 0px 0px 0px;
 	display: block;
+}
 
+
+#test {
+	position: relative;
+	top:500px;
+	width: 500px;
+	height: 300px;
+	border: solid black 1px;
+	background-color: grey;
+	display: block;
 }
