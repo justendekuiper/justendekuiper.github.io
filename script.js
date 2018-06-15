@@ -3,6 +3,18 @@ document.getElementById('HeaderImage').ondragstart = function() { return false; 
 });
 
 
+$(document).ready(function(){
+  var input = document.getElementById("EntreeField");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("ButtonEntreeField").click();
+  }
+});
+})
+
 /*Inserted textfield expander */
 $(document).ready(function () {
   $('#EntreeField').each(function () {
@@ -378,10 +390,7 @@ while (amenitiesTotal.includes("-")) {
   amenitiesTotal = amenitiesTotal.replace("-","XXX")
   amenitiesTotal = amenitiesTotal.replace("\n","XXX")
 
-var num = document.getElementById("DailyPricingTable").rows.length;
-    var x = document.createElement("tr");
-
-
+    var x = document.createElement("div");
     var a = document.createElement("div");
     var anode = document.createTextNode(amenity);
     a.appendChild(anode);
@@ -393,8 +402,10 @@ var num = document.getElementById("DailyPricingTable").rows.length;
 
 
 
-
-
+/* Listing House Rules */
+var listingHouseRules = insertedtext.substring(insertedtext.indexOf('has_premium_override'),insertedtext.indexOf('hypothetical_rank')+17);
+var listingHouseRules = listingHouseRules.substring(listingHouseRules.indexOf('house_rules')+12,listingHouseRules.indexOf('hypothetical_rank')-1);
+document.getElementById("HouseRulesListingDetails").innerText = listingHouseRules;
 
 
 
@@ -408,8 +419,11 @@ var num = document.getElementById("DailyPricingTable").rows.length;
   var amount_micros_usd = "";
 
 
+  var numberNight = 0;
+
 
 /* Creating Daily pricing Line */
+check_snapshot_type:
 if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
   var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
 }
@@ -418,32 +432,118 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 /* Snapshot Type 1 */
   else {
     var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
-    var replacedtext = insertedDailyPricingText;
+    var nightReplacedText = insertedDailyPricingText;
+    var dailyPriceReplacedText = insertedDailyPricingText;    
     var listingCurrency = insertedPricingText.substring(insertedPricingText.indexOf('"listing_currency":"')+20,insertedPricingText.indexOf('"listing_currency":"')+23)
 
+    /*Nights */
+    check_numberof_nights:
+    while (nightReplacedText.includes('start_date')) {
+    start_date = nightReplacedText.substring(nightReplacedText.indexOf('start_date') +13 , nightReplacedText.indexOf('start_date') +23);
+    numberNight++;
+
+    nightReplacedText = nightReplacedText.replace('start_date','X-X');
+    nightReplacedText = nightReplacedText.replace('start_date','X-X'); 
+    nightReplacedText = nightReplacedText.replace('start_date','X-X');   
+
+    var x = document.createElement("div");
+    var a = document.createElement("div");
+    var b = document.createElement("div");
+    var arrowDiv = document.createElement("div");
+    var contentDiv = document.createElement("div");
+
+    var anode = document.createTextNode(start_date);
+    var bnode = document.createTextNode("Night " +numberNight);
+    var arrowNode = document.createTextNode("");
+    a.appendChild(anode);
+    b.appendChild(bnode);
+    arrowDiv.appendChild(arrowNode);
+
+    x.id="Night"+numberNight;
+    x.className="PricingHeaderBar";
+    a.id="Date"+numberNight;
+    a.className="PricingHeaderNightDate"
+    b.className="PricingHeaderNightCount";
+    arrowDiv.className="PricingHeaderBarArrow";
+    contentDiv.className="ContentPricesDiv";
+    contentDiv.id="ContentPriceDiv"+numberNight;
+    x.appendChild(b);
+
+
+    document.getElementById("OverviewNights").appendChild(x).appendChild(a);
+    x.before(arrowDiv);
+    x.after(contentDiv);
+}
+
+
     /*Daily Price */
-    while (replacedtext.includes('[{"type":')) {
-    start_date = replacedtext.substring(replacedtext.indexOf('start_date') +13 , replacedtext.indexOf('start_date') +23);
-    type = replacedtext.substring(replacedtext.indexOf('[{"type":') +10,replacedtext.indexOf('","start_date":"'));
-    amount_micros_usd = replacedtext.substring(replacedtext.indexOf('original_amount_micro_usd') +27,replacedtext.indexOf('applied_amount_micro_usd')-2);
-    original_amount_micro_listing = replacedtext.substring(replacedtext.indexOf('original_amount_micro_listing')+31, replacedtext.indexOf('applied_amount_micro_listing')-2);
+    check_daily_price:
+    while (dailyPriceReplacedText.includes('[{"type":')) {
+    start_date = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('start_date') +13 , dailyPriceReplacedText.indexOf('start_date') +23);
+    type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('[{"type":') +10,dailyPriceReplacedText.indexOf('","start_date":"'));
+    type = type.toLowerCase();
+    type = type.replace(/_/g," ");
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    amount_micros_usd = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('original_amount_micro_usd') +27,dailyPriceReplacedText.indexOf('applied_amount_micro_usd')-2);
+    original_amount_micro_listing = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('original_amount_micro_listing')+31, dailyPriceReplacedText.indexOf('applied_amount_micro_listing')-2);
 
 
-    replacedtext = replacedtext.replace('start_date','X-X');
-    replacedtext = replacedtext.replace('start_date','X-X'); 
-    replacedtext = replacedtext.replace('start_date','X-X'); 
-    replacedtext = replacedtext.replace('[{"type":', "X-X");
-    replacedtext = replacedtext.replace('original_amount_micro_usd', "X-X");
-    replacedtext = replacedtext.replace('applied_amount_micro_usd', "X-X");
-    replacedtext = replacedtext.replace('original_amount_micro_listing','X-X');
-    replacedtext = replacedtext.replace('applied_amount_micro_listing','X-X'); 
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('start_date','X-X');
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('start_date','X-X'); 
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('start_date','X-X'); 
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('[{"type":', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('original_amount_micro_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('applied_amount_micro_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('original_amount_micro_listing','X-X');
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('applied_amount_micro_listing','X-X'); 
 
-    var amount_usd =  parseInt(amount_micros_usd) / 1000000; 
-    var original_amount_listing =  parseInt(original_amount_micro_listing) / 1000000; 
+    var amount_usd =  "US$ " + parseInt(amount_micros_usd) / 1000000; 
+    var original_amount_listing =  listingCurrency + " " + parseInt(original_amount_micro_listing) / 1000000; 
 
 
+    var counter = 1;
 
-/* Creating table and rows  */
+    append_daily_price:
+   while (numberNight >= counter) {
+      
+      if (document.getElementById("Date"+counter).textContent === start_date) {
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="dailyDiv";
+        divDayInsert.id="dailyDiv"+counter;
+        document.getElementById("ContentPriceDiv"+counter).appendChild(divDayInsert);
+
+
+        var typeDayInsert = document.createElement("div");
+        var typeDayInsertNode = document.createTextNode(type);
+        typeDayInsert.appendChild(typeDayInsertNode);
+        typeDayInsert.className= "dailyType";
+        typeDayInsert.id= "dailyType"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(typeDayInsert);
+
+        var amount_usdDayInsert = document.createElement("div");
+        var amount_usdDayNode = document.createTextNode(amount_usd);
+        amount_usdDayInsert.appendChild(amount_usdDayNode);
+        amount_usdDayInsert.className= "dailyUsd";
+        amount_usdDayInsert.id= "dailyUsd"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(amount_usdDayInsert);
+
+        var original_amount_micro_listingDayInsert = document.createElement("div");
+        var original_amount_micro_listingDayNode = document.createTextNode(original_amount_listing);
+        original_amount_micro_listingDayInsert.appendChild(original_amount_micro_listingDayNode);
+        original_amount_micro_listingDayInsert.className= "dailyListing";
+        original_amount_micro_listingDayInsert.id= "dailyListing"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(original_amount_micro_listingDayInsert);
+
+        counter = counter + numberNight;
+ 
+
+      }
+      else {
+        counter= counter +1;
+      }
+    }
+/* DEPRICATED -- Creating TD and TR  
     var num = document.getElementById("DailyPricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -476,27 +576,42 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
 
     document.getElementById("DailyPricingTable").appendChild(x);
-
+*/
   }
 
 
 
-
+/* Daily Discounts */
 if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
     var replacedInsertedPricingText = insertedPricingText.substring(insertedPricingText.indexOf(':"DAILY_DISCOUNT"')-2, insertedPricingText.indexOf('[{"type"'));
 
     while (replacedInsertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       var eachDiscountLine = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(':"DAILY_DISCOUNT"')+2,replacedInsertedPricingText.indexOf('"payment_pricing_item_meta":{"type"'));
-      
       var discountNight = eachDiscountLine.substring(eachDiscountLine.indexOf('start_date')+13,eachDiscountLine.indexOf('nights')-3);
-      
       var discountType = eachDiscountLine.replace('type":"')
+
       discountType = discountType.replace('type":"')
       discountType = discountType.substring( discountType.indexOf('type":"')+7, discountType.indexOf('price_factor'))
       discountType = discountType.substring( 0 , discountType.indexOf('"'))
       discountType = discountType.toLowerCase();
       discountType = discountType.replace(/_/g," ");
       discountType = discountType.charAt(0).toUpperCase() + discountType.slice(1);
+      var discountTypeLength = ""
+
+
+
+      if (numberNight >=28 && discountType== "Length of stay discount") {
+        discountTypeLength = discountType +" (Monthly)";
+      }
+      else if (numberNight <28 && discountType== "Length of stay discount") {
+        discountTypeLength = discountType +" (Weekly)";
+      }
+      else {
+        discountTypeLength = discountType;
+      }
+
+
+
 
       var discountPercentage = eachDiscountLine.substring(eachDiscountLine.indexOf('price_factor')+14,eachDiscountLine.indexOf('guest_amount_currency'));
       discountPercentage = discountPercentage.substring(discountPercentage.indexOf('.')+1,discountPercentage.indexOf(',"'));
@@ -520,6 +635,51 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       replacedInsertedPricingText = replacedInsertedPricingText.replace (/,"amount_micro_guest":/,"X-X");
 
 
+      discountTypeID= discountType.replace(/ /g,"");
+      counter = 1;
+
+   while (numberNight >= counter) {
+      
+      if (document.getElementById("Date"+counter).textContent === discountNight) {
+       
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id="discountDiv"+counter+discountTypeID;
+        document.getElementById("ContentPriceDiv"+counter).appendChild(divDayInsert);
+
+
+        var discountTypeInsert = document.createElement("div");
+        var discountTypeNode = document.createTextNode(discountTypeLength);
+        discountTypeInsert.appendChild(discountTypeNode);
+        discountTypeInsert.className="discountType";
+        discountTypeInsert.id= "dailyUsd"+counter;
+        document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountTypeInsert);
+
+
+        var discountPercentageInsert = document.createElement("div");
+        var discountPercentageNode = document.createTextNode(discountPercentage+"%");
+        discountPercentageInsert.appendChild(discountPercentageNode);
+        discountPercentageInsert.className= "discountPercentage";
+        discountPercentageInsert.id= "dailyListing"+counter;
+        document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountPercentageInsert);
+
+        counter = counter + numberNight;
+ 
+
+      }
+      else {
+        counter= counter +1;
+      }
+    }
+
+
+
+
+
+
+/*
+
+
     var num = document.getElementById("DiscountsPricingTable").rows.length;
     var x = document.createElement("tr");
 
@@ -540,7 +700,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
     x.appendChild(a);
 
     document.getElementById("DiscountsPricingTable").appendChild(x);
-
+*/
 
     }
     }
@@ -561,52 +721,52 @@ else {
 
 
 /* Get Cleaning Fee 
-cleaning_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-cleaning_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+cleaning_fee_type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('payment_pricing_item_meta":{"type"') + 36,dailyPriceReplacedText.indexOf('","amount_micro_guest"'));
+cleaning_fee_price = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf("amount_micros_usd") + 19,dailyPriceReplacedText.indexOf("created_at")-2);
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('payment_pricing_item_meta":{"type"', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('","amount_micro_guest"', "X-X");
 
   
 /* Get Extra Guest Fee 
-extra_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-extra_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+extra_guest_fee_type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('payment_pricing_item_meta":{"type"') + 36,dailyPriceReplacedText.indexOf('","amount_micro_guest"'));
+extra_guest_fee_price = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf("amount_micros_usd") + 19,dailyPriceReplacedText.indexOf("created_at")-2);
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('payment_pricing_item_meta":{"type"', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('","amount_micro_guest"', "X-X");
 
 
 
 /* Get Airbnb Guest Fee 
-airbnb_guest_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-airbnb_guest_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+airbnb_guest_fee_type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('payment_pricing_item_meta":{"type"') + 36,dailyPriceReplacedText.indexOf('","amount_micro_guest"'));
+airbnb_guest_fee_price = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf("amount_micros_usd") + 19,dailyPriceReplacedText.indexOf("created_at")-2);
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('payment_pricing_item_meta":{"type"', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('","amount_micro_guest"', "X-X");
 
 
 
 /* Get FX Fee
-fx_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-fx_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+fx_fee_type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('payment_pricing_item_meta":{"type"') + 36,dailyPriceReplacedText.indexOf('","amount_micro_guest"'));
+fx_fee_price = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf("amount_micros_usd") + 19,dailyPriceReplacedText.indexOf("created_at")-2);
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('payment_pricing_item_meta":{"type"', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('","amount_micro_guest"', "X-X");
 
 
 /* Get Airbnb Host Fee
-airbnb_host_fee_type = replacedtext.substring(replacedtext.indexOf('payment_pricing_item_meta":{"type"') + 36,replacedtext.indexOf('","amount_micro_guest"'));
-airbnb_host_fee_price = replacedtext.substring(replacedtext.indexOf("amount_micros_usd") + 19,replacedtext.indexOf("created_at")-2);
-    replacedtext = replacedtext.replace('amount_micros_usd', "X-X");
-    replacedtext = replacedtext.replace('created_at', "X-X");
-    replacedtext = replacedtext.replace('payment_pricing_item_meta":{"type"', "X-X");
-    replacedtext = replacedtext.replace('","amount_micro_guest"', "X-X");
+airbnb_host_fee_type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('payment_pricing_item_meta":{"type"') + 36,dailyPriceReplacedText.indexOf('","amount_micro_guest"'));
+airbnb_host_fee_price = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf("amount_micros_usd") + 19,dailyPriceReplacedText.indexOf("created_at")-2);
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('amount_micros_usd', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('created_at', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('payment_pricing_item_meta":{"type"', "X-X");
+    dailyPriceReplacedText = dailyPriceReplacedText.replace('","amount_micro_guest"', "X-X");
 
 
 
