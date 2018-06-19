@@ -137,13 +137,6 @@ table, tr, td {
     border: 1px solid black;
 }
 
-.NameTable {
-	width: 1%;
-}
-
-.DataTable {
-	width: 1%;
-}
 
 
 
@@ -178,15 +171,14 @@ table, tr, td {
 
 .PricingHeaderBarArrow{
 	position: relative;
-	top:7px;
 	display: inline-block;
-	width: 2%;
-	right:0%;
-	background-color: #118488;
-	border: solid #80bfff 1px;
-	border-radius: 7px;
-	height: 20px;
-	margin-right: 2%;
+	width: 1%;
+	height: 0;
+	top: 3px;
+	border-top: 7px solid transparent;
+	border-left: 14px solid #118488;
+	border-bottom: 7px solid transparent;
+	margin-right: 1px;
 }
 
 
@@ -195,7 +187,7 @@ table, tr, td {
 	width: 95%;
 	right:0%;
 	background-color: #118488;
-	border: solid #80bfff 1px;
+	border: solid darkblue 1px;
 	border-radius: 7px;
 	height: 20px;
 	margin: 0px 0px 0px 0px;
@@ -205,24 +197,58 @@ table, tr, td {
 	background-color: #0e767a;
 }
 
+#expandImg {
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	left:10%;
+	display: inline-block;
+}
 
 
+.whiteSpaceDiv {
+	display: block;
+	height: 10px;
+}
 
 
 
 .PricingHeaderNightCount {
 	margin-left: 2%;
 	display: inline-block;
-	width: 20%;
+	width: 10%;
 	height: 100%;
 	color: white;
 }
 
+.PricingHeaderHostNightPrice{
+	display: inline-block;
+	margin-left: 6%;
+	width: 19%;
+	height: 100%;
+	color: white;
+}
+
+.PricingHeaderUSDNightPrice{
+	display: inline-block;
+	margin-left: 3%;
+	width: 19%;
+	height: 100%;
+	color: white;
+}
+
+.PricingHeaderGuestNightPrice{
+	display: inline-block;
+	margin-left: 3%;
+	width: 19%;
+	height: 100%;
+	color: white;
+}
 
 .PricingHeaderNightDate {
 	display: inline-block;
-	margin-left: 20%;
-	width: 20%;
+	margin-left: 8%;
+	width: 10%;
 	height: 100%;
 	color: white;
 }
@@ -232,7 +258,7 @@ table, tr, td {
 .ContentPricesDiv{
 	position: relative;
 	width:100%;
-	border: solid green 1px;
+	margin-bottom: 10px;
 }
 
 
@@ -240,7 +266,7 @@ table, tr, td {
 .dailyDiv {
 	width: 100%;
 	border: solid black 1px;
-	margin: 5px 0px 10px 0px;
+	margin: 5px 0px 7px 0px;
 }
 .dailyType {
 	display: inline-block;
@@ -282,6 +308,31 @@ table, tr, td {
 }
 
 
+/* Extra Guest Fee */
+.extraGuestDiv {
+	width: 100%;
+	border: solid black 1px;
+	margin: 5px 0px 7px 0px;
+}
+.extraGuestType {
+	display: inline-block;
+	width: 30%;
+}
+
+.extraGuestGuest {
+	display: inline-block;
+	width: 20%;
+}
+
+.extraGuestListing {
+	display: inline-block;
+	width: 20%;
+}
+
+.extraGuestUSD {
+	display: inline-block;
+	width: 20%;
+}
 
 
 
