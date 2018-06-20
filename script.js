@@ -136,6 +136,13 @@ function expandItems() {
 /*changing inserted text*/
 function transformtext() {
 
+
+createdData = document.getElementById('OverviewNights');
+while (createdData.hasChildNodes()) {
+    createdData.removeChild(createdData.lastChild);
+}
+
+
 document.getElementById("DropdownReservationDetails").style.display = "block";
 document.getElementById("DropdownReservationPricing").style.display = "block";
 document.getElementById("DropdownListingDetails").style.display = "block";
@@ -613,15 +620,15 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var amount_usdDayInsert = document.createElement("div");
         var amount_usdDayNode = document.createTextNode(amount_usd);
         amount_usdDayInsert.appendChild(amount_usdDayNode);
-        amount_usdDayInsert.className= "dailyUsd";
-        amount_usdDayInsert.id= "dailyUsd"+counter;
+        amount_usdDayInsert.className= "dailyUSD";
+        amount_usdDayInsert.id= "dailyUSD"+counter;
         document.getElementById("dailyDiv"+counter).appendChild(amount_usdDayInsert);
 
         var amount_usdDayInsert = document.createElement("div");
         var amount_usdDayNode = document.createTextNode(guest_amount_micros);
         amount_usdDayInsert.appendChild(amount_usdDayNode);
-        amount_usdDayInsert.className= "dailyUsd";
-        amount_usdDayInsert.id= "dailyUsd"+counter;
+        amount_usdDayInsert.className= "dailyGuest";
+        amount_usdDayInsert.id= "dailyGuest"+counter;
         document.getElementById("dailyDiv"+counter).appendChild(amount_usdDayInsert);
 
         break;
@@ -645,6 +652,20 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       var eachDiscountLine = replacedInsertedPricingText.substring(replacedInsertedPricingText.indexOf(':"DAILY_DISCOUNT"')+2,replacedInsertedPricingText.indexOf('"payment_pricing_item_meta":{"type"'));
       var discountNight = eachDiscountLine.substring(eachDiscountLine.indexOf('start_date')+13,eachDiscountLine.indexOf('nights')-3);
       var discountType = eachDiscountLine.replace('type":"')
+
+
+      var discountAmountListing = eachDiscountLine.substring(eachDiscountLine.indexOf('amount_micro_listing')+22,eachDiscountLine.indexOf('amount_micro_usd')-2);
+      discountAmountListing = parseFloat(discountAmountListing);
+      discountAmountListing = listingCurrency +" "+ ((discountAmountListing/1000000).toFixed(2));  
+
+    var discountAmountUSD = eachDiscountLine.substring(eachDiscountLine.indexOf('amount_micro_usd')+18,eachDiscountLine.indexOf('start_date')-2);
+    discountAmountUSD = parseFloat(discountAmountUSD);
+    discountAmountUSD = "US$" +" "+ ((discountAmountUSD/1000000).toFixed(2));  
+
+    var discountAmountGuest = eachDiscountLine.substring(eachDiscountLine.indexOf('amount_micro_guest')+20,eachDiscountLine.indexOf('amount_micro_listing')-2);
+    discountAmountGuest = parseFloat(discountAmountGuest);
+    discountAmountGuest = guestCurrency +" "+ ((discountAmountGuest/1000000).toFixed(2)); 
+
 
       discountType = discountType.replace('type":"')
       discountType = discountType.substring( discountType.indexOf('type":"')+7, discountType.indexOf('price_factor'))
@@ -719,6 +740,31 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         discountPercentageInsert.id= "discountPercentage"+counter+"-"+ ($("#ContentPriceDiv"+counter).find(".discountPercentage").length+1);
         document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountPercentageInsert);
 
+
+        var discountAmountListingInsert = document.createElement("div");
+        var discountAmountListingNode = document.createTextNode(discountAmountListing);
+        discountAmountListingInsert.appendChild(discountAmountListingNode);
+        discountAmountListingInsert.className="discountAmountListing";
+        discountAmountListingInsert.id= "discountAmountListing"+counter+"-"+ ($("#ContentPriceDiv"+counter).find(".discountAmountListing").length+1);
+        document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountAmountListingInsert);
+
+
+        var discountAmountUSDInsert = document.createElement("div");
+        var discountAmountUSDNode = document.createTextNode(discountAmountUSD);
+        discountAmountUSDInsert.appendChild(discountAmountUSDNode);
+        discountAmountUSDInsert.className="discountAmountUSD";
+        discountAmountUSDInsert.id= "discountAmountUSD"+counter+"-"+ ($("#ContentPriceDiv"+counter).find(".discountAmountUSD").length+1);
+        document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountAmountUSDInsert);
+
+
+        var discountAmountGuestInsert = document.createElement("div");
+        var discountAmountGuestNode = document.createTextNode(discountAmountGuest);
+        discountAmountGuestInsert.appendChild(discountAmountGuestNode);
+        discountAmountGuestInsert.className="discountAmountGuest";
+        discountAmountGuestInsert.id= "discountAmountGuest"+counter+"-"+ ($("#ContentPriceDiv"+counter).find(".discountAmountGuest").length+1);
+        document.getElementById("discountDiv"+counter+discountTypeID).appendChild(discountAmountGuestInsert);
+
+
         counter = counter + numberNight;
  
 
@@ -742,14 +788,14 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
     extra_guest_fee_type = extra_guest_fee_type.charAt(0).toUpperCase() + extra_guest_fee_type.slice(1);
     
 
-    var extra_guest_fee_Guest = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_guest')+20,replacedExtraGuestFeeText.indexOf('amount_micro_listing')-3);
-    extra_guest_fee_Guest =  guestCurrency + " " + Math.round(((parseInt(extra_guest_fee_Guest) / 1000000) + 0.00001) * 100) / 100; 
+    var extra_guest_fee_Guest = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_guest')+20,replacedExtraGuestFeeText.indexOf('amount_micro_listing')-2);
+    extra_guest_fee_Guest =  guestCurrency + " " + Math.round(((parseInt((extra_guest_fee_Guest)/numberNight) / 1000000) + 0.00001) * 100) / 100; 
     
-    var extra_guest_fee_Listing = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_listing')+22,replacedExtraGuestFeeText.indexOf('amount_micro_usd')-3);
-    extra_guest_fee_Listing = listingCurrency + " " + Math.round(((parseInt(extra_guest_fee_Listing) / 1000000) + 0.00001) * 100) / 100; 
+    var extra_guest_fee_Listing = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_listing')+22,replacedExtraGuestFeeText.indexOf('amount_micro_usd')-2);
+    extra_guest_fee_Listing = listingCurrency + " " + Math.round(((parseInt((extra_guest_fee_Listing)/numberNight) / 1000000) + 0.00001) * 100) / 100; 
  
-    var extra_guest_fee_USD = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_usd')+18,replacedExtraGuestFeeText.indexOf('start_date')-3);
-    extra_guest_fee_USD =  "US$ " + Math.round(((parseInt(extra_guest_fee_USD) / 1000000) + 0.00001) * 100) / 100; 
+    var extra_guest_fee_USD = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_usd')+18,replacedExtraGuestFeeText.indexOf('start_date')-2);
+    extra_guest_fee_USD =  "US$ " + Math.round(((parseInt((extra_guest_fee_USD) / 1000000)/numberNight) + 0.00001) * 100) / 100; 
  
 
 
@@ -797,7 +843,58 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
 
 
 
+counter = 1
 
+while (numberNight >= counter) {
+    var numItems = $("#ContentPriceDiv"+counter).find(".discountAmountListing").length ;
+    var totalDiscountListing = 0
+    var totalDiscountUSD = 0
+    var totalDiscountGuest = 0
+
+    while (numItems > 0 ) {
+    tempDiscountHolderListing = (document.getElementById('discountAmountListing' + counter + '-' + numItems)).textContent;
+    tempDiscountHolderListing = parseFloat( tempDiscountHolderListing.substring(tempDiscountHolderListing.indexOf(" ")+1) )
+    totalDiscountListing = totalDiscountListing + tempDiscountHolderListing;
+
+    tempDiscountHolderUSD = (document.getElementById('discountAmountUSD' + counter + '-' + numItems)).textContent;
+    tempDiscountHolderUSD = parseFloat( tempDiscountHolderUSD.substring(tempDiscountHolderUSD.indexOf(" ")+1) )
+    totalDiscountUSD = totalDiscountUSD + tempDiscountHolderUSD;
+
+    tempDiscountHolderGuest = (document.getElementById('discountAmountGuest' + counter + '-' + numItems)).textContent;
+    tempDiscountHolderGuest = parseFloat( tempDiscountHolderGuest.substring(tempDiscountHolderGuest.indexOf(" ")+1) )
+    totalDiscountGuest = totalDiscountGuest + tempDiscountHolderGuest;
+
+
+
+    numItems--
+    }
+
+    var listingPriceListing = document.getElementById('dailyListing'+counter).innerText
+    listingPriceListing = parseInt(listingPriceListing.substring(4));
+    var extraGuestPriceListing = document.getElementById('extraGuestListing'+counter).innerText
+    extraGuestPriceListing= parseInt(extraGuestPriceListing.substring(4));
+    document.getElementById("HeaderHostPrice"+counter).innerText = listingCurrency + " " + (listingPriceListing + totalDiscountListing + extraGuestPriceListing).toFixed(2)
+    
+    var listingPriceUSD = document.getElementById('dailyUSD'+counter).innerText
+    listingPriceUSD = parseInt(listingPriceUSD.substring(4));
+    var extraGuestPriceUSD = document.getElementById('extraGuestUSD'+counter).innerText
+    extraGuestPriceUSD= parseInt(extraGuestPriceUSD.substring(4));
+    document.getElementById("HeaderUSDPrice"+counter).innerText = "US$" + " " + (listingPriceUSD + totalDiscountUSD + extraGuestPriceUSD).toFixed(2)
+    
+    var listingPriceGuest = document.getElementById('dailyGuest'+counter).innerText
+    listingPriceGuest = parseInt(listingPriceGuest.substring(4));
+    var extraGuestPriceGuest = document.getElementById('extraGuestGuest'+counter).innerText
+    extraGuestPriceGuest= parseInt(extraGuestPriceGuest.substring(4));
+    document.getElementById("HeaderGuestPrice"+counter).innerText =  (listingPriceGuest + totalDiscountGuest + extraGuestPriceGuest).toFixed(2)
+    
+
+    counter++;
+}
+
+
+
+
+/*
 var highestPercentage = 0
 counter = 1;
 
@@ -824,7 +921,7 @@ extraGuestPriceListing= parseInt(extraGuestPriceListing.substring(4));
 
 counter++;
 }
-
+*/
 
 
 
