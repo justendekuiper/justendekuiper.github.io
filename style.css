@@ -280,12 +280,18 @@ table, tr, td {
 	width: 30%;
 }
 
-.dailyUsd {
+.dailyListing {
 	display: inline-block;
 	width: 20%;
 }
 
-.dailyListing {
+
+.dailyUSD {
+	display: inline-block;
+	width: 20%;
+}
+
+.dailyGuest {
 	display: inline-block;
 	width: 20%;
 }

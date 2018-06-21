@@ -136,16 +136,26 @@ function expandItems() {
 /*changing inserted text*/
 function transformtext() {
 
-
+// Deleting Previous Created Data
 createdData = document.getElementById('OverviewNights');
+expandImg = document.getElementById('expandImg');
 while (createdData.hasChildNodes()) {
     createdData.removeChild(createdData.lastChild);
 }
+
+if ($('#expandImg').length > 0) {
+  expandImg.remove();
+}
+
+
 
 
 document.getElementById("DropdownReservationDetails").style.display = "block";
 document.getElementById("DropdownReservationPricing").style.display = "block";
 document.getElementById("DropdownListingDetails").style.display = "block";
+
+
+
 
 
 
@@ -485,9 +495,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
 /* Snapshot Type 1 */
   else {
-    var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
-    var nightReplacedText = insertedDailyPricingText;
-    var dailyPriceReplacedText = insertedDailyPricingText;    
+ 
     var listingCurrency = insertedPricingText.substring(insertedPricingText.indexOf('"listing_currency":"')+20,insertedPricingText.indexOf('"listing_currency":"')+23)
     var guestCurrency = insertedtext.substring(insertedtext.indexOf('guest_currency')+15,insertedtext.indexOf('guest_currency_rate'),-2)
 
@@ -499,7 +507,97 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     document.getElementById("DivPricingDetails").insertBefore(expandImg, document.getElementById("DivPricingDetails").childNodes[0]);
     document.getElementById('expandImg').ondragstart = function() { return false; };
 
+
+
+
+    /*Nights Special Offer Base Price */
+
+if(insertedPricingText.includes('SPECIAL_OFFER_BASE_PRICE')) {
+
+var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('SPECIAL_OFFER_BASE_PRICE') - 15);
+var nightReplacedText = insertedDailyPricingText;
+var dailyPriceReplacedText =  insertedPricingText;
+
+    while (nightReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
+      var start_date = nightReplacedText.substring(nightReplacedText.indexOf('start_date')+13, nightReplacedText.indexOf('start_date') +23);
+      numberNight++;
+
+    nightReplacedText = nightReplacedText.replace('start_date','X-X'); 
+    nightReplacedText = nightReplacedText.replace('start_date','X-X'); 
+    nightReplacedText = nightReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X'); 
+    nightReplacedText = nightReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X'); 
+
+
+    var x = document.createElement("div");
+    var a = document.createElement("div");
+    var b = document.createElement("div");
+    var c = document.createElement("div");
+    var d = document.createElement("div");
+    var e = document.createElement("div");
+    var arrowDiv = document.createElement("div");
+    var contentDiv = document.createElement("div");
+    var whiteSpaceDiv = document.createElement("div");
+
+    var anode = document.createTextNode(start_date);
+    var bnode = document.createTextNode("Range " +numberNight);
+    var cNode = document.createTextNode("Host: ");
+    var dNode = document.createTextNode("USD ");
+    var eNode = document.createTextNode("Guest: ");
+    var arrowNode = document.createTextNode("");
+
+    a.appendChild(anode);
+    b.appendChild(bnode);
+    arrowDiv.appendChild(arrowNode);
+    c.appendChild(cNode);
+    d.appendChild(dNode);
+    e.appendChild(eNode);
+
+    x.id="Night"+numberNight;
+    x.className="PricingHeaderBar";
+    x.setAttribute("onclick","ClickPricingBar(this);");
+    a.id="Date"+numberNight;
+    a.className="PricingHeaderNightDate";
+    b.className="PricingHeaderNightCount";
+    c.className="PricingHeaderHostNightPrice";
+    c.id="HeaderHostPrice"+numberNight;
+    d.className="PricingHeaderUSDNightPrice";
+    d.id="HeaderUSDPrice"+numberNight;
+    e.className="PricingHeaderGuestNightPrice";
+    e.id="HeaderGuestPrice"+numberNight;
+    arrowDiv.className="PricingHeaderBarArrow";
+    arrowDiv.setAttribute("onclick","ClickPricingBarArrow(this);");
+    contentDiv.className="ContentPricesDiv";
+    contentDiv.id="ContentPriceDiv"+numberNight;
+    contentDiv.style.display = "none";
+    whiteSpaceDiv.className="whiteSpaceDiv";
+    x.appendChild(b);
+    x.appendChild(c);
+    x.appendChild(d);
+    x.appendChild(e);
+    x.appendChild(a);
+
+
+    document.getElementById("OverviewNights").appendChild(x);
+    x.before(arrowDiv);
+    x.after(whiteSpaceDiv);
+    x.after(contentDiv);
+
+
+
+    }
+
+
+} //if special offer
+
+
     /*Nights */
+else {
+
+    var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
+    var nightReplacedText = insertedDailyPricingText;
+    var dailyPriceReplacedText = insertedDailyPricingText;   
+
+
     while (nightReplacedText.includes('start_date')) {
     start_date = nightReplacedText.substring(nightReplacedText.indexOf('start_date') +13 , nightReplacedText.indexOf('start_date') +23);
     numberNight++;
@@ -548,7 +646,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     arrowDiv.setAttribute("onclick","ClickPricingBarArrow(this);");
     contentDiv.className="ContentPricesDiv";
     contentDiv.id="ContentPriceDiv"+numberNight;
-    contentDiv.style.display = "none";
+    contentDiv.style.display = "block";
     whiteSpaceDiv.className="whiteSpaceDiv";
     x.appendChild(b);
     x.appendChild(c);
@@ -561,10 +659,103 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     x.before(arrowDiv);
     x.after(whiteSpaceDiv);
     x.after(contentDiv);
-}
+} // while contains Start_date to create nights
+
+
+} // If not special offer
+
+
 
 
     /*Daily Price */
+if(insertedPricingText.includes('SPECIAL_OFFER_BASE_PRICE')) {
+    var insertedSpecialOfferPricingText = insertedPricingText.substring(insertedPricingText.indexOf('{"type":"SPECIAL_OFFER_BASE_PRICE"') - 3);
+    var specialOfferPriceReplacedText = insertedSpecialOfferPricingText;   
+    counter = 1;
+
+while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
+    var type = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('"type":"')+8,specialOfferPriceReplacedText.indexOf(',"amount_micro_guest":')-1)
+    type = type.toLowerCase();
+    type = type.replace(/_/g," ");
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    dailyPriceListing = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('amount_micro_listing') +22,specialOfferPriceReplacedText.indexOf('amount_micro_usd')-2);
+    dailyPriceUSD = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('amount_micro_usd')+18, specialOfferPriceReplacedText.indexOf('start_date')-2);
+    dailyPriceGuest = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('amount_micro_guest')+20,specialOfferPriceReplacedText.indexOf('amount_micro_listing')-2);
+
+    dailyPriceListing = listingCurrency + " " + (parseInt(dailyPriceListing)/1000000).toFixed(2)
+    dailyPriceUSD =  "US$" + " " + (parseInt(dailyPriceUSD)/1000000).toFixed(2)
+    dailyPriceGuest =  guestCurrency + " " + (parseInt(dailyPriceGuest)/1000000).toFixed(2)
+
+
+
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace('"type":"','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_listing":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_listing":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_usd":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_usd":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_guest":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"amount_micro_guest":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"start_date":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace(',"start_date":','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X');
+    specialOfferPriceReplacedText = specialOfferPriceReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X');
+
+
+
+
+
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="dailyDiv";
+        divDayInsert.id="dailyDiv"+counter;
+        document.getElementById("ContentPriceDiv"+counter).appendChild(divDayInsert);
+
+
+        var typeDayInsert = document.createElement("div");
+        var typeDayInsertNode = document.createTextNode(type);
+        typeDayInsert.appendChild(typeDayInsertNode);
+        typeDayInsert.className= "dailyType";
+        typeDayInsert.id= "dailyType"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(typeDayInsert);
+
+        var original_amount_micro_listingDayInsert = document.createElement("div");
+        var original_amount_micro_listingDayNode = document.createTextNode(dailyPriceListing);
+        original_amount_micro_listingDayInsert.appendChild(original_amount_micro_listingDayNode);
+        original_amount_micro_listingDayInsert.className= "dailyListing";
+        original_amount_micro_listingDayInsert.id= "dailyListing"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(original_amount_micro_listingDayInsert);
+
+        var amount_usdDayInsert = document.createElement("div");
+        var amount_usdDayNode = document.createTextNode(dailyPriceUSD);
+        amount_usdDayInsert.appendChild(amount_usdDayNode);
+        amount_usdDayInsert.className= "dailyUSD";
+        amount_usdDayInsert.id= "dailyUSD"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(amount_usdDayInsert);
+
+        var amount_usdDayInsert = document.createElement("div");
+        var amount_usdDayNode = document.createTextNode(dailyPriceGuest);
+        amount_usdDayInsert.appendChild(amount_usdDayNode);
+        amount_usdDayInsert.className= "dailyGuest";
+        amount_usdDayInsert.id= "dailyGuest"+counter;
+        document.getElementById("dailyDiv"+counter).appendChild(amount_usdDayInsert);
+
+        counter++
+
+
+
+
+
+} // While if special offer base price
+
+
+} // If special offer base price
+
+
+
+else { //not special offer base price
+
+
     while (dailyPriceReplacedText.includes('[{"type":')) {
     start_date = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('start_date') +13 , dailyPriceReplacedText.indexOf('start_date') +23);
     type = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('[{"type":') +10,dailyPriceReplacedText.indexOf('","start_date":"'));
@@ -639,8 +830,11 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         counter= counter +1;
       }
     }
-
   }
+
+
+} // if not special offer base price
+
 
 
 
@@ -868,28 +1062,55 @@ while (numberNight >= counter) {
 
     numItems--
     }
-
+    //pulling Daily Price Listing
     var listingPriceListing = document.getElementById('dailyListing'+counter).innerText
     listingPriceListing = parseInt(listingPriceListing.substring(4));
+    
+    //pulling Extra guest price Listing
+    if (($('#extraGuestListing'+counter).length)===0){
+        var extraGuestPriceListing = 1;
+    }
+    else {
     var extraGuestPriceListing = document.getElementById('extraGuestListing'+counter).innerText
     extraGuestPriceListing= parseInt(extraGuestPriceListing.substring(4));
+}
     document.getElementById("HeaderHostPrice"+counter).innerText = listingCurrency + " " + (listingPriceListing + totalDiscountListing + extraGuestPriceListing).toFixed(2)
     
+
+
+    //pulling Daily Price USD
     var listingPriceUSD = document.getElementById('dailyUSD'+counter).innerText
     listingPriceUSD = parseInt(listingPriceUSD.substring(4));
+
+    //pulling Extra guest price USD
+    if (($('#extraGuestUSD'+counter).length)===0){
+        var extraGuestPriceUSD = 1;
+    }
+    else {
     var extraGuestPriceUSD = document.getElementById('extraGuestUSD'+counter).innerText
     extraGuestPriceUSD= parseInt(extraGuestPriceUSD.substring(4));
+}
     document.getElementById("HeaderUSDPrice"+counter).innerText = "US$" + " " + (listingPriceUSD + totalDiscountUSD + extraGuestPriceUSD).toFixed(2)
     
+
+    //pulling Daily Price Guest
     var listingPriceGuest = document.getElementById('dailyGuest'+counter).innerText
     listingPriceGuest = parseInt(listingPriceGuest.substring(4));
+
+     //pulling Extra guest price USD
+    if (($('#extraGuestGuest'+counter).length)===0){
+        var extraGuestPriceGuest = 1;
+    }
+    else {
     var extraGuestPriceGuest = document.getElementById('extraGuestGuest'+counter).innerText
     extraGuestPriceGuest= parseInt(extraGuestPriceGuest.substring(4));
+}
     document.getElementById("HeaderGuestPrice"+counter).innerText =  (listingPriceGuest + totalDiscountGuest + extraGuestPriceGuest).toFixed(2)
     
 
     counter++;
-}
+    } // While Loop through NumNights
+
 
 
 
