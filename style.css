@@ -277,23 +277,23 @@ table, tr, td {
 }
 .dailyType {
 	display: inline-block;
-	width: 30%;
+	width: 19%;
 }
 
 .dailyListing {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 
 .dailyUSD {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 .dailyGuest {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 
@@ -313,27 +313,30 @@ table, tr, td {
 .discountType{
 	display: inline-block;
 	width: 50%;
+	background-color: #f2f2f2;
 }
 
 .discountPercentage{
 	display: inline-block;
 	width: 30%;
+	background-color: #f2f2f2;
 }
 
 
 .discountAmountListing{
 	display: inline-block;
-	width: 30%;
+	margin-left: 20%;
+	width: 20%;
 }
 
 .discountAmountUSD{
 	display: inline-block;
-	width: 30%;
+	width: 20%;
 }
 
 .discountAmountGuest{
 	display: inline-block;
-	width: 30%;
+	width: 20%;
 }
 
 
@@ -345,22 +348,22 @@ table, tr, td {
 }
 .extraGuestType {
 	display: inline-block;
-	width: 30%;
+	width: 19%;
 }
 
 .extraGuestGuest {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 .extraGuestListing {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 .extraGuestUSD {
 	display: inline-block;
-	width: 20%;
+	width: 21%;
 }
 
 
