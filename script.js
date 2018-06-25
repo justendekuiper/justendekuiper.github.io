@@ -41,12 +41,12 @@ $(document).ready(function () {
 function collapseReservationDetails() {
     var x = document.getElementById("BookingDetails");
     if (x.style.display === "none") {
-        x.style.display = "block";
+        $("#BookingDetails").slideDown(500);
         $('html,body').animate({
         scrollTop: $("#DropdownReservationDetails").offset().top + (-10)},
         'slow');
     } else {
-        x.style.display = "none";
+        $("#BookingDetails").slideUp(500);
     }
 }
 
@@ -55,12 +55,12 @@ function collapseReservationDetails() {
 function collapseReservationPrice() {
     var x = document.getElementById("DivPricingDetails");
     if (x.style.display === "none") {
-        x.style.display = "block";
+        $("#DivPricingDetails").slideDown(500);
         $('html,body').animate({
         scrollTop: $("#DropdownReservationPricing").offset().top + (-10)},
         'slow');
     } else {
-        x.style.display = "none";
+        $("#DivPricingDetails").slideUp(500);
     }
 }
 
@@ -69,12 +69,12 @@ function collapseReservationPrice() {
   function collapseReservationListingDetails() {
     var x = document.getElementById("DivListingDetails");
     if (x.style.display === "none") {
-        x.style.display = "block";
+        $("#DivListingDetails").slideDown(500);
         $('html,body').animate({
         scrollTop: $("#DropdownListingDetails").offset().top + (-10)},
         'slow');
     } else {
-        x.style.display = "none";
+        $("#DivListingDetails").slideUp(500);
     }
 }   
   
@@ -272,11 +272,17 @@ var insertedPricingText = insertedtext.substring(insertedtext.indexOf("pricing_s
 /* Reservation Code */
 if (insertedtext.includes("confirmation_code")&&insertedtext.includes("coupon_id")) {
   var reservation_code = insertedtext.substring(insertedtext.indexOf("confirmation_code") + 19,insertedtext.indexOf("coupon_id")-2);
+  var linkCodeInsert = document.createElement('a');
+  var linkCodeNode = document.createTextNode(reservation_code);
+  linkCodeInsert.appendChild(linkCodeNode);
+  linkCodeInsert.title = reservation_code;
+  linkCodeInsert.setAttribute("target","blank")
+  linkCodeInsert.href = "https://nova.airbnb.tools/reservations/" + reservation_code;
 }
 else {
   reservation_code="";
 }
-document.getElementById("reservation_code").innerText = reservation_code;
+document.getElementById("reservation_code").appendChild(linkCodeInsert);
 
 
 
@@ -1109,9 +1115,9 @@ var dailyPriceReplacedText =  insertedPricingText;
     var nightListingNode = document.createTextNode("#" +numberNight);
     var nightUsdNode = document.createTextNode("#" +numberNight);
     var nightGuestNode = document.createTextNode("#" +numberNight);
-    var listingPricenightNode = document.createTextNode("Host: ");
-    var usdPricenightNode = document.createTextNode("USD ");
-    var guestPricenightNode = document.createTextNode("Guest: ");
+    var listingPricenightNode = document.createTextNode("N/A");
+    var usdPricenightNode = document.createTextNode("N/A");
+    var guestPricenightNode = document.createTextNode("N/A");
 
     dateListingDiv.appendChild(dateListingNode);
     dateUsdDiv.appendChild(dateUsdNode);
@@ -1241,9 +1247,9 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     var nightListingNode = document.createTextNode("#" +numberNight);
     var nightUsdNode = document.createTextNode("#" +numberNight);
     var nightGuestNode = document.createTextNode("#" +numberNight);
-    var listingPricenightNode = document.createTextNode("Host: ");
-    var usdPricenightNode = document.createTextNode("USD ");
-    var guestPricenightNode = document.createTextNode("Guest: ");
+    var listingPricenightNode = document.createTextNode("N/A");
+    var usdPricenightNode = document.createTextNode("N/A");
+    var guestPricenightNode = document.createTextNode("N/A");
 
     dateListingDiv.appendChild(dateListingNode);
     dateUsdDiv.appendChild(dateUsdNode);
@@ -1367,9 +1373,9 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     var nightListingNode = document.createTextNode("#" +numberNight);
     var nightUsdNode = document.createTextNode("#" +numberNight);
     var nightGuestNode = document.createTextNode("#" +numberNight);
-    var listingPricenightNode = document.createTextNode("Host: ");
-    var usdPricenightNode = document.createTextNode("USD ");
-    var guestPricenightNode = document.createTextNode("Guest: ");
+    var listingPricenightNode = document.createTextNode("N/A");
+    var usdPricenightNode = document.createTextNode("N/A");
+    var guestPricenightNode = document.createTextNode("N/A");
 
     dateListingDiv.appendChild(dateListingNode);
     dateUsdDiv.appendChild(dateUsdNode);
@@ -2101,7 +2107,6 @@ while (numberNight >= counter) {
    //pulling Daily Price USD
    var listingPriceUSD = document.getElementById('dailyUSD'+counter).innerText
    listingPriceUSD = parseFloat(listingPriceUSD.substring(listingPriceUSD.indexOf(" ")+1));
-
     //pulling Extra guest price USD
    if (($('#extraGuestUSD'+counter).length)===0){
         var extraGuestPriceUSD = 0;
@@ -2110,7 +2115,7 @@ while (numberNight >= counter) {
     var extraGuestPriceUSD = document.getElementById('extraGuestUSD'+counter).innerText
     extraGuestPriceUSD= parseFloat(extraGuestPriceUSD.substring(extraGuestPriceUSD.indexOf(" ")+1));
 }
-    document.getElementById("HeaderUSDPrice"+counter).innerText = "$" + " " + (listingPriceUSD).toFixed(2)
+    document.getElementById("HeaderUSDPrice"+counter).innerText = "$" + " " + (listingPriceUSD + totalDiscountUSD + extraGuestPriceUSD).toFixed(2)
     
 
 //Guest
