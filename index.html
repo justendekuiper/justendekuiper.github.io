@@ -14,26 +14,57 @@
 </head>
 <body>
 
-<div id="top"> <span id="Copyright">Ⓒ Aleksei Liksman & Justen de Kuiper</span> </div>
+
+
+
+
+
+
+<div id="top"> <span id="Copyright">Ⓒ Justen de Kuiper & Aleksei Liksman</span> </div>
 	<div id="header">
 		 <img id="HeaderImage" src="kitchen.jpg" alt="Airbnb kitchen">
 	</div>	
-		
+
 
 <!-- Input Area -->
+<div id="entreeFieldContainer">
+	<div id="howToUse">
+	<h4>How to use the tool</h4>
+	<p>1. Go to the reservation page in Nova and select view Snapshots (bottom of the screen).
+		<br>
+		<br>
+		2. Select all text (CTR + A  /  CMD + A) and copy text.
+		<br>
+		<br>
+		3. Paste all text inside the textbox on the right.
+	</p>
+</div>
 <div id=DivEntreeField>
-<textarea id="EntreeField" name="Entreefield" placeholder="To use the tool, follow these steps:
-1. Go to the reservation page in Nova and select view Snapshots (bottom of the screen).
-2. Select all text (CTR + A  /  CMD + A) and copy text.
-3. Paste all text inside here."></textarea>	
-<button id="ButtonEntreeField" onclick="transformtext()">View Snapshot</button>
+<textarea id="EntreeField" name="Entreefield" placeholder="Paste your snapshot here"></textarea>	
+<button id="ButtonEntreeField" onclick="transformtext()">VIEW SNAPSHOT</button>
+</div>
+<div id="buttonsDiv">
+	<img class="popupbuttons" id= "FAQButton" onclick="FAQClick()" style="opacity: 0.7;" src="FAQs.png" alt="FAQ">
+	<img class="popupbuttons" id="ContactButton" onclick="ContactClick()" style="opacity: 0.7;" src="Contact.png" alt="Contact">
+
+	<!-- Pop-up Div's -->
+<div class="popupDiv" id="FAQDiv">
+</div>
+<div id="contactButtons">
+<div class="popupDiv" id="contactDiv">
+	<img class="contactMethod" src="images/emailIcon.png" alt="Send me an email!" onclick="sendEmail()">
+	<a href="https://airbnb.slack.com/messages/D2J0L5529" target="blank"><img class="contactMethod" src="images/slackIcon.png" alt="Reach out on Slack!" ></a>
+</div>
+</div>
+
+</div>
 </div>
 <!-- onfocus="this.value=''"  for onclick remove inserted text -->
 
 
 <!-- Output Area -->
 <div id="DivOutputField">
-	<div id="DropdownReservationDetails" onclick="collapseReservationDetails()"><h4>Details</h4> </div>
+	<div id="DropdownReservationDetails" class="Dropdown" onclick="collapseReservationDetails()"><h4>DETAILS</h4> </div>
 
 	<!-- Booking Policy -->
 	<div id="BookingDetails" style="display: none;">
@@ -74,7 +105,7 @@
 
 
 	<!-- Daily Pricing Data -->
-	<div id="DropdownReservationPricing" onclick="collapseReservationPrice()"><h4>Pricing</h4> </div>
+	<div id="DropdownReservationPricing" class="Dropdown" onclick="collapseReservationPrice()"><h4>PRICE</h4> </div>
 <div id="DivPricingDetails" style="display: none;">
 	<div id="OverviewNights"></div>
 
@@ -83,7 +114,7 @@
 </div>
 
 	<!-- Daily Listing Details -->
-	<div id="DropdownListingDetails" onclick="collapseReservationListingDetails()"><h4>Listing Details</h4> </div>
+	<div id="DropdownListingDetails" class="Dropdown" onclick="collapseReservationListingDetails()"><h4>LISTING DETAILS</h4> </div>
 
 
 <div id="DivListingDetails"  style="display: none;">
@@ -104,8 +135,6 @@
 
 
 </div>
-
- <div id="test" style="display: none;"></div>
 
 </div>
 </body>

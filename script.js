@@ -2,6 +2,12 @@ $(document).ready(function () {
 document.getElementById('HeaderImage').ondragstart = function() { return false; };
 });
 
+$(window).scroll(function() {
+  var scroll = $(window).scrollTop();
+    $("#HeaderImage").css({
+        transform: 'translate3d(0%, -'+(scroll/100)+'%, 0) scale('+(100 + scroll/20)/100+')',
+    });
+});
 
 
 
@@ -34,6 +40,28 @@ $(document).ready(function () {
 });
 
 
+// Popup Buttons
+function ContactClick() {
+    if(document.getElementById('ContactButton').style.opacity == "0.7") {
+        document.getElementById('ContactButton').style.opacity = "1.0";
+        document.getElementById('contactDiv').style.display = "block";
+    }
+    else {
+        document.getElementById('ContactButton').style.opacity = "0.7";
+        document.getElementById('contactDiv').style.display = "none";
+    }
+}
+
+
+function sendEmail() {
+var link = "mailto:justen.dekuiper@airbnb.com"
+             + "?cc="
+             + "&subject=" + escape("Snapshot Tool - ")
+             + "&body=" + escape('Hi Justen, \n \n ')
+    ;
+    window.location.href = link;
+    ;
+}
 
 /* Clicking on Dropdown menu */
 
@@ -270,6 +298,10 @@ var insertedtoptext =  insertedtext.substring(insertedtext.indexOf("admin_notes"
 var insertedPricingText = insertedtext.substring(insertedtext.indexOf("pricing_snapshot_data") ,insertedtext.indexOf("admin_points")-2);
 
 /* Reservation Code */
+var reservationCodeData = document.getElementById("reservation_code")
+while (reservationCodeData.hasChildNodes()) {
+    reservationCodeData.removeChild(reservationCodeData.lastChild);
+}
 if (insertedtext.includes("confirmation_code")&&insertedtext.includes("coupon_id")) {
   var reservation_code = insertedtext.substring(insertedtext.indexOf("confirmation_code") + 19,insertedtext.indexOf("coupon_id")-2);
   var linkCodeInsert = document.createElement('a');
@@ -1013,7 +1045,7 @@ var guestCurrencySymbol = changeCurrencyToSymbol(guestCurrency);
 
 
     var listingNode = document.createTextNode("Host: " + listingCurrency)
-    var usdNode = document.createTextNode("USD")
+    var usdNode = document.createTextNode("System: USD")
     var guestNode = document.createTextNode("Guest: " + guestCurrency)
 
     listingDiv.appendChild(listingNode);
@@ -1473,6 +1505,16 @@ while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
     type = type.toLowerCase();
     type = type.replace(/_/g," ");
     type = type.charAt(0).toUpperCase() + type.slice(1);
+  
+    if (type === "Default daily") {
+        type = "Base Price";
+    }
+        else if (type === "Weekend daily") {
+            type= "Weekend Pricing";
+        }
+    
+
+
 
     dailyPriceListing = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('amount_micro_listing') +22,specialOfferPriceReplacedText.indexOf('amount_micro_usd')-2);
     dailyPriceUSD = specialOfferPriceReplacedText.substring(specialOfferPriceReplacedText.indexOf('amount_micro_usd')+18, specialOfferPriceReplacedText.indexOf('start_date')-2);
@@ -1573,6 +1615,7 @@ while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
 else { //not special offer base price
 
 // Start Snapshot #2, daily price
+
 if (insertedPricingText.includes("guest_fee_reservation_stamp")) { 
 
 
@@ -1586,6 +1629,15 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     type = type.toLowerCase();
     type = type.replace(/_/g," ");
     type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    if (type === "Default daily") {
+        type = "Base Price";
+    }
+        else if (type === "Weekend daily") {
+            type= "Weekend Pricing";
+        }
+    
+
 
     exact_amount_micros_usd = parseFloat(dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('original_amount_usd') +22,dailyPriceSnapshot2ReplacedText.indexOf('applied_amount_usd')-3));
     amount_micros_usd = exact_amount_micros_usd.toFixed(2);
@@ -1688,6 +1740,21 @@ else {
     type = type.toLowerCase();
     type = type.replace(/_/g," ");
     type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    if (type === "Default daily") {
+        type = "Base Price";
+    }
+        else if (type === "Weekend daily") {
+            type= "Weekend Pricing";
+        }
+            else if (type === "Smart pricing daily") {
+            type= "Smart Pricing";
+        }
+    
+
+
+
+
 
     amount_micros_usd = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('original_amount_micro_usd') +27,dailyPriceReplacedText.indexOf('applied_amount_micro_usd')-2);
     original_amount_micro_listing = dailyPriceReplacedText.substring(dailyPriceReplacedText.indexOf('original_amount_micro_listing')+31, dailyPriceReplacedText.indexOf('applied_amount_micro_listing')-2);
