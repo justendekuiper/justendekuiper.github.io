@@ -1,6 +1,6 @@
 body {
 	margin:0;   
-	min-width: 1200px; 
+	min-width: 1600px; 
 
 }
 
@@ -179,6 +179,7 @@ body {
 	width: 69%;
 	display: none;
 }
+
 
 #contactDiv {
 	left: 35%;
@@ -489,6 +490,46 @@ table, tr, td {
 }
 
 
+/* Cleaning Fee */
+.CleaningFeeType{
+	font-size: 12px;
+	margin-left: 3%;
+	display: inline-block;
+    width: 25%;
+	height: 100%;
+	color: #f5efef;
+}
+
+.CleaningFeePrice {
+	display: inline-block;
+	width: 36%;
+	height: 100%;
+	text-align: center;
+	color: white;
+}
+
+
+/* Taxes and Airbnb Fee */
+.headerFeesType{
+	font-size: 12px;
+	margin-left: 3%;
+	display: inline-block;
+    width: 24%;
+	height: 100%;
+	color: #f5efef;
+}
+
+.headerFeesAmount {
+	display: inline-block;
+	width: 37%;
+	height: 100%;
+	text-align: center;
+	color: white;
+}
+
+
+
+
 
 .ContentPricesDiv{
 	position: relative;
@@ -595,6 +636,56 @@ table, tr, td {
 	width: 21%;
 }
 
+
+
+/* Fees & Taxes */
+.feeDiv {
+	width: 100%;
+	border: solid black 1px;
+	margin: 5px 0px 7px 0px;
+}
+
+.airbnbFeeListingType {
+	display: inline-block;
+	width: 70%;
+}
+
+.airbnbFeeListingAmount {
+	display: inline-block;
+	width: 21%;
+}
+
+
+.taxListingType {
+	display: inline-block;
+	width: 70%;
+}
+
+.taxListingAmount {
+	display: inline-block;
+	width: 21%;
+}
+
+.airbnbFeeGuestType {
+	display: inline-block;
+	width: 70%;
+}
+
+.airbnbFeeGuestAmount {
+	display: inline-block;
+	width: 21%;
+}
+
+
+.taxGuestType {
+	display: inline-block;
+	width: 70%;
+}
+
+.taxGuestAmount {
+	display: inline-block;
+	width: 21%;
+}
 
 
 
