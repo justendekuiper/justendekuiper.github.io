@@ -2149,11 +2149,17 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     type = type.replace(/_/g," ");
     type = type.charAt(0).toUpperCase() + type.slice(1);
 
-    if (type === "Default daily") {
-        type = "Base Price";
+            if (type === "Default daily") {
+            type = "Base Price";
     }
-        else if (type === "Weekend daily") {
+            else if (type === "Weekend daily") {
             type= "Weekend Pricing";
+        }
+            else if (type === "Custom daily") {
+            type= "Custom Price";
+        }
+            else if (type === "Smart pricing daily") {
+            type= "Smart Pricing";
         }
     
 
