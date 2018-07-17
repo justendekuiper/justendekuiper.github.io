@@ -23,7 +23,7 @@ input.addEventListener("keyup", function(event) {
     document.getElementById("ButtonEntreeField").click();
   }
 });
-})
+}) 
 
 /*Inserted textfield expander */
 $(document).ready(function () {
