@@ -53,10 +53,12 @@ function ContactClick() {
 }
 
 
+
+var reservationCode = "Test"
 function sendEmail() {
 var link = "mailto:justen.dekuiper@airbnb.com"
-             + "?cc="
-             + "&subject=" + escape("Snapshot Tool - ")
+             + "?cc=" +escape("aleksei.liksman@airbnb.com")
+             + "&subject=" + escape("Snapshot Tool - " + reservationCode)
              + "&body=" + escape('Hi Justen, \n \n ')
     ;
     window.location.href = link;
@@ -250,6 +252,34 @@ function expandItemsGuest() {
 
 
 
+// Selecting More info Questionmark   
+/*
+function ClickExtraGuestInfo(obj) {
+    if(document.getElementById('moreInfoExtraGuest2').style.display == "block") {
+    document.getElementById('moreInfoExtraGuest2').style.display = "none";
+}
+else {
+    document.getElementById('moreInfoExtraGuest2').style.display = "block";
+}
+};
+*/
+
+
+
+function ClickExtraGuestInfo(obj) {
+    if(obj.parentElement.parentElement.nextSibling.style.display == "block") {
+    obj.parentElement.parentElement.nextSibling.style.display = "none";
+}
+else {
+    obj.parentElement.parentElement.nextSibling.style.display = "block";
+}    
+};
+
+
+
+
+
+
 
 /*changing inserted text*/
 function transformtext() {
@@ -304,6 +334,8 @@ while (reservationCodeData.hasChildNodes()) {
 }
 if (insertedtext.includes("confirmation_code")&&insertedtext.includes("coupon_id")) {
   var reservation_code = insertedtext.substring(insertedtext.indexOf("confirmation_code") + 19,insertedtext.indexOf("coupon_id")-2);
+  reservationCode= reservation_code
+
   var linkCodeInsert = document.createElement('a');
   var linkCodeNode = document.createTextNode(reservation_code);
   linkCodeInsert.appendChild(linkCodeNode);
@@ -1627,9 +1659,9 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var airbnbFeeGuestTypeInsert = document.createElement('div');
         var airbnbFeeGuestAmountInsert = document.createElement('div');
 
-        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee (");
         var airbnbFeeListingAmountNode = document.createTextNode(airbnbFeeListingAmountDisplay);
-        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee (");
         var airbnbFeeGuestAmountNode = document.createTextNode(airbnbFeeGuestAmountDisplay);
 
         airbnbFeeListingTypeInsert.appendChild(airbnbFeeListingTypeNode);
@@ -1954,9 +1986,9 @@ while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
         var airbnbFeeGuestTypeInsert = document.createElement('div');
         var airbnbFeeGuestAmountInsert = document.createElement('div');
 
-        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee (");
         var airbnbFeeListingAmountNode = document.createTextNode(airbnbFeeListingAmountDisplay);
-        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee (");
         var airbnbFeeGuestAmountNode = document.createTextNode(airbnbFeeGuestAmountDisplay);
 
         airbnbFeeListingTypeInsert.appendChild(airbnbFeeListingTypeNode);
@@ -2375,12 +2407,12 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var airbnbFeeListingAmount = insertedtext.substring(insertedtext.indexOf('host_fee_revenue_cents')-10);
         airbnbFeeListingAmount = airbnbFeeListingAmount.substring(airbnbFeeListingAmount.indexOf('"host_fee_revenue_cents"')+35,airbnbFeeListingAmount.indexOf('host_id')-2);
         airbnbFeeListingAmount = ((parseFloat(airbnbFeeListingAmount)*listingCurrencyRate)/100).toFixed(2);
-        airbnbFeeListingAmountDisplay = listingCurrencySymbol + " " + airbnbFeeListingAmount;
+        airbnbFeeListingAmountDisplay = "±" + listingCurrencySymbol + " " + airbnbFeeListingAmount;
 
         var airbnbFeeGuestAmount = insertedtext.substring(insertedtext.indexOf('guest_fee_revenue_cents')-10);
         airbnbFeeGuestAmount = airbnbFeeGuestAmount.substring(airbnbFeeGuestAmount.indexOf('"guest_fee_revenue_cents"')+34,airbnbFeeGuestAmount.indexOf('guest_id')-2);
         airbnbFeeGuestAmount = ((parseFloat(airbnbFeeGuestAmount)*guestCurrencyRate)/100).toFixed(2);
-        airbnbFeeGuestAmountDisplay = guestCurrencySymbol + " " + airbnbFeeGuestAmount;
+        airbnbFeeGuestAmountDisplay = "±" + guestCurrencySymbol + " " + airbnbFeeGuestAmount;
 
 
         //Creating elements
@@ -2398,9 +2430,9 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var airbnbFeeGuestTypeInsert = document.createElement('div');
         var airbnbFeeGuestAmountInsert = document.createElement('div');
 
-        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeListingTypeNode = document.createTextNode("Airbnb fee (±");
         var airbnbFeeListingAmountNode = document.createTextNode(airbnbFeeListingAmountDisplay);
-        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee");
+        var airbnbFeeGuestTypeNode = document.createTextNode("Airbnb fee (±");
         var airbnbFeeGuestAmountNode = document.createTextNode(airbnbFeeGuestAmountDisplay);
 
         airbnbFeeListingTypeInsert.appendChild(airbnbFeeListingTypeNode);
@@ -2454,17 +2486,17 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         barAirbnbFeeGuest.after(contentFeesGuest);
 
 
-//!!!!!! // !!!!!! // 
+
         //VAT Listing 
         if (insertedtext.includes('host_vat_remittance_cents')) {
             var taxAmountListing = insertedtext.substring(insertedtext.indexOf('host_vat_remittance_cents')-5)
             taxAmountListing = taxAmountListing.substring(taxAmountListing.indexOf('host_vat_remittance_cents')+26, taxAmountListing.indexOf('hosting_id')-1);
             taxAmountListing = ((parseFloat(taxAmountListing)*listingCurrencyRate)/100).toFixed(2)
-            taxAmountListingDisplay = listingCurrencySymbol + " " + taxAmountListing
+            taxAmountListingDisplay = "±" + listingCurrencySymbol + " " + taxAmountListing
             taxPercentageListing = insertedtext.substring(insertedtext.indexOf('host_vat_rate')-2)
             taxPercentageListing = taxPercentageListing.substring(taxPercentageListing.indexOf('host_vat_rate')+15,taxPercentageListing.indexOf('host_vat_remittance_cents')-2)
             taxPercentageListing = parseFloat(taxPercentageListing) * 100;
-            taxPercentageListing = taxPercentageListing + "%";
+            taxPercentageListing = "±" + taxPercentageListing + "%";
 
             var taxListingDiv = document.createElement('div');
             var taxTypeListingInsert = document.createElement('div');
@@ -2488,10 +2520,10 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
             //Creating total for Header with Tax Listing
         if (insertedtext.includes('host_vat_remittance_cents')) {
-            var totalFeesListing = listingCurrencySymbol + " " + (parseFloat(taxAmountListing) + parseFloat(airbnbFeeListingAmount)).toFixed(2);
+            var totalFeesListing = "±" + listingCurrencySymbol + " " + (parseFloat(taxAmountListing) + parseFloat(airbnbFeeListingAmount)).toFixed(2);
         }
         else {
-            var totalFeesListing = listingCurrencySymbol + " "  + (parseFloat(airbnbFeeListingAmount).toFixed(2));
+            var totalFeesListing = "±" + listingCurrencySymbol + " "  + (parseFloat(airbnbFeeListingAmount).toFixed(2));
         }
 
             var totalHeaderFeesTypeListingInsert = document.createElement('div')
@@ -2518,11 +2550,11 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
             var taxAmountGuest = insertedtext.substring(insertedtext.indexOf('guest_vat_remittance_cents')-5)
             taxAmountGuest = taxAmountGuest.substring(taxAmountGuest.indexOf('guest_vat_remittance_cents')+28, taxAmountGuest.indexOf('host_currency')-1);
             taxAmountGuest = ((parseFloat(taxAmountGuest)*listingCurrencyRate)/100).toFixed(2)
-            taxAmountGuestDisplay = guestCurrencySymbol + " " + taxAmountGuest
+            taxAmountGuestDisplay = "±" + guestCurrencySymbol + " " + taxAmountGuest
             taxPercentageGuest = insertedtext.substring(insertedtext.indexOf('guest_vat_rate')-2)
             taxPercentageGuest = taxPercentageGuest.substring(taxPercentageGuest.indexOf('guest_vat_rate')+15,taxPercentageGuest.indexOf('guest_vat_remittance_cents')-2)
             taxPercentageGuest = parseFloat(taxPercentageGuest) * 100;
-            taxPercentageGuest = taxPercentageGuest + "%";
+            taxPercentageGuest = "±" + taxPercentageGuest + "%";
 
 
             var taxGuestDiv = document.createElement('div');
@@ -2547,10 +2579,10 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
 
             //Creating total for Header with Tax Guest
             if (insertedtext.includes('guest_vat_remittance_cents')) {
-            var totalFeesGuest = guestCurrencySymbol + " " + (parseFloat(taxAmountGuest) + parseFloat(airbnbFeeGuestAmount)).toFixed(2);
+            var totalFeesGuest = "±" + guestCurrencySymbol + " " + (parseFloat(taxAmountGuest) + parseFloat(airbnbFeeGuestAmount)).toFixed(2);
         }
         else {
-            var totalFeesGuest = guestCurrencySymbol + " "  + (parseFloat(airbnbFeeGuestAmount).toFixed(2));
+            var totalFeesGuest = "±" + guestCurrencySymbol + " "  + (parseFloat(airbnbFeeGuestAmount).toFixed(2));
         }
         
             var totalHeaderFeesTypeGuestInsert = document.createElement('div')
@@ -2784,7 +2816,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("ContentPricesDivListing"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
-        var discountTypeNode = document.createTextNode(discountTypeLength);
+        var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2797,13 +2829,6 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         discountAmountListingInsert.id= "discountAmountListing"+counter+"-"+ ($("#ContentPricesDivListing"+counter).find(".discountAmountListing").length+1);
         document.getElementById("discountDivListing"+counter+discountTypeID).appendChild(discountAmountListingInsert);
 
-        var discountPercentageInsert = document.createElement("div");
-        var discountPercentageNode = document.createTextNode(discountPercentage+"%");
-        discountPercentageInsert.appendChild(discountPercentageNode);
-        discountPercentageInsert.className= "discountPercentage discountPercentage"+counter;
-        discountPercentageInsert.id= "discountPercentage"+counter+"-"+ ($("#ContentPricesDivListing"+counter).find(".discountPercentage").length+1);
-        document.getElementById("discountDivListing"+counter+discountTypeID).appendChild(discountPercentageInsert);
-
 
        // USD
         var divDayInsert = document.createElement("div");
@@ -2812,7 +2837,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("ContentPricesDivUsd"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
-        var discountTypeNode = document.createTextNode(discountTypeLength);
+        var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2825,13 +2850,6 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         discountAmountUSDInsert.id= "discountAmountUSD"+counter+"-"+ ($("#ContentPricesDivUsd"+counter).find(".discountAmountUSD").length+1);
         document.getElementById("discountDivUsd"+counter+discountTypeID).appendChild(discountAmountUSDInsert);
 
-        var discountPercentageInsert = document.createElement("div");
-        var discountPercentageNode = document.createTextNode(discountPercentage+"%");
-        discountPercentageInsert.appendChild(discountPercentageNode);
-        discountPercentageInsert.className= "discountPercentage discountPercentage"+counter;
-        discountPercentageInsert.id= "discountPercentage"+counter+"-"+ ($("#ContentPricesDivUsd"+counter).find(".discountPercentage").length+1);
-        document.getElementById("discountDivUsd"+counter+discountTypeID).appendChild(discountPercentageInsert);
-
 
         // GUEST
         var divDayInsert = document.createElement("div");
@@ -2840,7 +2858,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("ContentPricesDivGuest"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
-        var discountTypeNode = document.createTextNode(discountTypeLength);
+        var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2852,13 +2870,6 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         discountAmountGuestInsert.className="discountAmountGuest";
         discountAmountGuestInsert.id= "discountAmountGuest"+counter+"-"+ ($("#ContentPricesDivGuest"+counter).find(".discountAmountGuest").length+1);
         document.getElementById("discountDivGuest"+counter+discountTypeID).appendChild(discountAmountGuestInsert);
-
-        var discountPercentageInsert = document.createElement("div");
-        var discountPercentageNode = document.createTextNode(discountPercentage+"%");
-        discountPercentageInsert.appendChild(discountPercentageNode);
-        discountPercentageInsert.className= "discountPercentage discountPercentage"+counter;
-        discountPercentageInsert.id= "discountPercentage"+counter+"-"+ ($("#ContentPricesDivGuest"+counter).find(".discountPercentage").length+1);
-        document.getElementById("discountDivGuest"+counter+discountTypeID).appendChild(discountPercentageInsert);
 
 
 
@@ -2893,7 +2904,26 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
  
     var extra_guest_fee_USD = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_usd')+18,replacedExtraGuestFeeText.indexOf('start_date')-2);
     extra_guest_fee_USD =  "$ " + (parseFloat((extra_guest_fee_USD) / 1000000)/numberNight).toFixed(2); 
- 
+
+
+
+    var extraGuestsIncluded = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('number_of_guests_included')+27,replacedExtraGuestFeeText.indexOf('number_of_extra_guests')-2);
+    var extraGuestsNumber = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('number_of_extra_guests')+24,replacedExtraGuestFeeText.indexOf('price_per_extra_guest_per_night_micro_guest')-2);
+    var extraGuestsPriceGuest = parseFloat(replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('guest_amount_micros')+21,replacedExtraGuestFeeText.indexOf('host_amount_currency')-2));
+        if(extraGuestsPriceGuest >0) {
+            extraGuestsPriceGuest = (parseFloat(extraGuestsPriceGuest)/1000000 / numberNight / extraGuestsNumber).toFixed(2);
+        }
+        else {
+            extraGuestsPriceGuest = extraGuestsPriceGuest.toFixed(2);
+        }
+    var extraGuestsPriceListing = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('host_amount_micros')-2);
+    extraGuestsPriceListing = parseFloat(extraGuestsPriceListing.substring(extraGuestsPriceListing.indexOf('host_amount_micros')+20 , extraGuestsPriceListing.indexOf('id')-2));
+        if(extraGuestsPriceListing >0) {
+            extraGuestsPriceListing = (parseFloat(extraGuestsPriceListing)/1000000 / numberNight / extraGuestsNumber).toFixed(2);
+    }
+    else {
+        extraGuestsPriceListing = extraGuestsPriceListing.toFixed(2);
+    }
 
 
     var counter =1;
@@ -2905,11 +2935,85 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         document.getElementById("ContentPricesDivListing"+counter).appendChild(divExtraGuestInsert);
 
         var divExtraGuestTypeInsert = document.createElement("div");
-        var divExtraGuestTypeNode = document.createTextNode(extra_guest_fee_type);
+        var divExtraGuestTypeNode = document.createTextNode(extra_guest_fee_type+"");
         divExtraGuestTypeInsert.appendChild(divExtraGuestTypeNode);
         divExtraGuestTypeInsert.className="extraGuestType";
         divExtraGuestTypeInsert.id= "extraGuestType"+counter;
         document.getElementById("extraGuestDivListing"+counter).appendChild(divExtraGuestTypeInsert);
+
+
+        var moreInfoExtraGuestInsert = document.createElement('img')
+        moreInfoExtraGuestInsert.src = "images/questionmark.png"
+        moreInfoExtraGuestInsert.setAttribute("height" , "14")
+        moreInfoExtraGuestInsert.setAttribute("width" , "14")
+        moreInfoExtraGuestInsert.style.position = "relative"
+        moreInfoExtraGuestInsert.style.top = "2px"
+        moreInfoExtraGuestInsert.style.left = "3px"
+        moreInfoExtraGuestInsert.style.cursor = "pointer"
+        moreInfoExtraGuestInsert.setAttribute("onclick","ClickExtraGuestInfo(this);");
+        document.getElementById("extraGuestType"+counter).appendChild(moreInfoExtraGuestInsert);
+
+
+//More Info
+        var moreInfoExtraGuestDivInsert = document.createElement('div');
+        moreInfoExtraGuestDivInsert.className = "moreInfoExtraGuest";
+        moreInfoExtraGuestDivInsert.id = "moreInfoExtraGuest" + counter;
+        moreInfoExtraGuestDivInsert.style.display="block";
+        document.getElementById("ContentPricesDivListing"+counter).appendChild(moreInfoExtraGuestDivInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Number of guest included in price:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsIncluded)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Number of extra guests:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsNumber)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+
+    
+       var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Host's price for each extra guest:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (listingCurrencySymbol +" " + extraGuestsPriceListing)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Guest's price for each extra guest:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (guestCurrencySymbol +" " + extraGuestsPriceGuest)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+     
+
+
 
         var divExtraGuestListingInsert = document.createElement("div");
         var divExtraGuestListingNode = document.createTextNode(extra_guest_fee_Listing);
@@ -3069,7 +3173,7 @@ while (numberNight >= counter) {
 }
 
         totalAmountListing = totalAmountListing + cleaningFeeTotal 
-        var percentageAirbnbFeeListing = " (" + (airbnbFeeListingAmount / totalAmountListing * 100).toFixed(2) +"%)";
+        var percentageAirbnbFeeListing = (airbnbFeeListingAmount / totalAmountListing * 100).toFixed(2) +"%)";
         document.getElementById('airbnbFeeListingType').append(percentageAirbnbFeeListing)
 
 
@@ -3093,7 +3197,7 @@ while (numberNight >= counter) {
     }
 
         totalAmountGuest = totalAmountGuest + cleaningFeeTotal
-        var percentageAirbnbFeeGuest = " (" + (airbnbFeeGuestAmount / totalAmountGuest * 100).toFixed(2) +"%)";
+        var percentageAirbnbFeeGuest = (airbnbFeeGuestAmount / totalAmountGuest * 100).toFixed(2) +"%)";
         document.getElementById('airbnbFeeGuestType').append(percentageAirbnbFeeGuest)
 
 
