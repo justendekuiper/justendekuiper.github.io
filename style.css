@@ -541,9 +541,16 @@ table, tr, td {
 
 
 /* Daily Pricing */
+.divDayHeader {
+	border: solid black 1px;
+    top: 5px;
+    position: relative;
+    width: 100%;
+    margin: 0px 0px 9px 0px;
+}
+
 .dailyDiv {
 	width: 100%;
-	border: solid black 1px;
 	margin: 5px 0px 7px 0px;
 }
 .dailyType {
@@ -570,15 +577,15 @@ table, tr, td {
 
 #DailyPricingData {
 	position: relative;
-	border: solid black 1px;
 	margin: 10px 0px 10px 0px;
 	display: block;
 }
 
 
 .discountDiv{
-	background-color: #f2f2f2;
-	width:100%;
+    background-color: #f2f2f2;
+    width: 100%;
+    position: relative;
 }
 
 .discountType{
