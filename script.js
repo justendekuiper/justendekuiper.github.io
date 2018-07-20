@@ -3174,7 +3174,7 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         moreInfoExtraGuestInsert.setAttribute("onclick","ClickExtraGuestInfo(this);");
         document.getElementById("extraGuestTypeGuest"+counter).appendChild(moreInfoExtraGuestInsert);
 
-  
+
 //More Info
         var moreInfoExtraGuestDivInsert = document.createElement('div');
         moreInfoExtraGuestDivInsert.className = "moreInfoExtraGuest";
