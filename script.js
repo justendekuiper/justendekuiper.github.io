@@ -54,6 +54,27 @@ function ContactClick() {
 
 
 
+var reservationCode = ""
+
+function sendEmail() {
+    if(reservationCode == ""){
+
+var link = "https://mail.google.com/mail/u/0/?view=cm&fs=1&to=justen.dekuiper@airbnb.com&su=Snapshot tool&body=&cc=aleksei.liksman@airbnb.com&tf=1";
+    var win = window.open(link, '_blank');
+    win.focus();
+    
+}
+    else {
+
+        var link = "https://mail.google.com/mail/u/0/?view=cm&fs=1&to=justen.dekuiper@airbnb.com&su=Snapshot tool - " + reservationCode + "&body=&cc=aleksei.liksman@airbnb.com&tf=1";
+    var win = window.open(link, '_blank');
+    win.focus();
+}
+    ;}
+
+
+
+/*
 var reservationCode = "Test"
 function sendEmail() {
 var link = "mailto:justen.dekuiper@airbnb.com"

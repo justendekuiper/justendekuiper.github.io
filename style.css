@@ -3,6 +3,24 @@ body {
 	min-width: 1600px; 
 
 }
+#requestFeedback{
+	position: absolute;
+	width: 40%;
+	z-index: 1;
+	left:30%;
+	top:85px;
+	height: 60px;
+
+}
+
+#requestFeedbackText {
+	text-align: center;
+	color: #118488;
+	font-size: 28px;
+}
+
+
+
 
 #header{
 	width:100%;
