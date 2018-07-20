@@ -744,6 +744,26 @@ display: inline-block;
 }
 
 
+/* Links Listing */
+#linksListingDiv {
+    position: absolute;
+    right: 20%;
+    bottom: -40px;
+}
+
+
+.linkListingDiv{
+    text-align: center;
+}
+
+.linkListing {
+	color: #118488
+}
+
+.linkListing:visited {
+	color: #118488
+}
+
 
 
 #HeaderListingDetails {

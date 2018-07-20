@@ -59,7 +59,7 @@ function sendEmail() {
 var link = "mailto:justen.dekuiper@airbnb.com"
              + "?cc=" +escape("aleksei.liksman@airbnb.com")
              + "&subject=" + escape("Snapshot Tool - " + reservationCode)
-             + "&body=" + escape('Hi Justen, \n \n ')
+             + "&body=" + escape('Hi, \n \n ')
     ;
     window.location.href = link;
     ;
@@ -319,7 +319,7 @@ document.getElementById("DropdownListingDetails").style.display = "block";
 
 var insertedtext = document.getElementById("EntreeField").value;
 var insertedtoptext =  insertedtext.substring(insertedtext.indexOf("admin_notes") + 1,insertedtext.indexOf("reservation_schedule2s")-2);
-var insertedPricingText = insertedtext.substring(insertedtext.indexOf("pricing_snapshot_data") ,insertedtext.indexOf("admin_points")-2);
+var insertedPricingText = insertedtext.substring(insertedtext.indexOf("pricing_snapshot_data") ,insertedtext.indexOf("admin_points")+15);
 
 /* Reservation Code */
 var reservationCodeData = document.getElementById("reservation_code")
@@ -570,6 +570,49 @@ if (insertedtext.includes("cancel_policy")) {
 
 /* Listing Details */
 
+
+
+// Listing Links
+// Listing ID retrieval
+var listingID = insertedtext.substring(insertedtext.indexOf('hypothetical_rank'),insertedtext.indexOf('instant_book_lead_time'));
+listingID = listingID.substring(listingID.indexOf('id')+4,listingID.indexOf('instant_book')-2);
+
+
+// Rooms & MYS Link
+var roomsLink = "https://admin.airbnb.com/rooms/" + listingID
+var mysLink = "https://admin.airbnb.com/manage-your-space/" + listingID +"/details"
+
+
+var roomsLinkDiv = document.createElement('div');
+roomsLinkDiv.className="linkListingDiv"
+var roomsLinkInsert = document.createElement('a');
+var roomsLinkNode = document.createTextNode('Listing Page');
+roomsLinkInsert.appendChild(roomsLinkNode);
+roomsLinkInsert.title = 'Listing Page';
+roomsLinkInsert.setAttribute("target","blank")
+roomsLinkInsert.href = roomsLink;
+roomsLinkInsert.className="linkListing"
+roomsLinkDiv.appendChild(roomsLinkInsert);
+
+var mysLinkDiv = document.createElement('div');
+mysLinkDiv.className="linkListingDiv"
+var mysLinkInsert = document.createElement('a');
+var mysLinkNode = document.createTextNode('MYS Page');
+mysLinkInsert.appendChild(mysLinkNode);
+mysLinkInsert.title = 'Manage Your Space Page';
+mysLinkInsert.setAttribute("target","blank")
+mysLinkInsert.href = mysLink;
+mysLinkInsert.className="linkListing"
+mysLinkDiv.appendChild(mysLinkInsert);
+
+var linksDiv = document.createElement('div');
+linksDiv.id="linksListingDiv"
+linksDiv.appendChild(roomsLinkDiv);
+linksDiv.appendChild(mysLinkDiv);
+
+document.getElementById("DivListingDetails").prepend(linksDiv);
+
+
 /* Listing title */
 var listingTitle = insertedtext.substring(insertedtext.indexOf('main_photo_is_dirty'),insertedtext.indexOf('place_recommendations_count'));
 listingTitle = listingTitle.substring(listingTitle.indexOf('monthly_price_native'),listingTitle.indexOf('native_currency')-1);
@@ -682,8 +725,19 @@ document.getElementById("HouseRulesListingDetails").innerText = listingHouseRule
 
 
 /* Checking Type of snapshot, creating text data*/
+// Type 2
 if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
-  var Snapshot2PriceText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
+    
+    //Pricing_History can be Empty, checking if not. If so, take data from line_items
+    var checkPricing_History = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history')+25,insertedPricingText.indexOf("admin_points")-6)
+    if(checkPricing_History.length >1){
+        var Snapshot2PriceText = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history'), insertedPricingText.indexOf('admin_points'));
+
+    }
+    else { // If Empty
+        var Snapshot2PriceText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
+    }
+
 
         var listingCurrency = insertedPricingText.substring(insertedPricingText.indexOf('listing_currency')-3,insertedPricingText.indexOf('line_items'))
         listingCurrency = listingCurrency.substring(listingCurrency.indexOf('listing_currency')+18,listingCurrency.indexOf('dated')-2)
@@ -1268,7 +1322,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     var replacedSnapshot2PriceText = Snapshot2PriceText;
     var dailyPriceSnapshot2ReplacedText = Snapshot2PriceText;  
 
-    while (replacedSnapshot2PriceText.includes('[{"type"=>')) {
+    while (replacedSnapshot2PriceText.includes('"settings"=>[{"type"=>')) {
         
     replacedSnapshot2PriceText = replacedSnapshot2PriceText.replace('start_date','X-X');
     replacedSnapshot2PriceText = replacedSnapshot2PriceText.replace('start_date','X-X'); 
@@ -1276,7 +1330,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         start_date = replacedSnapshot2PriceText.substring(replacedSnapshot2PriceText.indexOf('start_date')+14,replacedSnapshot2PriceText.indexOf('start_date')+24)
 
     replacedSnapshot2PriceText = replacedSnapshot2PriceText.replace('start_date','X-X');
-    replacedSnapshot2PriceText = replacedSnapshot2PriceText.replace('[{"type"=>','X-X');
+    replacedSnapshot2PriceText = replacedSnapshot2PriceText.replace('"settings"=>[{"type"=>','X-X');
 
     numberNight++;
 
@@ -2164,13 +2218,22 @@ else { //not special offer base price
 if (insertedPricingText.includes("guest_fee_reservation_stamp")) { 
 
 
-    while (dailyPriceSnapshot2ReplacedText.includes('[{"type"=>"')) {
+    while (dailyPriceSnapshot2ReplacedText.includes('"settings"=>[{"type"=>')) {
 
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date','X-X');
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date','X-X'); 
 
     start_date = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('start_date') +14 , dailyPriceSnapshot2ReplacedText.indexOf('start_date') +24);
-    type = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('[{"type"=>"') +11,dailyPriceSnapshot2ReplacedText.indexOf('start_date')-4);
+
+
+
+if(checkPricing_History.length >1) {
+    dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date','X-X'); 
+}
+
+type = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('"settings"=>[{"type"=>') +23,dailyPriceSnapshot2ReplacedText.indexOf('start_date')-4);
+
+
     type = type.toLowerCase();
     type = type.replace(/_/g," ");
     type = type.charAt(0).toUpperCase() + type.slice(1);
@@ -2195,8 +2258,11 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     original_amount_micro_listing = (exact_amount_micros_usd * listingCurrencyRate).toFixed(2);
     guest_amount_micros = (exact_amount_micros_usd * guestCurrencyRate).toFixed(2);
 
+
+if(checkPricing_History.length <1) {
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date','X-X');
-    dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('[{"type"=>"', "X-X");
+}
+    dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('"settings"=>[{"type"=>', "X-X");
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('original_amount_usd', "X-X");
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('applied_amount_usd', "X-X");
 
@@ -2652,16 +2718,15 @@ else {
       if (document.getElementById("DateListing"+counter).textContent === start_date) {
         // Listing
 
-        var divDayHeaderInsert = document.createElement("div");
-        divDayHeaderInsert.className="divDayHeader";
-        divDayHeaderInsert.id="divDayHeader"+counter;
-        document.getElementById("ContentPricesDivListing"+counter).appendChild(divDayHeaderInsert);
+        var divDayHeaderListingInsert = document.createElement("div");
+        divDayHeaderListingInsert.className="divDayHeader";
+        divDayHeaderListingInsert.id="divDayListingHeader"+counter;
+        document.getElementById("ContentPricesDivListing"+counter).appendChild(divDayHeaderListingInsert);
 
 
         var divDayInsert = document.createElement("div");
         divDayInsert.className="dailyDiv";
         divDayInsert.id="dailyDivListing"+counter;
-        divDayInsert.style.display = "none";
         document.getElementById("ContentPricesDivListing"+counter).appendChild(divDayInsert);
 
 
@@ -2670,26 +2735,15 @@ else {
         typeDayInsert.appendChild(typeDayInsertNode);
         typeDayInsert.className= "dailyType";
         typeDayInsert.id= "dailyType"+counter;
-        document.getElementById("divDayHeader"+counter).appendChild(typeDayInsert);
+        document.getElementById("divDayListingHeader"+counter).appendChild(typeDayInsert);
 
         var original_amount_micro_listingDayInsert = document.createElement("div");
         var original_amount_micro_listingDayNode = document.createTextNode(original_amount_listing);
         original_amount_micro_listingDayInsert.appendChild(original_amount_micro_listingDayNode);
         original_amount_micro_listingDayInsert.className= "dailyListing";
         original_amount_micro_listingDayInsert.id= "dailyListing"+counter;
-        document.getElementById("divDayHeader"+counter).appendChild(original_amount_micro_listingDayInsert);
+        document.getElementById("divDayListingHeader"+counter).appendChild(original_amount_micro_listingDayInsert);
 
-        
-        var moreInfoDiscountInsert = document.createElement('img')
-        moreInfoDiscountInsert.src = "images/questionmark.png"
-        moreInfoDiscountInsert.setAttribute("height" , "14")
-        moreInfoDiscountInsert.setAttribute("width" , "14")
-        moreInfoDiscountInsert.style.position = "relative"
-        moreInfoDiscountInsert.style.top = "2px"
-        moreInfoDiscountInsert.style.left = "6px"
-        moreInfoDiscountInsert.style.cursor = "pointer"
-        moreInfoDiscountInsert.setAttribute("onclick","ClickDiscountInfo(this);");
-        document.getElementById("dailyType"+counter).appendChild(moreInfoDiscountInsert);
 
         var divDayInsert = document.createElement("div");
         divDayInsert.className="discountDiv";
@@ -2698,6 +2752,11 @@ else {
 
 
         //USD
+        var divDayHeaderUsdInsert = document.createElement("div");
+        divDayHeaderUsdInsert.className="divDayHeader";
+        divDayHeaderUsdInsert.id="divDayUsdHeader"+counter;
+        document.getElementById("ContentPricesDivUsd"+counter).appendChild(divDayHeaderUsdInsert);
+
         var divDayInsert = document.createElement("div");
         divDayInsert.className="dailyDiv";
         divDayInsert.id="dailyDivUsd"+counter;
@@ -2708,17 +2767,27 @@ else {
         typeDayInsert.appendChild(typeDayInsertNode);
         typeDayInsert.className= "dailyType";
         typeDayInsert.id= "dailyType"+counter;
-        document.getElementById("dailyDivUsd"+counter).appendChild(typeDayInsert);
+        document.getElementById("divDayUsdHeader"+counter).appendChild(typeDayInsert);
 
         var amount_usdDayInsert = document.createElement("div");
         var amount_usdDayNode = document.createTextNode(amount_usd);
         amount_usdDayInsert.appendChild(amount_usdDayNode);
         amount_usdDayInsert.className= "dailyUSD";
         amount_usdDayInsert.id= "dailyUSD"+counter;
-        document.getElementById("dailyDivUsd"+counter).appendChild(amount_usdDayInsert);
+        document.getElementById("divDayUsdHeader"+counter).appendChild(amount_usdDayInsert);
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id="discountDiv"+counter;
+        document.getElementById("dailyDivUsd"+counter).appendChild(divDayInsert);
 
 
         // Guest
+        var divDayHeaderGuestInsert = document.createElement("div");
+        divDayHeaderGuestInsert.className="divDayHeader";
+        divDayHeaderGuestInsert.id="divDayGuestHeader"+counter;
+        document.getElementById("ContentPricesDivGuest"+counter).appendChild(divDayHeaderGuestInsert);
+
         var divDayInsert = document.createElement("div");
         divDayInsert.className="dailyDiv";
         divDayInsert.id="dailyDivGuest"+counter;
@@ -2729,14 +2798,20 @@ else {
         typeDayInsert.appendChild(typeDayInsertNode);
         typeDayInsert.className= "dailyType";
         typeDayInsert.id= "dailyType"+counter;
-        document.getElementById("dailyDivGuest"+counter).appendChild(typeDayInsert);
+        document.getElementById("divDayGuestHeader"+counter).appendChild(typeDayInsert);
 
         var amount_usdDayInsert = document.createElement("div");
         var amount_usdDayNode = document.createTextNode(guest_amount_micros);
         amount_usdDayInsert.appendChild(amount_usdDayNode);
         amount_usdDayInsert.className= "dailyGuest";
         amount_usdDayInsert.id= "dailyGuest"+counter;
-       document.getElementById("dailyDivGuest"+counter).appendChild(amount_usdDayInsert);
+        document.getElementById("divDayGuestHeader"+counter).appendChild(amount_usdDayInsert);
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id="discountDiv"+counter;
+        document.getElementById("dailyDivGuest"+counter).appendChild(divDayInsert);
+
 
         break;
       }
@@ -2785,14 +2860,25 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       var discountTypeLength = ""
 
 
+      if (insertedPricingText.includes('"min_length"')) {
+        var discountMinLength = parseInt(insertedPricingText.substring(insertedPricingText.indexOf('"min_length"')+13, insertedPricingText.indexOf('max_length')-2))
+
+      }
+      else {
+        var discountMinLength = 0;
+      }
+
 
       if (numberNight >=28 && discountType== "Length of stay discount") {
         discountTypeLength = "Monthly Discount";
       }
-      else if (numberNight <28 && discountType== "Length of stay discount") {
+      else if (numberNight >=14 && discountType== "Length of stay discount") {
         discountTypeLength = "Weekly Discount";
       }
-      else {
+      else if (discountMinLength >0 && discountType== "Length of stay discount"){
+        discountTypeLength = discountMinLength +"-night discount";
+}
+    else{
         discountTypeLength = discountType;
       }
 
@@ -2802,7 +2888,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       var discountPercentage = eachDiscountLine.substring(eachDiscountLine.indexOf('price_factor')+14,eachDiscountLine.indexOf('guest_amount_currency'));
       discountPercentage = discountPercentage.substring(discountPercentage.indexOf('.')+1,discountPercentage.indexOf(',"'));
       discountPercentage = parseInt(discountPercentage);
-      
+
       if (discountPercentage === 0) {
         discountPercentage = 100;
       }
@@ -2835,7 +2921,12 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("discountDiv"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
+        if (discountPercentage == "0") {
+        var discountTypeNode = document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' +discountTypeLength);       
+        }
+        else{
         var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
+    }
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2856,7 +2947,12 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("ContentPricesDivUsd"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
+        if (discountPercentage == "0") {
+        var discountTypeNode = document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' +discountTypeLength);       
+        }
+        else{
         var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
+    }
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2877,7 +2973,12 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         document.getElementById("ContentPricesDivGuest"+counter).appendChild(divDayInsert);
 
         var discountTypeInsert = document.createElement("div");
+        if (discountPercentage == "0") {
+        var discountTypeNode = document.createTextNode( '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' +discountTypeLength);       
+        }
+        else{
         var discountTypeNode = document.createTextNode(discountPercentage + "% ⇒ " +discountTypeLength);
+    }
         discountTypeInsert.appendChild(discountTypeNode);
         discountTypeInsert.className="discountType";
         discountTypeInsert.id= "discountType"+counter;
@@ -2957,7 +3058,7 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         var divExtraGuestTypeNode = document.createTextNode(extra_guest_fee_type+"");
         divExtraGuestTypeInsert.appendChild(divExtraGuestTypeNode);
         divExtraGuestTypeInsert.className="extraGuestType";
-        divExtraGuestTypeInsert.id= "extraGuestType"+counter;
+        divExtraGuestTypeInsert.id= "extraGuestTypeListing"+counter;
         document.getElementById("extraGuestDivListing"+counter).appendChild(divExtraGuestTypeInsert);
 
 
@@ -2970,13 +3071,13 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         moreInfoExtraGuestInsert.style.left = "6px"
         moreInfoExtraGuestInsert.style.cursor = "pointer"
         moreInfoExtraGuestInsert.setAttribute("onclick","ClickExtraGuestInfo(this);");
-        document.getElementById("extraGuestType"+counter).appendChild(moreInfoExtraGuestInsert);
+        document.getElementById("extraGuestTypeListing"+counter).appendChild(moreInfoExtraGuestInsert);
 
 
 //More Info
         var moreInfoExtraGuestDivInsert = document.createElement('div');
         moreInfoExtraGuestDivInsert.className = "moreInfoExtraGuest";
-        moreInfoExtraGuestDivInsert.id = "moreInfoExtraGuest" + counter;
+        moreInfoExtraGuestDivInsert.id = "moreInfoExtraGuestListing" + counter;
         moreInfoExtraGuestDivInsert.style.display="none";
         document.getElementById("ContentPricesDivListing"+counter).appendChild(moreInfoExtraGuestDivInsert);
 
@@ -2984,54 +3085,39 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         moreInfoExtraGuestInclNode = document.createTextNode ("Number of guest included in price:")
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
         moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsIncluded)
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
         moreInfoExtraGuestInclNode = document.createTextNode ("Number of extra guests:")
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
         moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsNumber)
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
 
     
        var moreInfoExtraGuestInclInsert = document.createElement('div');
-        moreInfoExtraGuestInclNode = document.createTextNode ("Host's price for each extra guest:")
+        moreInfoExtraGuestInclNode = document.createTextNode ("Price for each extra guest:")
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
         moreInfoExtraGuestInclNode = document.createTextNode (listingCurrencySymbol +" " + extraGuestsPriceListing)
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
-
-        var moreInfoExtraGuestInclInsert = document.createElement('div');
-        moreInfoExtraGuestInclNode = document.createTextNode ("Guest's price for each extra guest:")
-        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
-        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
-
-        var moreInfoExtraGuestInclInsert = document.createElement('div');
-        moreInfoExtraGuestInclNode = document.createTextNode (guestCurrencySymbol +" " + extraGuestsPriceGuest)
-        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
-        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
-        document.getElementById('moreInfoExtraGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
-
-     
-
+        document.getElementById('moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
 
         var divExtraGuestListingInsert = document.createElement("div");
@@ -3070,11 +3156,72 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         document.getElementById("ContentPricesDivGuest"+counter).appendChild(divExtraGuestInsert);
 
         var divExtraGuestTypeInsert = document.createElement("div");
-        var divExtraGuestTypeNode = document.createTextNode(extra_guest_fee_type);
+        var divExtraGuestTypeNode = document.createTextNode(extra_guest_fee_type+"");
         divExtraGuestTypeInsert.appendChild(divExtraGuestTypeNode);
         divExtraGuestTypeInsert.className="extraGuestType";
-        divExtraGuestTypeInsert.id= "extraGuestType"+counter;
+        divExtraGuestTypeInsert.id= "extraGuestTypeGuest"+counter;
         document.getElementById("extraGuestDivGuest"+counter).appendChild(divExtraGuestTypeInsert);
+
+
+        var moreInfoExtraGuestInsert = document.createElement('img')
+        moreInfoExtraGuestInsert.src = "images/questionmark.png"
+        moreInfoExtraGuestInsert.setAttribute("height" , "14")
+        moreInfoExtraGuestInsert.setAttribute("width" , "14")
+        moreInfoExtraGuestInsert.style.position = "relative"
+        moreInfoExtraGuestInsert.style.top = "2px"
+        moreInfoExtraGuestInsert.style.left = "6px"
+        moreInfoExtraGuestInsert.style.cursor = "pointer"
+        moreInfoExtraGuestInsert.setAttribute("onclick","ClickExtraGuestInfo(this);");
+        document.getElementById("extraGuestTypeGuest"+counter).appendChild(moreInfoExtraGuestInsert);
+
+
+//More Info
+        var moreInfoExtraGuestDivInsert = document.createElement('div');
+        moreInfoExtraGuestDivInsert.className = "moreInfoExtraGuest";
+        moreInfoExtraGuestDivInsert.id = "moreInfoExtraGuestGuest" + counter;
+        moreInfoExtraGuestDivInsert.style.display="none";
+        document.getElementById("ContentPricesDivGuest"+counter).appendChild(moreInfoExtraGuestDivInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Number of guest included in price:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsIncluded)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Number of extra guests:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (extraGuestsNumber)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+
+
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode ("Price for each extra guest:")
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "descriptionInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+        var moreInfoExtraGuestInclInsert = document.createElement('div');
+        moreInfoExtraGuestInclNode = document.createTextNode (guestCurrencySymbol +" " + extraGuestsPriceGuest)
+        moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
+        moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
+        document.getElementById('moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
+
+
 
         var divExtraGuestGuestInsert = document.createElement("div");
         var divExtraGuestGuestNode = document.createTextNode(extra_guest_fee_Guest);
@@ -3082,6 +3229,10 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
         divExtraGuestGuestInsert.className= "extraGuestGuest";
         divExtraGuestGuestInsert.id= "extraGuestGuest"+counter;
         document.getElementById("extraGuestDivGuest"+counter).appendChild(divExtraGuestGuestInsert);
+
+
+
+
         counter++;
 
     }
