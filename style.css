@@ -27,7 +27,7 @@ body {
 	height: 400px;
 	overflow: hidden;
 	margin:0;
-	background-color: grey;
+	background-color: #dcd8d7;
 }
 
 #HeaderImage {
@@ -764,9 +764,8 @@ display: inline-block;
 
 /* Links Listing */
 #linksListingDiv {
-    position: absolute;
-    right: 20%;
-    bottom: -40px;
+    position: relative;
+	left: 50%;
 }
 
 
