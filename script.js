@@ -275,7 +275,7 @@ else {
     obj.parentElement.parentElement.nextSibling.style.display = "block";
 }    
 };
-
+ 
 
 // Creating Alteration Button + Content
 function createAlterationButton(alterationNumber,alterationTotal) {
@@ -287,7 +287,7 @@ function createAlterationButton(alterationNumber,alterationTotal) {
         alterationNumberDisplay = "Latest alteration";
     }
     else {
-        alterationNumberDisplay = "Alteration #" +alterationNumber;
+        alterationNumberDisplay = "Alteration #" + (alterationTotal - alterationNumber);
     }
     var createAlterationButton = document.createElement('div')
     var createAlterationButtonText = document.createElement('h4')
