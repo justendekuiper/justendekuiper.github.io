@@ -256,7 +256,7 @@ function expandItemsGuest() {
 };
 
 
-
+ 
 // Selecting More info Questionmark   
 function ClickExtraGuestInfo(obj) {
     if(obj.parentElement.parentElement.nextSibling.style.display == "block") {
@@ -287,7 +287,7 @@ function createAlterationButton(alterationNumber,alterationTotal) {
         alterationNumberDisplay = "Latest alteration";
     }
     else {
-        alterationNumberDisplay = alterationNumber;
+        alterationNumberDisplay = "Alteration #" +alterationNumber;
     }
     var createAlterationButton = document.createElement('div')
     var createAlterationButtonText = document.createElement('h4')
@@ -1199,10 +1199,7 @@ if(insertedtext.includes('Justen') || insertedtext.includes('justen') || inserte
 
 // Alteration Checking
 var alterationTotal = ((insertedtext.match(/base_price_breakdown/g) || []).length - 1 );
-if (alterationTotal >0) {
 
-
-} 
 
 var alterationNumber = 0;
 
@@ -2190,7 +2187,6 @@ alert('Oops, this booking is not working yet. Please send this on to me to inves
 
 
 else {
-
 // Normal Type Snapshot
     while (replacedSnapshot2PriceText.includes('"settings"=>[{"type"=>')) {
         
@@ -2215,18 +2211,20 @@ else {
 
  else {  //Start snapshot #1 nights
 
+
     var insertedDailyPricingText = insertedPricingText.substring(insertedPricingText.indexOf('[{"type":') - 3);
     var nightReplacedText = insertedDailyPricingText;
     var dailyPriceReplacedText = insertedDailyPricingText;   
 
 
-    while (nightReplacedText.includes('start_date')) {
+    while (nightReplacedText.includes('[{"type":')) {
     start_date = nightReplacedText.substring(nightReplacedText.indexOf('start_date') +13 , nightReplacedText.indexOf('start_date') +23);
     numberNight++;
 
     nightReplacedText = nightReplacedText.replace('start_date','X-X');
     nightReplacedText = nightReplacedText.replace('start_date','X-X'); 
-    nightReplacedText = nightReplacedText.replace('start_date','X-X');   
+    nightReplacedText = nightReplacedText.replace('start_date','X-X'); 
+    nightReplacedText = nightReplacedText.replace('[{"type":','X-X');   
 
 
     createNightBarsInsert (start_date,numberNight,alterationNumber);
