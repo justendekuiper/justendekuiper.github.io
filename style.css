@@ -9,7 +9,7 @@ body {
 	z-index: 1;
 	left:30%;
 	top:85px;
-	height: 60px;
+	background-color: #333131c9;
 
 }
 
@@ -205,7 +205,6 @@ body {
 }
 
 /*Output Area */
-
 #DivOutputField {
 	position: relative;
 	margin: 0px 0px 0px 0px;
@@ -215,33 +214,56 @@ body {
 
 }
 
+.alterationButton {
+	position:relative;
+	width:10%;
+	margin-left:45%;
+	top:20px;
+	height: 30px;
+	background-color: #118488;
+	border: solid 2px;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	cursor: pointer;
+}
 
+.alterationButton > h4 {
+	position: relative;
+	bottom:50%;
+	text-align: center;
+}
+
+.alterationContent {
+	width: 80%;
+	margin-left:10%;
+}
 .Dropdown > h4 {
 	position: relative;
 	bottom:50%;
 	text-align: center;
 }
 
-#DropdownReservationDetails{
+
+
+.Dropdown{
 	position: relative;
 	left: 20%;
 	width: 60%;
 	height: 30px;
-	margin: 20px 0px 5px 0px;
+	margin: 0px 0px 2px 0px;
 	border-radius: 10px;
 	background-color: #118488;
 	border: solid 2px;
-	display: none;
 	color:white;
 }
 
-#DropdownReservationDetails:hover{
+.Dropdown:hover{
 	cursor: pointer;
 	background-color: #0e767a;
 }
 
 
-#BookingDetails{
+.BookingDetails{
 	position: relative;
 	width: 70%;
 	margin-left: 15%;
@@ -274,7 +296,6 @@ table, tr, td {
 	border-radius: 10px;
 	background-color: #118488;
 	border: solid 2px;
-	display: none;
 	color:white;
 }
 
@@ -300,7 +321,7 @@ table, tr, td {
 
 
 /* Header Host / usd / Guest */
-#listingPriceDiv {
+.listingPriceDiv {
 	display: inline-block;
 	width: 15%;
 	height: 20px;
@@ -311,12 +332,12 @@ table, tr, td {
 	margin-left: 8%;
 	color:white;
 }
-#listingPriceDiv:hover{
+.listingPriceDiv:hover{
 	cursor: pointer;
 	background-color: #0e767a;
 }
 
-#usdPriceDiv {
+.usdPriceDiv {
 	display: inline-block;
 	width: 15%;
 	height: 20px;
@@ -327,7 +348,7 @@ table, tr, td {
 	margin-left: 19%;
 	color:white;
 }
-#usdPriceDiv:hover{
+.usdPriceDiv:hover{
 	cursor: pointer;
 	background-color: #0e767a;
 }
@@ -335,7 +356,7 @@ table, tr, td {
 
 
 
-#guestPriceDiv {
+.guestPriceDiv {
 	display: inline-block;
 	width: 15%;
 	height: 20px;
@@ -346,7 +367,7 @@ table, tr, td {
 	margin-left: 19%;
 	color:white;
 }
-#guestPriceDiv:hover{
+.guestPriceDiv:hover{
 	cursor: pointer;
 	background-color: #0e767a;
 }
@@ -366,7 +387,6 @@ table, tr, td {
 	border: solid 1px;
 	border-radius: 7px;
 	height: 20px;
-	display: none;
 }
 
 .PricingHeaderBarListing:hover {
@@ -410,32 +430,51 @@ table, tr, td {
 	background-color: #0e767a;
 }
 
+.listingContainer {
+	position: relative;
+	left: 0%;
+	width: 32%;
+	display: inline-block;
+}
 
-#listingContentDiv{
+.usdContainer {
+	position: relative;
+	width: 32%;
+	display: inline-block;	
+}
+
+.guestContainer {
+	position: relative;
+	width: 32%;
+	display: inline-block;
+}
+
+
+.listingContentDiv{
 	position: relative;
 	left:0%;
 	margin-top:20px;
-	width: 33%;
 	display: inline-grid;
 	top:-10px;
+	width: 100%;
 }
 
 
-#usdContentDiv{
+.usdContentDiv{
 	position: relative;
 	margin-top:20px;
-	width: 33%;
 	display: inline-grid;
 	top:-10px;
+	width: 100%;
 }
 
 
-#guestContentDiv{
+.guestContentDiv{
 	position: relative;
 	margin-top:20px;
-	width: 33%;
 	display: inline-grid;
 	top:-10px;
+	width: 100%;
 }
 
 
@@ -744,7 +783,6 @@ display: inline-block;
 	border-radius: 10px;
 	background-color: #118488;
 	border: solid 2px;
-	display: none;
 	color:white;
 }
   
@@ -754,7 +792,7 @@ display: inline-block;
 	background-color: #0e767a;
 }
 
-#DivListingDetails {
+.DivListingDetails {
 	width: 50%;
 	margin-left: 25%;
 	margin-left: 25%;
@@ -763,7 +801,7 @@ display: inline-block;
 
 
 /* Links Listing */
-#linksListingDiv {
+.linksListingDiv {
     position: relative;
 	left: 50%;
 }
@@ -783,7 +821,7 @@ display: inline-block;
 
 
 
-#HeaderListingDetails {
+.HeaderListingDetails {
 	font-weight: bold;
 	font-size: 1em;
 	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
@@ -814,7 +852,7 @@ display: inline-block;
 
 
 
-#DescriptionListingDetails {
+.DescriptionListingDetails {
 	font-size: 16px;
 	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 	font-weight: normal;
@@ -823,7 +861,7 @@ display: inline-block;
 
 
 
-#AmenitiesData {
+.AmenitiesData {
 	position: relative;
 	width: 100%;
 	margin-top:20px;
@@ -838,7 +876,7 @@ display: inline-block;
 	border:none;
 }
 
-#HouseRulesListingDetails {
+.HouseRulesListingDetails {
 	margin: 10px 0px 40px 0px;
 }
 
