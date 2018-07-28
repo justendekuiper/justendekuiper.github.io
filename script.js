@@ -2251,6 +2251,11 @@ else {
 
 
 
+
+
+
+
+
 // Service Fees & Taxes
 
     // Airbnb Fee Guest & Listing
@@ -2269,6 +2274,10 @@ else {
 
 
         createAirbnbFeeInsert (airbnbFeeListingAmountDisplay,airbnbFeeGuestAmountDisplay,alterationNumber)
+
+
+
+
 
 
 
@@ -2302,31 +2311,7 @@ else {
 }
 
 
-            //Creating total for Header with Tax Listing
 
-        if (insertedPricingText.includes('VALUE_ADDED_TAX_HOST')) {
-            var totalFeesListing = listingCurrencySymbol + " " + (parseFloat(taxAmountListing) + parseFloat(airbnbFeeListingAmount)).toFixed(2);
-        }
-        else {
-            var totalFeesListing = listingCurrencySymbol + " "  + (parseFloat(airbnbFeeListingAmount).toFixed(2));
-        }
-
-            var totalHeaderFeesTypeListingInsert = document.createElement('div')
-            var totalHeaderFeesListingAmountInsert = document.createElement('div')
-
-            var totalHeaderFeesTypeListingNode = document.createTextNode("Fees & VAT");
-            var totalHeaderFeesAmountListingNode = document.createTextNode(totalFeesListing);
-
-        totalHeaderFeesTypeListingInsert.className= "headerFeesType";
-        totalHeaderFeesListingAmountInsert.className= "headerFeesAmount";
-        totalHeaderFeesListingAmountInsert.id= alterationNumber + "headerFeesAmountListing";
-
-            totalHeaderFeesTypeListingInsert.appendChild(totalHeaderFeesTypeListingNode);
-            totalHeaderFeesListingAmountInsert.appendChild(totalHeaderFeesAmountListingNode);
-
-            document.getElementById(alterationNumber + 'FeesHeaderBarListing').appendChild(totalHeaderFeesTypeListingInsert)
-            document.getElementById(alterationNumber + 'FeesHeaderBarListing').appendChild(totalHeaderFeesListingAmountInsert)
-        
 
 
      //VAT Guest 
@@ -2360,12 +2345,199 @@ else {
   }
 
 
-            //Creating total for Header with Tax Guest
-            if (insertedPricingText.includes('VALUE_ADDED_TAX_GUEST')) {
-            var totalFeesGuest = guestCurrencySymbol + " " + (parseFloat(taxAmountGuest) + parseFloat(airbnbFeeGuestAmount)).toFixed(2);
+
+
+
+
+
+// Beyond
+
+// Damage Waiver
+if (insertedPricingText.includes('"PASS_THROUGH_DAMAGE_WAIVER"')) {
+    var type = "Pass Through Damage Waiver"
+    var priceListing = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_DAMAGE_WAIVER"')+10)
+    priceListing = priceListing.substring(priceListing.indexOf('amount_micro_listing')+22,priceListing.indexOf('amount_micro_usd')-2) 
+    priceListing = listingCurrencySymbol + " " + ((parseFloat(priceListing / 1000000)).toFixed(2))
+    
+    var priceUsd = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_DAMAGE_WAIVER"')+10)
+    priceUsd = priceUsd.substring(priceUsd.indexOf('amount_micro_usd')+18,priceUsd.indexOf('start_date')-2) 
+    priceUsd =  "$ " + ((parseFloat(priceUsd / 1000000)).toFixed(2))
+    
+    var priceGuest = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_DAMAGE_WAIVER"')+10)
+    priceGuest = priceGuest.substring(priceGuest.indexOf('amount_micro_guest')+20,priceGuest.indexOf('amount_micro_listing')-2) 
+    priceGuest =  "$ " + ((parseFloat(priceGuest / 1000000)).toFixed(2))
+
+
+    //Guest
+    var dwDiv = document.createElement('div');
+    dwDiv.className = "feeDiv"
+    dwDiv.id = alterationNumber + "DW"
+
+    var dwType = document.createElement('div');
+    dwType.className = "DWTypeGuest airbnbFeeGuestType";
+    dwType.id = alterationNumber + "DWTypeGuest";
+    var dwTypeNode = document.createTextNode(type);
+    dwType.appendChild(dwTypeNode);
+
+    var amount = document.createElement('div');
+    amount.className = "DWAmountGuest airbnbFeeGuestAmount";
+    amount.id = alterationNumber + "DWAmountGuest"
+    var amountNode = document.createTextNode(priceGuest)
+    amount.appendChild(amountNode);
+
+    dwDiv.appendChild(dwType);
+    dwDiv.appendChild(amount);
+    document.getElementById(alterationNumber + "contentFeesGuest").appendChild(dwDiv); 
+}
+
+
+
+
+// Gratuity Fee
+if (insertedPricingText.includes('"PASS_THROUGH_GRATUITY_FEE"')) {
+    var type = "Pass Through Gratuity Fee"
+    var priceListing = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_GRATUITY_FEE"')+10)
+    priceListing = priceListing.substring(priceListing.indexOf('amount_micro_listing')+22,priceListing.indexOf('amount_micro_usd')-2) 
+    priceListing = listingCurrencySymbol + " " + ((parseFloat(priceListing / 1000000)).toFixed(2))
+    
+    var priceUsd = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_GRATUITY_FEE"')+10)
+    priceUsd = priceUsd.substring(priceUsd.indexOf('amount_micro_usd')+18,priceUsd.indexOf('start_date')-2) 
+    priceUsd =  "$ " + ((parseFloat(priceUsd / 1000000)).toFixed(2))
+    
+    var priceGuest = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_GRATUITY_FEE"')+10)
+    priceGuest = priceGuest.substring(priceGuest.indexOf('amount_micro_guest')+20,priceGuest.indexOf('amount_micro_listing')-2) 
+    priceGuest =  "$ " + ((parseFloat(priceGuest / 1000000)).toFixed(2))
+
+
+    //Guest
+    var dwDiv = document.createElement('div');
+    dwDiv.className = "feeDiv"
+    dwDiv.id = alterationNumber + "GF"
+
+    var dwType = document.createElement('div');
+    dwType.className = "GFType airbnbFeeGuestType";
+    dwType.id = alterationNumber + "GFTypeGuest";
+    var dwTypeNode = document.createTextNode(type);
+    dwType.appendChild(dwTypeNode);
+
+    var amount = document.createElement('div');
+    amount.className = "GFAmount airbnbFeeGuestAmount";
+    amount.id = alterationNumber + "GFAmountGuest"
+    var amountNode = document.createTextNode(priceGuest)
+    amount.appendChild(amountNode);
+
+    dwDiv.appendChild(dwType);
+    dwDiv.appendChild(amount);
+    document.getElementById(alterationNumber + "contentFeesGuest").appendChild(dwDiv); 
+}
+
+
+
+
+// Service Charge
+if (insertedPricingText.includes('"PASS_THROUGH_SERVICE_CHARGE"')) {
+    var type = "Pass Through Service Charge"
+    var priceListing = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_SERVICE_CHARGE"')+10)
+    priceListing = priceListing.substring(priceListing.indexOf('amount_micro_listing')+22,priceListing.indexOf('amount_micro_usd')-2) 
+    priceListing = listingCurrencySymbol + " " + ((parseFloat(priceListing / 1000000)).toFixed(2))
+    
+    var priceUsd = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_SERVICE_CHARGE"')+10)
+    priceUsd = priceUsd.substring(priceUsd.indexOf('amount_micro_usd')+18,priceUsd.indexOf('start_date')-2) 
+    priceUsd =  "$ " + ((parseFloat(priceUsd / 1000000)).toFixed(2))
+    
+    var priceGuest = insertedPricingText.substring(insertedPricingText.indexOf('"PASS_THROUGH_SERVICE_CHARGE"')+10)
+    priceGuest = priceGuest.substring(priceGuest.indexOf('amount_micro_guest')+20,priceGuest.indexOf('amount_micro_listing')-2) 
+    priceGuest =  "$ " + ((parseFloat(priceGuest / 1000000)).toFixed(2))
+
+
+    //Guest
+    var dwDiv = document.createElement('div');
+    dwDiv.className = "feeDiv"
+    dwDiv.id = alterationNumber + "SC"
+
+    var dwType = document.createElement('div');
+    dwType.className = "SCType airbnbFeeGuestType";
+    dwType.id = alterationNumber + "SCType";
+    var dwTypeNode = document.createTextNode(type);
+    dwType.appendChild(dwTypeNode);
+
+    var amount = document.createElement('div');
+    amount.className = "SCAmount airbnbFeeGuestAmount";
+    amount.id = alterationNumber + "SCAmountGuest"
+    var amountNode = document.createTextNode(priceGuest)
+    amount.appendChild(amountNode);
+
+    dwDiv.appendChild(dwType);
+    dwDiv.appendChild(amount);
+    document.getElementById(alterationNumber + "contentFeesGuest").appendChild(dwDiv); 
+}
+
+
+
+
+
+          // Beyond Fees
+          var beyondFeeGuest = 0;
+
+          if (insertedPricingText.includes('PASS_THROUGH_DAMAGE_WAIVER')) {
+            var placeHolderFee = document.getElementById(alterationNumber + 'DWAmountGuest').innerText;
+            placeHolderFee = parseFloat(placeHolderFee.substring(placeHolderFee.indexOf(" ")+1));
+            beyondFeeGuest = beyondFeeGuest + placeHolderFee
+          }
+
+          if (insertedPricingText.includes('PASS_THROUGH_GRATUITY_FEE')) {
+            var placeHolderFee = document.getElementById(alterationNumber + 'GFAmountGuest').innerText;
+            placeHolderFee = parseFloat(placeHolderFee.substring(placeHolderFee.indexOf(" ")+1));
+            beyondFeeGuest = beyondFeeGuest + placeHolderFee
+          }
+
+          if (insertedPricingText.includes('PASS_THROUGH_SERVICE_CHARGE')) {
+            var placeHolderFee = document.getElementById(alterationNumber + 'SCAmountGuest').innerText;
+            placeHolderFee = parseFloat(placeHolderFee.substring(placeHolderFee.indexOf(" ")+1));
+            beyondFeeGuest = beyondFeeGuest + placeHolderFee
+          }
+
+
+
+
+
+
+               //Creating total for Header with Tax Listing
+
+        if (insertedPricingText.includes('VALUE_ADDED_TAX_HOST')) {
+            var totalFeesListing = listingCurrencySymbol + " " + (parseFloat(taxAmountListing) + parseFloat(airbnbFeeListingAmount)).toFixed(2);
         }
         else {
-            var totalFeesGuest = guestCurrencySymbol + " "  + (parseFloat(airbnbFeeGuestAmount).toFixed(2));
+            var totalFeesListing = listingCurrencySymbol + " "  + (parseFloat(airbnbFeeListingAmount).toFixed(2));
+        }
+
+            var totalHeaderFeesTypeListingInsert = document.createElement('div')
+            var totalHeaderFeesListingAmountInsert = document.createElement('div')
+
+            var totalHeaderFeesTypeListingNode = document.createTextNode("Fees & VAT");
+            var totalHeaderFeesAmountListingNode = document.createTextNode(totalFeesListing);
+
+        totalHeaderFeesTypeListingInsert.className= "headerFeesType";
+        totalHeaderFeesListingAmountInsert.className= "headerFeesAmount";
+        totalHeaderFeesListingAmountInsert.id= alterationNumber + "headerFeesAmountListing";
+
+            totalHeaderFeesTypeListingInsert.appendChild(totalHeaderFeesTypeListingNode);
+            totalHeaderFeesListingAmountInsert.appendChild(totalHeaderFeesAmountListingNode);
+
+            document.getElementById(alterationNumber + 'FeesHeaderBarListing').appendChild(totalHeaderFeesTypeListingInsert)
+            document.getElementById(alterationNumber + 'FeesHeaderBarListing').appendChild(totalHeaderFeesListingAmountInsert)
+        
+  
+
+// (((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100)) -- Making sure it adds up even if number is (1.7 + 1.71)
+
+            //Creating total for Header with Tax Guest
+            if (insertedPricingText.includes('VALUE_ADDED_TAX_GUEST')) {
+            var totalFeesGuest = guestCurrencySymbol + " " + (((taxAmountGuest * 100).toFixed(2)/100) + ((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100));
+
+        }
+        else {
+            var totalFeesGuest = guestCurrencySymbol + " "  + (((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100));     
         }
         
             var totalHeaderFeesTypeGuestInsert = document.createElement('div')
@@ -2390,10 +2562,17 @@ else {
 
 
 
+
 } //End snapshot #1 nights
 
 
 } // If not special offer
+
+
+
+
+
+
 
 
 
@@ -2470,6 +2649,9 @@ while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
           createAirbnbFeeInsert (airbnbFeeListingAmountDisplay,airbnbFeeGuestAmountDisplay,alterationNumber)
 
 
+
+
+
         //VAT Listing 
         if (insertedPricingText.includes('VALUE_ADDED_TAX_HOST')) {
             var taxAmountListing = insertedPricingText.substring(insertedPricingText.indexOf('VALUE_ADDED_TAX_HOST'))
@@ -2514,6 +2696,7 @@ while (specialOfferPriceReplacedText.includes('SPECIAL_OFFER_BASE_PRICE')) {
 
             var totalHeaderFeesTypeListingNode = document.createTextNode("Fees & VAT");
             var totalHeaderFeesAmountListingNode = document.createTextNode(totalFeesListing);
+
 
         totalHeaderFeesTypeListingInsert.className= "headerFeesType";
         totalHeaderFeesListingAmountInsert.className= "headerFeesAmount";
@@ -2739,6 +2922,10 @@ if(checkPricing_History.length <1) {
             taxListingDiv.appendChild(taxAmountListingInsert);
             document.getElementById(alterationNumber + 'contentFeesListing').appendChild(taxListingDiv);
 }
+
+
+
+
 
 
             //Creating total for Header with Tax Listing
