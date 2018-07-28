@@ -201,24 +201,13 @@ function ClickPricingBar(e) {
 
 
 
-var newsrc = "expand-arrows.png";
+var expandListing = "expand-arrows.png";
 // Listing
 function expandItemsListing(e) {
-  if ( newsrc == "expand-arrows.png" ) {
-    document.images.e.src = "images/minimize-arrows.png";
-    document.images.e.alt = "Minimize";
-    newsrc  = "minimize-arrows.png";
-    e.siblings().style.display = "block"
+
+$(e).siblings('.ContentPricesDivListing').css({"display": "block"});
+
 }
-
-  else {
-    document.images.e.src = "images/expand-arrows.png";
-    document.images.e.alt = "Expand";
-    newsrc  = "expand-arrows.png";
-    e.siblings().style.display = "none"
-  }
-};
-
 
 // USD
 function expandItemsUsd() {
@@ -3019,7 +3008,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         var discountAmountListingNode = document.createTextNode(discountAmountListing);
         discountAmountListingInsert.appendChild(discountAmountListingNode);
         discountAmountListingInsert.className="discountAmountListing";
-        discountAmountListingInsert.id= alterationNumber + "discountAmountListing"+counter+"-"+ ($("#ContentPricesDivListing"+counter).find(".discountAmountListing").length+1);
+        discountAmountListingInsert.id= alterationNumber + "discountAmountListing"+counter+"-"+ ($("#" + alterationNumber + "ContentPricesDivListing"+counter).find(".discountAmountListing").length+1);
         document.getElementById(alterationNumber + "discountDivListing"+counter+discountTypeID).appendChild(discountAmountListingInsert);
 
 
@@ -3045,7 +3034,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         var discountAmountUSDNode = document.createTextNode(discountAmountUSD);
         discountAmountUSDInsert.appendChild(discountAmountUSDNode);
         discountAmountUSDInsert.className="discountAmountUSD";
-        discountAmountUSDInsert.id= alterationNumber + "discountAmountUSD"+counter+"-"+ ($("#ContentPricesDivUsd"+counter).find(".discountAmountUSD").length+1);
+        discountAmountUSDInsert.id= alterationNumber + "discountAmountUSD"+counter+"-"+ ($("#" + alterationNumber + "ContentPricesDivUsd"+counter).find(".discountAmountUSD").length+1);
         document.getElementById(alterationNumber + "discountDivUsd"+counter+discountTypeID).appendChild(discountAmountUSDInsert);
 
 
@@ -3071,7 +3060,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
         var discountAmountGuestNode = document.createTextNode(discountAmountGuest);
         discountAmountGuestInsert.appendChild(discountAmountGuestNode);
         discountAmountGuestInsert.className="discountAmountGuest";
-        discountAmountGuestInsert.id= alterationNumber + "discountAmountGuest"+counter+"-"+ ($("#ContentPricesDivGuest"+counter).find(".discountAmountGuest").length+1);
+        discountAmountGuestInsert.id= alterationNumber + "discountAmountGuest"+counter+"-"+ ($("#" + alterationNumber + "ContentPricesDivGuest"+counter).find(".discountAmountGuest").length+1);
         document.getElementById(alterationNumber + "discountDivGuest"+counter+discountTypeID).appendChild(discountAmountGuestInsert);
 
 
@@ -3144,13 +3133,19 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
 
 counter = 1
 
+
+
 while (numberNight >= counter) {
-    var numItemsListing = $("#ContentPricesDivListing"+counter).find(".discountAmountListing").length ;
-    var numItemsUsd = $("#ContentPricesDivUsd"+counter).find(".discountAmountUSD").length ;
-    var numItemsGuest = $("#ContentPricesDivGuest"+counter).find(".discountAmountGuest").length ;
+    var numItemsListing = $("#" + alterationNumber + "ContentPricesDivListing"+counter).find(".discountAmountListing").length ;
+    var numItemsUsd = $("#" + alterationNumber + "ContentPricesDivUsd"+counter).find(".discountAmountUSD").length ;
+    var numItemsGuest = $("#" + alterationNumber + "ContentPricesDivGuest"+counter).find(".discountAmountGuest").length ;
     var totalDiscountListing = 0
     var totalDiscountUSD = 0
     var totalDiscountGuest = 0
+    
+
+
+
 
     while (numItemsListing > 0 ) {
     tempDiscountHolderListing = (document.getElementById(alterationNumber + 'discountAmountListing' + counter + '-' + numItemsListing)).textContent;
@@ -3183,7 +3178,7 @@ while (numberNight >= counter) {
     listingPriceListing = parseFloat(listingPriceListing.substring(listingPriceListing.indexOf(" ")+1));
     
     //pulling Extra guest price Listing
-    if (($('#extraGuestListing'+counter).length)===0){
+    if (($(alterationNumber + '#extraGuestListing'+counter).length)===0){
         var extraGuestPriceListing = 0;
     }
     else {
@@ -3198,7 +3193,7 @@ while (numberNight >= counter) {
    var listingPriceUSD = document.getElementById(alterationNumber + 'dailyUSD'+counter).innerText
    listingPriceUSD = parseFloat(listingPriceUSD.substring(listingPriceUSD.indexOf(" ")+1));
     //pulling Extra guest price USD
-   if (($('#extraGuestUSD'+counter).length)===0){
+   if (($(alterationNumber + '#extraGuestUSD'+counter).length)===0){
         var extraGuestPriceUSD = 0;
     }
     else {
@@ -3214,7 +3209,7 @@ while (numberNight >= counter) {
     listingPriceGuest = parseFloat(listingPriceGuest.substring(listingPriceGuest.indexOf(" ")+1));
 
      //pulling Extra guest price Guest
-    if (($('#extraGuestGuest'+counter).length)===0){
+    if (($(alterationNumber + '#extraGuestGuest'+counter).length)===0){
         var extraGuestPriceGuest = 0;
     }
     else {
@@ -3240,7 +3235,7 @@ while (numberNight >= counter) {
             totalAmountListing = totalAmountListing + amountNightCounter;
             i++
         }
-        if ($('#cleaningFeePriceListing').length > 0) {
+        if ($(alterationNumber + '#cleaningFeePriceListing').length > 0) {
            var cleaningFeeTotal = document.getElementById(alterationNumber + 'cleaningFeePriceListing').innerText;
         cleaningFeeTotal = parseFloat(cleaningFeeTotal.substring(cleaningFeeTotal.indexOf(" ")+1));
         }
@@ -3264,7 +3259,7 @@ while (numberNight >= counter) {
             totalAmountGuest = totalAmountGuest + amountNightCounter;
             i++
         }
-        if ($('#cleaningFeePriceGuest').length > 0) {
+        if ($(alterationNumber + '#cleaningFeePriceGuest').length > 0) {
         var cleaningFeeTotal = document.getElementById(alterationNumber + 'cleaningFeePriceGuest').innerText
         cleaningFeeTotal = parseFloat(cleaningFeeTotal.substring(cleaningFeeTotal.indexOf(" ")+1))
 }
