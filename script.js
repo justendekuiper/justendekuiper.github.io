@@ -204,45 +204,54 @@ function ClickPricingBar(e) {
 var expandListing = "expand-arrows.png";
 // Listing
 function expandItemsListing(e) {
-
-$(e).siblings('.ContentPricesDivListing').css({"display": "block"});
+    if(expandListing == "expand-arrows.png") {
+        $(e).siblings('.ContentPricesDivListing').css({"display": "block"});
+        $(e).attr("src","images/minimize-arrows.png");
+        expandListing  = "minimize-arrows.png";
+}
+else {
+        $(e).siblings('.ContentPricesDivListing').css({"display": "none"});
+        $(e).attr("src","images/expand-arrows.png");
+        expandListing  = "expand-arrows.png";
+}
 
 }
 
-// USD
-function expandItemsUsd() {
-  if ( newsrc == "expand-arrows.png" ) {
-    document.images["expandImgUsd"].src = "images/minimize-arrows.png";
-    document.images["expandImgUsd"].alt = "Minimize";
-    newsrc  = "minimize-arrows.png";
-    $('.ContentPricesDivUsd').show();
+
+
+var expandUsd = "expand-arrows.png";
+// Usd
+function expandItemsUsd(e) {
+    if(expandUsd == "expand-arrows.png") {
+        $(e).siblings('.ContentPricesDivUsd').css({"display": "block"});
+        $(e).attr("src","images/minimize-arrows.png");
+        expandUsd  = "minimize-arrows.png";
+}
+else {
+        $(e).siblings('.ContentPricesDivUsd').css({"display": "none"});
+        $(e).attr("src","images/expand-arrows.png");
+        expandUsd  = "expand-arrows.png";
 }
 
-  else {
-    document.images["expandImgUsd"].src = "images/expand-arrows.png";
-    document.images["expandImgUsd"].alt = "Expand";
-    newsrc  = "expand-arrows.png";
-    $('.ContentPricesDivUsd').hide();
-  }
-};
+}
 
 
+var expandGuest = "expand-arrows.png";
 // Guest
-function expandItemsGuest() {
-  if ( newsrc == "expand-arrows.png" ) {
-    document.images["expandImgGuest"].src = "images/minimize-arrows.png";
-    document.images["expandImgGuest"].alt = "Minimize";
-    newsrc  = "minimize-arrows.png";
-    $('.ContentPricesDivGuest').show();
+function expandItemsGuest(e) {
+    if(expandGuest == "expand-arrows.png") {
+        $(e).siblings('.ContentPricesDivGuest').css({"display": "block"});
+        $(e).attr("src","images/minimize-arrows.png");
+        expandGuest  = "minimize-arrows.png";
+}
+else {
+        $(e).siblings('.ContentPricesDivGuest').css({"display": "none"});
+        $(e).attr("src","images/expand-arrows.png");
+        expandGuest  = "expand-arrows.png";
 }
 
-  else {
-    document.images["expandImgGuest"].src = "images/expand-arrows.png";
-    document.images["expandImgGuest"].alt = "Expand";
-    newsrc  = "expand-arrows.png";
-    $('.ContentPricesDivGuest').hide();
-  }
-};
+}
+
 
 
  
@@ -3131,7 +3140,7 @@ if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
       if (numberNight >=28 && discountType== "Length of stay discount") {
         discountTypeLength = "Monthly Discount";
       }
-      else if (numberNight >=14 && discountType== "Length of stay discount") {
+      else if (numberNight >=7 && discountType== "Length of stay discount") {
         discountTypeLength = "Weekly Discount";
       }
       else if (discountMinLength >0 && discountType== "Length of stay discount"){
