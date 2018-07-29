@@ -3365,7 +3365,7 @@ while (numberNight >= counter) {
     listingPriceListing = parseFloat(listingPriceListing.substring(listingPriceListing.indexOf(" ")+1));
     
     //pulling Extra guest price Listing
-    if (($(alterationNumber + '#extraGuestListing'+counter).length)===0){
+    if (($('#' + alterationNumber + 'extraGuestListing'+counter).length)===0){
         var extraGuestPriceListing = 0;
     }
     else {
@@ -3380,7 +3380,7 @@ while (numberNight >= counter) {
    var listingPriceUSD = document.getElementById(alterationNumber + 'dailyUSD'+counter).innerText
    listingPriceUSD = parseFloat(listingPriceUSD.substring(listingPriceUSD.indexOf(" ")+1));
     //pulling Extra guest price USD
-   if (($(alterationNumber + '#extraGuestUSD'+counter).length)===0){
+   if (($('#' + alterationNumber + 'extraGuestUSD'+counter).length)===0){
         var extraGuestPriceUSD = 0;
     }
     else {
@@ -3396,7 +3396,7 @@ while (numberNight >= counter) {
     listingPriceGuest = parseFloat(listingPriceGuest.substring(listingPriceGuest.indexOf(" ")+1));
 
      //pulling Extra guest price Guest
-    if (($(alterationNumber + '#extraGuestGuest'+counter).length)===0){
+    if (($('#' + alterationNumber + 'extraGuestGuest'+counter).length)===0){
         var extraGuestPriceGuest = 0;
     }
     else {
