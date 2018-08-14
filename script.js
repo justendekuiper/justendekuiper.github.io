@@ -75,12 +75,16 @@ var link = "https://mail.google.com/mail/u/0/?view=cm&fs=1&to=justen.dekuiper@ai
     ;}
  
 
-
-
+function adjustBorderPriceSpecify(){
+$('.priceSpecifyDiv').each(function(i, obj) {
+   obj.style.border = "solid #118488 0.13vw";
+});
+}
 
 /* Clicking on Dropdown menu */
 // Alteration Button 
 function collapseAlteration(e) {
+adjustBorderPriceSpecify();
     if (e.nextSibling.style.display === "none") {
         e.nextSibling.style.display = "block";
     }
@@ -93,16 +97,32 @@ function collapseAlteration(e) {
 
 /* Details */
 function collapseReservationDetails(e) {
-    if (e.nextSibling.style.display === "none") {
-        e.nextSibling.style.display = "block";
-        $('html,body').animate({
-        scrollTop: $(".Dropdown").offset().top + (-10)},
-        'slow');
+
+var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+ }
+adjustBorderPriceSpecify();
+document.getElementById("borderDivOutputField").style.display = "block";
+
+
+    var object = e +'BookingDetails'
+    object = document.getElementById(object);
+    if (object.style.display === "none") {
+        object.style.display = "block";
     }
   else {
-    e.nextSibling.style.display = "none";
-  }
-
+        object.style.display = "none";
+}
 }
 
 
@@ -111,31 +131,69 @@ function collapseReservationDetails(e) {
 
 
 /* Pricing */
-function collapseReservationPrice() {
-    var x = document.getElementById("DivPricingDetails");
-    if (x.style.display === "none") {
-        $("#DivPricingDetails").slideDown(500);
-        $('html,body').animate({
-        scrollTop: $("#DropdownReservationPricing").offset().top + (-10)},
-        'slow');
-    } else {
-        $("#DivPricingDetails").slideUp(500);
+function collapseReservationPrice(e) {
+
+   var specifyBarListing = document.getElementById(e + 'listingPriceDiv');
+    var specifyBarUsd = document.getElementById(e + 'usdPriceDiv');
+    var specifyBarGuest = document.getElementById(e + 'guestPriceDiv');
+ 
+
+ 
+    if (specifyBarListing.style.display === "none") {
+        specifyBarListing.style.display = "block";
     }
+  else {
+        specifyBarListing.style.display = "none";
+}
+
+ 
+    if (specifyBarUsd.style.display === "none") {
+        specifyBarUsd.style.display = "block";
+    }
+  else {
+        specifyBarUsd.style.display = "none";
+}
+
+ 
+    if (specifyBarGuest.style.display === "none") {
+        specifyBarGuest.style.display = "block";
+    }
+  else {
+        specifyBarGuest.style.display = "none";
+}
+
 }
 
 
 /* Listing Details */
-  function collapseReservationListingDetails() {
-    var x = document.getElementById("DivListingDetails");
-    if (x.style.display === "none") {
-        $("#DivListingDetails").slideDown(500);
-        $('html,body').animate({
-        scrollTop: $("#DropdownListingDetails").offset().top + (-10)},
-        'slow');
-    } else {
-        $("#DivListingDetails").slideUp(500);
+  function collapseReservationListingDetails(e) {
+
+    var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+ }
+adjustBorderPriceSpecify();
+document.getElementById("borderDivOutputField").style.display = "block";
+
+    var object = e +'DivListingDetails'
+    object = document.getElementById(object);
+    
+    if (object.style.display === "none") {
+        object.style.display = "block";
     }
-}   
+  else {
+        object.style.display = "none";
+}
+}
   
 
 
@@ -152,7 +210,7 @@ function collapseReservationPrice() {
 /*Onclick Pricing Bar Expand */
 function ClickPricingBar(e) {
     if (e.nextSibling.style.display === "none") {
-        e.nextSibling.style.display = "block";
+        e.nextSibling.style.display = "inline-block";
     }
     else {
         e.nextSibling.style.display = "none";
@@ -160,22 +218,155 @@ function ClickPricingBar(e) {
 };
 
 
-//Onclick night bar Expand
+//Onclick night bar Expand Listing
+    function ClickPricingBarHeaderListing(e,obj){
+   var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
 
-    function ClickPricingBarHeader(e){
-        var content = e.nextSibling.nextSibling.nextSibling.childNodes[0];
-        if (content.style.display === "none") {
-            $(".PricingHeaderBarListing").show(500);
-            $(".whiteSpaceDivListing").show(500);
-            $(".expandImg").show(500);
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+}
 
-            content.style.display = "inline-grid"
-        }
-        else {
+   var outputAreaPrice = document.getElementById(e +'OverviewNights');
+ 
+ if (outputAreaPrice.hasChildNodes()) {
+     // Get all children of node
+     var children = outputAreaPrice.childNodes;               
 
-            content.style.display = "none"
-        }
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+}
+
+adjustBorderPriceSpecify();
+obj.style.border = "0.13vw solid #8D2748";
+document.getElementById("borderDivOutputField").style.display = "block";
+
+    var object = document.getElementById(e +'DivPricingDetails');
+    
+    if (object.style.display === "none") {
+        object.style.display = "block";
     }
+
+
+
+     var object = document.getElementById(e + 'listingContainer')
+     if (object.style.display ==="none") {
+        object.style.display = "block";
+     }
+ 
+}
+
+
+
+//Onclick night bar Expand USD
+    function ClickPricingBarHeaderUsd(e,obj){
+   var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }}
+
+
+   var outputAreaPrice = document.getElementById(e +'OverviewNights');
+ 
+ if (outputAreaPrice.hasChildNodes()) {
+     // Get all children of node
+     var children = outputAreaPrice.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+}
+
+
+adjustBorderPriceSpecify();
+obj.style.border = "0.13vw solid #8D2748";
+document.getElementById("borderDivOutputField").style.display = "block";
+
+    var object = document.getElementById(e +'DivPricingDetails');
+
+    if (object.style.display === "none") {
+        object.style.display = "block";
+    }
+
+
+    var object = document.getElementById(e + 'usdContainer')
+     if (object.style.display ==="none") {
+        object.style.display = "block";
+     }
+ 
+}
+
+
+//Onclick night bar Expand Listing
+    function ClickPricingBarHeaderGuest(e,obj){
+   var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+ }
+
+    var outputAreaPrice = document.getElementById(e +'OverviewNights');
+ 
+ if (outputAreaPrice.hasChildNodes()) {
+     // Get all children of node
+     var children = outputAreaPrice.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+}
+
+
+adjustBorderPriceSpecify();
+obj.style.border = "0.13vw solid #8D2748";
+document.getElementById("borderDivOutputField").style.display = "block";
+
+     var object = document.getElementById(e +'DivPricingDetails');
+    
+    if (object.style.display === "none") {
+        object.style.display = "block";
+    }
+
+
+    var object = document.getElementById(e + 'guestContainer')
+     if (object.style.display ==="none") {
+        object.style.display = "block";
+     }
+ }
+
 
 /* DEPRICATED 
 
@@ -205,7 +396,7 @@ var expandListing = "expand-arrows.png";
 // Listing
 function expandItemsListing(e) {
     if(expandListing == "expand-arrows.png") {
-        $(e).siblings('.ContentPricesDivListing').css({"display": "block"});
+        $(e).siblings('.ContentPricesDivListing').css({"display": "inline-block"});
         $(e).attr("src","images/minimize-arrows.png");
         expandListing  = "minimize-arrows.png";
 }
@@ -223,7 +414,7 @@ var expandUsd = "expand-arrows.png";
 // Usd
 function expandItemsUsd(e) {
     if(expandUsd == "expand-arrows.png") {
-        $(e).siblings('.ContentPricesDivUsd').css({"display": "block"});
+        $(e).siblings('.ContentPricesDivUsd').css({"display": "inline-block"});
         $(e).attr("src","images/minimize-arrows.png");
         expandUsd  = "minimize-arrows.png";
 }
@@ -240,7 +431,7 @@ var expandGuest = "expand-arrows.png";
 // Guest
 function expandItemsGuest(e) {
     if(expandGuest == "expand-arrows.png") {
-        $(e).siblings('.ContentPricesDivGuest').css({"display": "block"});
+        $(e).siblings('.ContentPricesDivGuest').css({"display": "inline-block"});
         $(e).attr("src","images/minimize-arrows.png");
         expandGuest  = "minimize-arrows.png";
 }
@@ -288,20 +479,18 @@ function createAlterationButton(alterationNumber,alterationTotal) {
         alterationNumberDisplay = "Alteration #" + (alterationTotal - alterationNumber);
     }
     var createAlterationButton = document.createElement('div')
-    var createAlterationButtonText = document.createElement('h4')
     var createAlterationButtonTextNode = document.createTextNode(alterationNumberDisplay)
-    createAlterationButtonText.appendChild(createAlterationButtonTextNode)
-    createAlterationButton.appendChild(createAlterationButtonText)
+    createAlterationButton.appendChild(createAlterationButtonTextNode)
     createAlterationButton.className = "alterationButton"
     createAlterationButton.id= alterationNumber + "alterationButton"
     createAlterationButton.setAttribute("onclick","collapseAlteration(this);");
-    document.getElementById('DivOutputField').appendChild(createAlterationButton);
+    document.getElementById('DivMenuField').appendChild(createAlterationButton);
 
     var createAlterationContent = document.createElement('div')
     createAlterationContent.id= alterationNumber + "alterationContent";
     createAlterationContent.className = "alterationContent"
     createAlterationContent.style.display = "none";
-    document.getElementById('DivOutputField').appendChild(createAlterationContent);
+    document.getElementById('DivMenuField').appendChild(createAlterationContent);
 }
 
 
@@ -317,7 +506,7 @@ function noAlterationContent(alterationNumber){
     createAlterationContent.id= alterationNumber + "alterationContent";
     createAlterationContent.className = "alterationContent"
     createAlterationContent.style.display = "block";
-    document.getElementById('DivOutputField').appendChild(createAlterationContent);
+    document.getElementById('DivMenuField').appendChild(createAlterationContent);
 }
 
 
@@ -326,38 +515,34 @@ function noAlterationContent(alterationNumber){
 // Creating Dropdown Menu With Alteration
     function createDropdownMenu(alterationNumber) {
         var createDropdownDetails = document.createElement('div');
-        var createDropdownDetailsH4 = document.createElement('h4');
-        var createDropdownDetailsNode = document.createTextNode('DETAILS');
-        createDropdownDetailsH4.appendChild(createDropdownDetailsNode);
-        createDropdownDetails.appendChild(createDropdownDetailsH4);
+        var createDropdownDetailsNode = document.createTextNode('Details');
+        createDropdownDetails.appendChild(createDropdownDetailsNode);
         createDropdownDetails.className = 'Dropdown'
         createDropdownDetails.id = alterationNumber + 'DropdownReservationDetails'
-        createDropdownDetails.setAttribute("onclick","collapseReservationDetails(this);");
+        createDropdownDetails.setAttribute("onclick","collapseReservationDetails(" + alterationNumber + ");");
         document.getElementById(alterationNumber + "alterationContent").appendChild(createDropdownDetails);
 
         var createBookingDetailsInner = document.createElement('div');
         createBookingDetailsInner.style.display ="none";
         createBookingDetailsInner.id = alterationNumber + "BookingDetails";
         createBookingDetailsInner.className = "BookingDetails";
-        document.getElementById(alterationNumber + "alterationContent").appendChild(createBookingDetailsInner);
+        document.getElementById('DivOutputField').appendChild(createBookingDetailsInner);
 
 
 
 
         var createDropdownPrice = document.createElement('div');
-        var createDropdownPriceH4 = document.createElement('h4');
-        var createDropdownPriceNode = document.createTextNode('PRICE');
-        createDropdownPriceH4.appendChild(createDropdownPriceNode);
-        createDropdownPrice.appendChild(createDropdownPriceH4);
+        var createDropdownPriceNode = document.createTextNode('Price');
+        createDropdownPrice.appendChild(createDropdownPriceNode);
         createDropdownPrice.className = 'Dropdown'
         createDropdownPrice.id = alterationNumber + 'DropdownReservationPricing'
-        createDropdownPrice.setAttribute("onclick","collapseReservationDetails(this);");
+        createDropdownPrice.setAttribute("onclick","collapseReservationPrice("+alterationNumber+");");
         document.getElementById(alterationNumber + "alterationContent").appendChild(createDropdownPrice);
 
         var createBookingPriceInner = document.createElement('div');
         createBookingPriceInner.style.display ="none";
         createBookingPriceInner.id = alterationNumber + "DivPricingDetails";
-        document.getElementById(alterationNumber + "alterationContent").appendChild(createBookingPriceInner);
+        document.getElementById('DivOutputField').appendChild(createBookingPriceInner);
 
         var createBookingPriceInnerst = document.createElement('div');
         createBookingPriceInnerst.style.display ="block";
@@ -369,13 +554,11 @@ function noAlterationContent(alterationNumber){
 
 
         var createDropdownListing = document.createElement('div');
-        var createDropdownListingH4 = document.createElement('h4');
-        var createDropdownListingNode = document.createTextNode('LISTING');
-        createDropdownListingH4.appendChild(createDropdownListingNode);
-        createDropdownListing.appendChild(createDropdownListingH4);
+        var createDropdownListingNode = document.createTextNode('Listing');
+        createDropdownListing.appendChild(createDropdownListingNode);
         createDropdownListing.className = 'Dropdown'
         createDropdownListing.id = alterationNumber + 'DropdownListingDetails'
-        createDropdownListing.setAttribute("onclick","collapseReservationDetails(this);");
+        createDropdownListing.setAttribute("onclick","collapseReservationListingDetails("+alterationNumber+");");
         document.getElementById(alterationNumber + "alterationContent").appendChild(createDropdownListing);
 
 
@@ -383,7 +566,7 @@ function noAlterationContent(alterationNumber){
         createListingDetails.id = alterationNumber + "DivListingDetails";
         createListingDetails.className = "DivListingDetails";
         createListingDetails.style.display = "none";
-        document.getElementById(alterationNumber + "alterationContent").appendChild(createListingDetails);
+        document.getElementById('DivOutputField').appendChild(createListingDetails);
 
         var headerListingDetails = document.createElement('div')
         headerListingDetails.id = alterationNumber + 'HeaderListingDetails';
@@ -711,12 +894,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         document.getElementById(alterationNumber + "ContentPricesDivListing"+counter).appendChild(divDayHeaderListingInsert);
 
 
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="dailyDiv";
-        divDayInsert.id=alterationNumber + "dailyDivListing"+counter;
-        document.getElementById(alterationNumber + "ContentPricesDivListing"+counter).appendChild(divDayInsert);
-
-
         var typeDayInsert = document.createElement("div");
         var typeDayInsertNode = document.createTextNode(type);
         typeDayInsert.appendChild(typeDayInsertNode);
@@ -732,10 +909,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         document.getElementById(alterationNumber + "divDayListingHeader"+counter).appendChild(original_amount_micro_listingDayInsert);
 
 
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="discountDiv";
-        divDayInsert.id=alterationNumber + "discountDiv"+counter;
-        document.getElementById(alterationNumber + "dailyDivListing"+counter).appendChild(divDayInsert);
 
 
         //USD
@@ -744,10 +917,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         divDayHeaderUsdInsert.id=alterationNumber + "divDayUsdHeader"+counter;
         document.getElementById(alterationNumber + "ContentPricesDivUsd"+counter).appendChild(divDayHeaderUsdInsert);
 
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="dailyDiv";
-        divDayInsert.id=alterationNumber + "dailyDivUsd"+counter;
-        document.getElementById(alterationNumber + "ContentPricesDivUsd"+counter).appendChild(divDayInsert);
 
         var typeDayInsert = document.createElement("div");
         var typeDayInsertNode = document.createTextNode(type);
@@ -763,10 +932,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         amount_usdDayInsert.id= alterationNumber + "dailyUSD"+counter;
         document.getElementById(alterationNumber + "divDayUsdHeader"+counter).appendChild(amount_usdDayInsert);
 
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="discountDiv";
-        divDayInsert.id=alterationNumber + "discountDiv"+counter;
-        document.getElementById(alterationNumber + "dailyDivUsd"+counter).appendChild(divDayInsert);
 
 
         // Guest
@@ -774,11 +939,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         divDayHeaderGuestInsert.className="divDayHeader";
         divDayHeaderGuestInsert.id=alterationNumber + "divDayGuestHeader"+counter;
         document.getElementById(alterationNumber + "ContentPricesDivGuest"+counter).appendChild(divDayHeaderGuestInsert);
-
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="dailyDiv";
-        divDayInsert.id=alterationNumber + "dailyDivGuest"+counter;
-        document.getElementById(alterationNumber + "ContentPricesDivGuest"+counter).appendChild(divDayInsert);
 
         var typeDayInsert = document.createElement("div");
         var typeDayInsertNode = document.createTextNode(type);
@@ -793,12 +953,6 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
         amount_usdDayInsert.className= "dailyGuest";
         amount_usdDayInsert.id= alterationNumber + "dailyGuest"+counter;
         document.getElementById(alterationNumber + "divDayGuestHeader"+counter).appendChild(amount_usdDayInsert);
-
-        var divDayInsert = document.createElement("div");
-        divDayInsert.className="discountDiv";
-        divDayInsert.id=alterationNumber + "discountDiv"+counter;
-        document.getElementById(alterationNumber + "dailyDivGuest"+counter).appendChild(divDayInsert);
-
 
 
 
@@ -1233,6 +1387,17 @@ function convertDiscountName(numberNight,discountType,discountTypeLength,discoun
 function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPercentage,discountTypeLength,discountAmountListing,discountAmountUSD,discountAmountGuest) {
            // Listing
         var divDayInsert = document.createElement("div");
+        divDayInsert.className="dailyDiv";
+        divDayInsert.id=alterationNumber + "dailyDivListing"+counter;
+        document.getElementById(alterationNumber + "ContentPricesDivListing"+counter).appendChild(divDayInsert);
+
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id=alterationNumber + "discountDiv"+counter;
+        document.getElementById(alterationNumber + "dailyDivListing"+counter).appendChild(divDayInsert);
+          
+        var divDayInsert = document.createElement("div");
         divDayInsert.className="discountDiv";
         divDayInsert.id=alterationNumber + "discountDivListing"+counter+discountTypeID;
         document.getElementById(alterationNumber + "discountDiv"+counter).appendChild(divDayInsert);
@@ -1259,6 +1424,18 @@ function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPe
 
        // USD
         var divDayInsert = document.createElement("div");
+        divDayInsert.className="dailyDiv";
+        divDayInsert.id=alterationNumber + "dailyDivUsd"+counter;
+        document.getElementById(alterationNumber + "ContentPricesDivUsd"+counter).appendChild(divDayInsert);
+
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id=alterationNumber + "discountDiv"+counter;
+        document.getElementById(alterationNumber + "dailyDivUsd"+counter).appendChild(divDayInsert);
+
+
+        var divDayInsert = document.createElement("div");
         divDayInsert.className="discountDiv";
         divDayInsert.id=alterationNumber + "discountDivUsd"+counter+discountTypeID;
         document.getElementById(alterationNumber + "ContentPricesDivUsd"+counter).appendChild(divDayInsert);
@@ -1284,6 +1461,16 @@ function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPe
 
 
         // GUEST
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="dailyDiv";
+        divDayInsert.id=alterationNumber + "dailyDivGuest"+counter;
+        document.getElementById(alterationNumber + "ContentPricesDivGuest"+counter).appendChild(divDayInsert);
+
+        var divDayInsert = document.createElement("div");
+        divDayInsert.className="discountDiv";
+        divDayInsert.id=alterationNumber + "discountDiv"+counter;
+        document.getElementById(alterationNumber + "dailyDivGuest"+counter).appendChild(divDayInsert);
+
         var divDayInsert = document.createElement("div");
         divDayInsert.className="discountDiv";
         divDayInsert.id=alterationNumber + "discountDivGuest"+counter+discountTypeID;
@@ -1319,11 +1506,9 @@ function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPe
 function transformtext() {
 
 
-outputArea = document.getElementById('DivOutputField');
 
-while (outputArea.firstChild) {
-    outputArea.removeChild(outputArea.firstChild);
-}
+$("#DivMenuField").children(":not(#borderDivMenuField)").remove();
+$("#DivOutputField").children(":not(#borderDivOutputField)").remove();
 
 
 
@@ -1339,7 +1524,7 @@ if(snapshotText.includes('Justen') || snapshotText.includes('justen') || snapsho
 
 // Errors, Working on it
 if (insertedtext.includes ('"WEEKLY_PRICE"') || insertedtext.includes ('"MONTHLY_PRICE"')) {
-alert('Oops, this booking is not working yet. Please send this on to me to investigate by clicking on the email button')
+alert('This booking might not be working yet. The dates are probably not correct, neither the number of nights. If it gives wrong info, please send me the reservation!')
 }
 
 
@@ -1382,7 +1567,7 @@ else {
 
         /* Scroll To Output */
         $('html,body').animate({
-        scrollTop: $("#DivOutputField").offset().top + (-50)},
+        scrollTop: $("#DivOutputField").offset().top},
         'slow');
 
 
@@ -2195,47 +2380,82 @@ var guestCurrencySymbol = changeCurrencyToSymbol(guestCurrency);
     var usdContent = document.createElement("div")
     var guestContent = document.createElement("div")
 
+    var listingTextDiv = document.createElement('div');
+    var usdTextDiv = document.createElement('div');
+    var guestTextDiv = document.createElement('div');
+    listingTextDiv.className = "expandSpecifyTypePrice";
+    usdTextDiv.className = "expandSpecifyTypePrice";
+    guestTextDiv.className = "expandSpecifyTypePrice";
+    var listingTextNode = document.createTextNode("Host: ")
+    var usdTextNode = document.createTextNode("System: ")
+    var guestTextNode = document.createTextNode("Guest: ")
+    listingTextDiv.appendChild(listingTextNode);
+    usdTextDiv.appendChild(usdTextNode);
+    guestTextDiv.appendChild(guestTextNode);
 
-    var listingNode = document.createTextNode("Host: " + listingCurrency)
-    var usdNode = document.createTextNode("System: USD")
-    var guestNode = document.createTextNode("Guest: " + guestCurrency)
 
-    listingDiv.appendChild(listingNode);
-    usdDiv.appendChild(usdNode);
-    guestDiv.appendChild(guestNode);
+    var listingCurrencyDiv = document.createElement('div');
+    var usdCurrencyDiv = document.createElement('div');
+    var guestCurrencyDiv = document.createElement('div');
+    listingCurrencyDiv.className = "expandSpecifyCurrencyPrice";
+    usdCurrencyDiv.className = "expandSpecifyCurrencyPrice";
+    guestCurrencyDiv.className = "expandSpecifyCurrencyPrice";
 
+    var listingCurrencyNode = document.createTextNode(listingCurrency)
+    var usdCurrencyNode = document.createTextNode("USD")
+    var guestCurrencyNode = document.createTextNode(guestCurrency)
+    listingCurrencyDiv.appendChild(listingCurrencyNode);
+    usdCurrencyDiv.appendChild(usdCurrencyNode);
+    guestCurrencyDiv.appendChild(guestCurrencyNode);
+
+    listingDiv.appendChild(listingTextDiv);
+    usdDiv.appendChild(usdTextDiv);
+    guestDiv.appendChild(guestTextDiv);
+
+    listingDiv.appendChild(listingCurrencyDiv);
+    usdDiv.appendChild(usdCurrencyDiv);
+    guestDiv.appendChild(guestCurrencyDiv);
+
+
+
+    listingDiv.style.display = "none";
+    usdDiv.style.display = "none";
+    guestDiv.style.display = "none";
     listingDiv.id = alterationNumber + "listingPriceDiv";
     usdDiv.id = alterationNumber + "usdPriceDiv";
     guestDiv.id = alterationNumber +"guestPriceDiv";
-    listingDiv.className = "listingPriceDiv";
-    usdDiv.className = "usdPriceDiv";
-    guestDiv.className = "guestPriceDiv";
+    listingDiv.className = "listingPriceDiv priceSpecifyDiv";
+    usdDiv.className = "usdPriceDiv priceSpecifyDiv";
+    guestDiv.className = "guestPriceDiv priceSpecifyDiv";
     listingContent.id = alterationNumber + "listingContentDiv"
     usdContent.id = alterationNumber + "usdContentDiv"
     guestContent.id = alterationNumber + "guestContentDiv"
     listingContent.className =  "listingContentDiv"
     usdContent.className =  "usdContentDiv"
     guestContent.className =   "guestContentDiv"
-    listingDiv.setAttribute("onclick","ClickPricingBarHeader(this);");
-    usdDiv.setAttribute("onclick","ClickPricingBarHeader(this);");
-    guestDiv.setAttribute("onclick","ClickPricingBarHeader(this);");
+    listingDiv.setAttribute("onclick","ClickPricingBarHeaderListing("+alterationNumber+",this);");
+    usdDiv.setAttribute("onclick","ClickPricingBarHeaderUsd("+alterationNumber+",this);");
+    guestDiv.setAttribute("onclick","ClickPricingBarHeaderGuest("+alterationNumber+",this);");
 
 
     var listingContainer = document.createElement('div');
     listingContainer.className = "listingContainer"
     listingContainer.id = alterationNumber + "listingContainer"
+    listingContainer.style.display = "none";
 
     var usdContainer = document.createElement('div');
     usdContainer.className = "usdContainer"
     usdContainer.id = alterationNumber + "usdContainer"
+    usdContainer.style.display = "none";
     
     var guestContainer = document.createElement('div');
     guestContainer.className = "guestContainer"
     guestContainer.id = alterationNumber + "guestContainer"
+    guestContainer.style.display = "none";
 
-    document.getElementById(alterationNumber + "OverviewNights").appendChild(listingDiv);
-    document.getElementById(alterationNumber + "OverviewNights").appendChild(usdDiv);
-    document.getElementById(alterationNumber + "OverviewNights").appendChild(guestDiv);
+    document.getElementById(alterationNumber + "DropdownReservationPricing").after(guestDiv);
+    document.getElementById(alterationNumber + "DropdownReservationPricing").after(usdDiv);
+    document.getElementById(alterationNumber + "DropdownReservationPricing").after(listingDiv);
 
 
     document.getElementById(alterationNumber + "OverviewNights").appendChild(listingContainer)
