@@ -80,12 +80,12 @@ html, body{
 	padding-left:2%;
 	width: 28%;
 	height: 100%;
-	font-size: 1.4vw;
+	font-size: 1.2vw;
 }
 
 #howToUse > h4 {
 	display: inline-block;
-	margin: 60px 0px 0px 0px;
+	margin: 20px 0px 0px 0px;
 }
 
 #howToUse > p {
@@ -257,6 +257,13 @@ html, body{
     position: absolute;
 }
 
+#arrowOutput{
+	position: relative;
+    width: 15vw;
+    left: 2vw;
+    top: 2vh;
+}
+
 
 /*Right Area */
 #DivRightField {
@@ -278,7 +285,7 @@ html, body{
 
 .alterationButton {
     position: relative;
-    width: 9vw;
+    width: 10vw;
     top: 20px;
     height: 2.5vh;
     background-color: #118488;
@@ -286,7 +293,7 @@ html, body{
     margin: 3vh 0 1vh 10%;
     cursor: pointer;
     padding: 0 0.2vw 0 0.2vw;
-    font-size: 1.2vw;
+    font-size: 1.3vw;
     vertical-align: middle;
     display: inline-block;
     color: white;
@@ -459,9 +466,45 @@ table, tr, td {
 	width: 40%;
 }
 
+.issueBar{
+	background: linear-gradient(white 1%,#8D2748 10%,#8D2748 90%, white 1%);
+    color: white;
+    width: 60vw;
+    padding: 2vh 2vw 2vh 2vw;
+    text-align: center;
+    position: relative;
+    bottom: 1vh;
+    margin-bottom: 0.3vh;
+}
+
+.monthDivFirst {
+	display: block;
+    position: relative;
+    width: 10vw;
+    background-color: #8D2748;
+    border: solid 0.1vw black;
+    border-radius: 7px;
+    font-size: 1.3vw;
+    color: white;
+    text-align: center;
+    left: 8vw;
+    margin: 0 0 2vh 0;
+}
 
 
-
+.monthDiv {
+	display: block;
+    position: relative;
+    width: 10vw;
+    background-color: #8D2748;
+    border: solid 0.1vw black;
+    border-radius: 7px;
+    font-size: 1.3vw;
+    color: white;
+    text-align: center;
+    left: 8vw;
+    margin: 2vh 0 4vh 0;
+}
 
 /* Content Host / USD / Guest */
 .PricingHeaderBarListing {
@@ -702,26 +745,30 @@ table, tr, td {
 .dailyType {
 	display: inline-block;
 	width: 70%;
-	font-size: 1.4vw;
+	font-size: 1.2vw;
+    font-weight: bold;
 }
 
 .dailyListing {
 	display: inline-block;
 	width: 29%;
-	font-size: 1.4vw;
+	font-size: 1.2vw;
+    font-weight: bold;
 }
 
 
 .dailyUSD {
 	display: inline-block;
 	width: 29%;
-	font-size: 1.4vw;
+	font-size: 1.2vw;
+    font-weight: bold;
 }
 
 .dailyGuest {
 	display: inline-block;
 	width: 29%;
-	font-size: 1.4vw;
+	font-size: 1.2vw;
+    font-weight: bold;
 }
 
 
@@ -736,6 +783,7 @@ table, tr, td {
     background-color: #f2f2f2;
     width: 100%;
     position: relative;
+    font-size: 1.3vw;
 }
 
 .discountType{
@@ -772,6 +820,7 @@ table, tr, td {
 	width: 100%;
 	border: solid black 1px;
 	margin: 5px 0px 7px 0px;
+	font-size: 1.3vw;
 }
 .extraGuestType {
 	display: inline-block;
@@ -800,6 +849,7 @@ table, tr, td {
     background-color: #f2f2f2;
     top: -6px;
     left: 1px;
+    font-size: 1.2vw;
 }
 
 
@@ -921,13 +971,17 @@ display: inline-block;
 	color: #118488
 }
 
-
+.typeListingDetails{
+	font-size: 0.8em;
+	position: relative;
+	bottom:0.2vh;
+}
 
 .HeaderListingDetails {
 	font-weight: bold;
 	font-size: 1em;
 	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-	margin: 20px 0px 20px 0px;
+	margin: 2px 0px 20px 0px;
 }
 
 
@@ -971,11 +1025,30 @@ display: inline-block;
 	display: block;
 }
 
-.amenityName {
+.amenityDiv {
 	display: inline-block;
 	width: 35%;
 	margin-right: 5%;
 	border:none;
+}
+
+.amenityPic {
+    position: relative;
+    width: 12%;
+    display: inline-block;
+}
+
+.amenityImage {
+    width: 60%
+}
+
+.amenityName {    
+	position: relative;
+    width: 80%;
+    display: inline-block;
+    font-size: 1.2vw;
+    vertical-align: middle;
+    bottom: 4px;
 }
 
 .HouseRulesListingDetails {

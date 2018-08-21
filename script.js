@@ -84,7 +84,7 @@ $('.priceSpecifyDiv').each(function(i, obj) {
 /* Clicking on Dropdown menu */
 // Alteration Button 
 function collapseAlteration(e) {
-adjustBorderPriceSpecify();
+
     if (e.nextSibling.style.display === "none") {
         e.nextSibling.style.display = "block";
     }
@@ -132,6 +132,8 @@ document.getElementById("borderDivOutputField").style.display = "block";
 
 /* Pricing */
 function collapseReservationPrice(e) {
+    listingSpecify = document.getElementById(e + "listingPriceDiv");
+ClickPricingBarHeaderListing(e,listingSpecify);
 
    var specifyBarListing = document.getElementById(e + 'listingPriceDiv');
     var specifyBarUsd = document.getElementById(e + 'usdPriceDiv');
@@ -249,7 +251,7 @@ function ClickPricingBar(e) {
 }
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.13vw solid #8D2748";
+obj.style.border = "0.15vw solid #8D2748";
 document.getElementById("borderDivOutputField").style.display = "block";
 
     var object = document.getElementById(e +'DivPricingDetails');
@@ -301,7 +303,7 @@ document.getElementById("borderDivOutputField").style.display = "block";
 
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.13vw solid #8D2748";
+obj.style.border = "0.15vw solid #8D2748";
 document.getElementById("borderDivOutputField").style.display = "block";
 
     var object = document.getElementById(e +'DivPricingDetails');
@@ -351,7 +353,7 @@ document.getElementById("borderDivOutputField").style.display = "block";
 
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.13vw solid #8D2748";
+obj.style.border = "0.15vw solid #8D2748";
 document.getElementById("borderDivOutputField").style.display = "block";
 
      var object = document.getElementById(e +'DivPricingDetails');
@@ -568,6 +570,11 @@ function noAlterationContent(alterationNumber){
         createListingDetails.style.display = "none";
         document.getElementById('DivOutputField').appendChild(createListingDetails);
 
+        var typeListingDetails = document.createElement('div')
+        typeListingDetails.id = alterationNumber + 'typeListingDetails';
+        typeListingDetails.className =  'typeListingDetails';
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(typeListingDetails)
+
         var headerListingDetails = document.createElement('div')
         headerListingDetails.id = alterationNumber + 'HeaderListingDetails';
         headerListingDetails.className =  'HeaderListingDetails';
@@ -768,9 +775,61 @@ function noAlterationContent(alterationNumber){
 
 
 
+function setAmenityImageName(amenityPicName) {
+        if(amenityPicName == "Air conditioning" || amenityPicName == "Baby bath" || amenityPicName == "Baby monitor" || amenityPicName == "Babysitter recommendations" || amenityPicName == "Bathtub" || amenityPicName == "Breakfast" || amenityPicName == "Changing table" || amenityPicName == "Children’s books and toys" || 
+             amenityPicName == "Children’s dinnerware" || amenityPicName == "Crib" || amenityPicName == "Dryer" || amenityPicName == "Elevator" || amenityPicName == "Essentials" || amenityPicName == "Ethernet connection" || amenityPicName == "Fireplace guards" || amenityPicName == "Free parking on premises" || amenityPicName == "Game console" 
+             || amenityPicName == "Gym" || amenityPicName == "Hair dryer" || amenityPicName == "Hangers" || amenityPicName == "Heating" || amenityPicName == "High chair" || amenityPicName == "Hot tub" || amenityPicName == "Indoor fireplace" || amenityPicName == "Iron" || amenityPicName == "Kitchen" 
+             || amenityPicName == "Laptop friendly workspace" || amenityPicName == "Outlet covers" || amenityPicName == "Pack ’n Play-travel crib" || amenityPicName == "Pool" || amenityPicName == "Private entrance" || amenityPicName == "Room-darkening shades" || amenityPicName == "Shampoo" || amenityPicName == "Stair gates" || amenityPicName == "Table corner guards" 
+             || amenityPicName == "TV" || amenityPicName == "Washer" || amenityPicName == "Wifi" || amenityPicName == "Window guards"){
+       return 'images/amenities/' + amenityPicName + '.png';
+}
+else {
+    return 'images/amenities/empty.png';
+}
+}
 
 
 
+
+
+function convertMonthName(month){
+    if(month == "01") {
+        return "January";
+    }
+    else if (month == "02") {
+        return "February";
+    }
+    else if (month == "03") {
+        return "March";
+    }
+    else if (month == "04") {
+        return "April";
+    }
+    else if (month == "05") {
+        return "May";
+    }
+    else if (month == "06") {
+        return "June";
+    }
+    else if (month == "07") {
+        return "July";
+    }
+    else if (month == "08") {
+        return "August";
+    }
+    else if (month == "09") {
+        return "September";
+    }
+    else if (month == "10") {
+        return "October";
+    }
+    else if (month == "11") {
+        return "November";
+    }
+    else if (month == "12") {
+        return "December";
+    }
+}
 
 
 
@@ -779,7 +838,82 @@ function noAlterationContent(alterationNumber){
 
 // Inserting pricing Divs through Functions
 // Creating Nights Lines
-function createNightBarsInsert (start_date,numberNight,alterationNumber) {
+function createNightBarsInsert (start_date,numberNight,alterationNumber,issueCheck) {
+
+if(issueCheck == true) {
+    var issueBarGuest = document.createElement('div')
+    var issueBarTextGuest = document.createTextNode('There is an issue with these snapshots. The details might be displayed, but most likely the dates are not correct. This is what is shown in the actual Snapshots, so there is an issue on the side of Airbnb. If you suspect an issue on this website, please send me an email!')
+    issueBarGuest.appendChild(issueBarTextGuest);
+    issueBarGuest.className="issueBar";
+    var outputGuest = document.getElementById(alterationNumber + "guestContentDiv")
+    outputGuest.insertBefore(issueBarGuest, outputGuest.childNodes[0]);
+
+    var issueBarListing = document.createElement('div')
+    var issueBarTextListing = document.createTextNode('There is an issue with these snapshots. The details might be displayed, but most likely the dates are not correct. This is what is shown in the actual Snapshots, so there is an issue on the side of Airbnb. If you suspect an issue on this website, please send me an email!')
+    issueBarListing.appendChild(issueBarTextListing);
+    issueBarListing.className="issueBar";
+    var outputListing = document.getElementById(alterationNumber + "listingContentDiv")
+    outputListing.insertBefore(issueBarListing, outputListing.childNodes[0]);
+
+    var issueBarUsd = document.createElement('div')
+    var issueBarTextUsd = document.createTextNode('There is an issue with these snapshots. The details might be displayed, but most likely the dates are not correct. This is what is shown in the actual Snapshots, so there is an issue on the side of Airbnb. If you suspect an issue on this website, please send me an email!')
+    issueBarUsd.appendChild(issueBarTextUsd);
+    issueBarUsd.className="issueBar";
+    var outputUsd = document.getElementById(alterationNumber + "usdContentDiv")
+    outputUsd.insertBefore(issueBarUsd, outputUsd.childNodes[0]);  
+}
+
+
+
+
+var startDay = start_date.substring(8)
+    if(numberNight == "1"){
+        var month = start_date.substring(5,7)
+        month = convertMonthName(month);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDivFirst";
+        document.getElementById(alterationNumber + "listingContentDiv").appendChild(monthDiv);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDivFirst";
+        document.getElementById(alterationNumber + "usdContentDiv").appendChild(monthDiv);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDivFirst";
+        document.getElementById(alterationNumber + "guestContentDiv").appendChild(monthDiv);
+    }
+
+    else if(startDay == "01") {
+        var month = start_date.substring(5,7)
+        month = convertMonthName(month);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDiv";
+        document.getElementById(alterationNumber + "listingContentDiv").appendChild(monthDiv);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDiv";
+        document.getElementById(alterationNumber + "usdContentDiv").appendChild(monthDiv);
+
+        var monthDiv = document.createElement('div');
+        var monthNode = document.createTextNode(month);
+        monthDiv.appendChild(monthNode);
+        monthDiv.className = "monthDiv";
+        document.getElementById(alterationNumber + "guestContentDiv").appendChild(monthDiv);
+
+    }
+
 
     var nightBarListing = document.createElement("div");
     var nightBarUsd = document.createElement("div");
@@ -1506,9 +1640,14 @@ function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPe
 function transformtext() {
 
 
-
 $("#DivMenuField").children(":not(#borderDivMenuField)").remove();
 $("#DivOutputField").children(":not(#borderDivOutputField)").remove();
+
+var arrowOutput = document.createElement('img')
+arrowOutput.setAttribute('src', 'images/arrowLeft.png');
+arrowOutput.id = "arrowOutput";
+document.getElementById('DivOutputField').appendChild(arrowOutput);
+document.getElementById('arrowOutput').ondragstart = function() { return false; };
 
 
 
@@ -1519,13 +1658,10 @@ $("#DivOutputField").children(":not(#borderDivOutputField)").remove();
 
     var snapshotText = insertedtext.substring(insertedtext.indexOf("admin_notes"),insertedtext.indexOf("visible_pictures")+10)
 if(snapshotText.includes('Justen') || snapshotText.includes('justen') || snapshotText.includes('Aleksei') || snapshotText.includes('aleksei') ) {
-    alert("Awesome, that's a booking that involves the developer!");
+    // alert("Awesome, that's a booking that involves the developer!");
 }
 
-// Errors, Working on it
-if (insertedtext.includes ('"WEEKLY_PRICE"') || insertedtext.includes ('"MONTHLY_PRICE"')) {
-alert('This booking might not be working yet. The dates are probably not correct, neither the number of nights. If it gives wrong info, please send me the reservation!')
-}
+
 
 
 
@@ -1547,7 +1683,13 @@ while (alterationTotal >= alterationNumber) {//While — Looping through Alterat
     insertedtext = insertedtext.substring(insertedtext.indexOf('visible_pictures')+15);
 
 
-
+// Errors, Working on it
+if (insertedPricingText.includes ('"WEEKLY_PRICE"') || insertedtext.includes ('"MONTHLY_PRICE"')) {
+ var issue = true;
+}
+else {
+    issue = false;
+}
 
 
 
@@ -1590,7 +1732,7 @@ if (snapshotText.includes("confirmation_code")&&snapshotText.includes("coupon_id
   var linkCodeNode = document.createTextNode(reservation_code);
   linkCodeInsert.appendChild(linkCodeNode);
   linkCodeInsert.title = reservation_code;
-  linkCodeInsert.setAttribute("target","blank")
+  linkCodeInsert.setAttribute("target","_blank")
   linkCodeInsert.href = "https://nova.airbnb.tools/reservations/" + reservation_code;
 }
 else {
@@ -1845,7 +1987,7 @@ var roomsLinkInsert = document.createElement('a');
 var roomsLinkNode = document.createTextNode('Listing Page');
 roomsLinkInsert.appendChild(roomsLinkNode);
 roomsLinkInsert.title = 'Listing Page';
-roomsLinkInsert.setAttribute("target","blank")
+roomsLinkInsert.setAttribute("target","_blank")
 roomsLinkInsert.href = roomsLink;
 roomsLinkInsert.className="linkListing"
 roomsLinkDiv.appendChild(roomsLinkInsert);
@@ -1856,7 +1998,7 @@ var mysLinkInsert = document.createElement('a');
 var mysLinkNode = document.createTextNode('MYS Page');
 mysLinkInsert.appendChild(mysLinkNode);
 mysLinkInsert.title = 'Manage Your Space Page';
-mysLinkInsert.setAttribute("target","blank")
+mysLinkInsert.setAttribute("target","_blank")
 mysLinkInsert.href = mysLink;
 mysLinkInsert.className="linkListing"
 mysLinkDiv.appendChild(mysLinkInsert);
@@ -1868,6 +2010,11 @@ linksDiv.appendChild(roomsLinkDiv);
 linksDiv.appendChild(mysLinkDiv);
 
 document.getElementById(alterationNumber + "DivListingDetails").prepend(linksDiv);
+
+/* Listing Type */
+var listingType = snapshotText.substring(snapshotText.indexOf('review_score_percentile')+10);
+listingType = listingType.substring(listingType.indexOf('room_type')+11,listingType.indexOf('security_deposit_native')-1);
+document.getElementById(alterationNumber + "typeListingDetails").innerText = listingType;
 
 
 /* Listing title */
@@ -1919,14 +2066,18 @@ while (amenitiesTotal.includes(" -")) {
   amenitiesTotal = amenitiesTotal.replace(" -","XXX")
   amenitiesTotal = amenitiesTotal.replace("(","XXX")
 
-    var x = document.createElement("div");
-    var a = document.createElement("div");
-    var anode = document.createTextNode(amenity);
-    a.appendChild(anode);
-    x.className="amenityName";
-    x.appendChild(a);
+    var amenityDiv = document.createElement("div");
+    var amenityName = document.createElement("div");
+    var amenityNameNode = document.createTextNode(amenity);
+    var amenityPic = document.createElement('div')
 
-    document.getElementById(alterationNumber + "AmenitiesData").appendChild(x);
+    amenityName.className="amenityName";
+    amenityName.appendChild(amenityNameNode);
+    amenityDiv.className="amenityDiv";
+    amenityDiv.appendChild(amenityPic);
+    amenityDiv.appendChild(amenityName);
+
+    document.getElementById(alterationNumber + "AmenitiesData").appendChild(amenityDiv);
 
 }
 }
@@ -1942,23 +2093,38 @@ amenitiesTotal = amenitiesTotal.substring(amenitiesTotal.indexOf('amenities_with
 while (amenitiesTotal.includes(" -")) {
 
     if (amenitiesTotal.includes('(')) {
-    var amenity = amenitiesTotal.substring(amenitiesTotal.indexOf(" -")+2,amenitiesTotal.indexOf("(")-1);
+    var amenity = amenitiesTotal.substring(amenitiesTotal.indexOf(" -")+3,amenitiesTotal.indexOf("(")-1);
     amenitiesTotal = amenitiesTotal.replace("(","XXX")
 }
     else {
-        var amenity = amenitiesTotal.substring(amenitiesTotal.indexOf(" -")+2,amenitiesTotal.indexOf("\n"));
+        var amenity = amenitiesTotal.substring(amenitiesTotal.indexOf(" -")+3,amenitiesTotal.indexOf("\n"));
     }
   amenitiesTotal = amenitiesTotal.replace(" -","XXX")
   amenitiesTotal = amenitiesTotal.replace("\n","XXX")
 
-    var x = document.createElement("div");
-    var a = document.createElement("div");
-    var anode = document.createTextNode(amenity);
-    a.appendChild(anode);
-    x.className="amenityName";
-    x.appendChild(a);
+    var amenityDiv = document.createElement("div");
+    var amenityName = document.createElement("div");
+    var amenityNameNode = document.createTextNode(amenity);
+    var amenityPic = document.createElement('div')
+    var amenityImage = document.createElement('img')
 
-    document.getElementById(alterationNumber + "AmenitiesData").appendChild(x);
+    amenityPicName = amenity.replace('/', "-")
+
+    amenityImageName = setAmenityImageName(amenityPicName);
+
+
+    amenityImage.setAttribute('src',amenityImageName);
+
+    amenityImage.className='amenityImage';
+    amenityName.className="amenityName";
+    amenityName.appendChild(amenityNameNode);
+    amenityPic.className="amenityPic";
+    amenityDiv.className="amenityDiv";
+    amenityPic.appendChild(amenityImage);
+    amenityDiv.appendChild(amenityPic);
+    amenityDiv.appendChild(amenityName);
+
+    document.getElementById(alterationNumber + "AmenitiesData").appendChild(amenityDiv);
 }
 }
 
@@ -1987,12 +2153,14 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     
     //Pricing_History can be Empty, checking if not. If so, take data from line_items
     var checkPricing_History = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history')+25,insertedPricingText.indexOf("admin_points")-6)
+
     if(checkPricing_History.length >1){
         var SnapshotPriceText = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history'), insertedPricingText.indexOf('admin_points'));
-
+        var emptyPricingHistory = false;
     }
     else { // If Empty
         var SnapshotPriceText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
+        var emptyPricingHistory = true;
     }
 
 
@@ -2011,6 +2179,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var listingCurrency = SnapshotPriceText.substring(SnapshotPriceText.indexOf('"listing_currency":"')+20,SnapshotPriceText.indexOf('"listing_currency":"')+23);
         var guestCurrency = insertedtoptext.substring(insertedtoptext.indexOf('guest_currency')-1);
         guestCurrency = guestCurrency.substring(guestCurrency.indexOf('guest_currency')+16, guestCurrency.indexOf('guest_currency_rate')-2);
+
 }  /* End of If - Checking Snapshot Type */
 
 
@@ -2516,7 +2685,8 @@ var dailyPriceReplacedText =  insertedPricingText;
     nightReplacedText = nightReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X'); 
     nightReplacedText = nightReplacedText.replace('SPECIAL_OFFER_BASE_PRICE','X-X'); 
 
-    createNightBarsInsert (start_date,numberNight,alterationNumber);
+    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+    issue = false;
     } //End While
 } //if special offer
 
@@ -2559,7 +2729,8 @@ if (insertedPricingText.includes('"WEEKLY_PRICE"')) {
                 nightReplacedText = nightReplacedText.replace('nights','X-X');
 
                     numberNight++;
-                    createNightBarsInsert (start_date,numberNight,alterationNumber);
+                    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+                    issue = false;
             }
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"WEEKLY_PRICE"','X-X')
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"WEEKLY_DISCOUNT"','X-X')
@@ -2592,7 +2763,8 @@ else if (insertedPricingText.includes('"MONTHLY_PRICE"')) {
                 nightReplacedText = nightReplacedText.replace('nights','X-X');
 
                     numberNight++;
-                    createNightBarsInsert (start_date,numberNight,alterationNumber);
+                    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+                    issue = false;
             }
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"MONTHLY_PRICE"','X-X')
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"MONTHLY_DISCOUNT"','X-X')
@@ -2607,7 +2779,29 @@ else if (insertedPricingText.includes('"MONTHLY_PRICE"')) {
 
 
 else {
-// Normal Type Snapshot
+// Normal Type Snapshot #2 
+
+if(emptyPricingHistory == true) { // If Snapshot 2, Pricing history is Empty
+    while(replacedSnapshotPriceText.includes('"settings"=>[{"type"=>')) {
+        var itemLine = replacedSnapshotPriceText.substring(replacedSnapshotPriceText.indexOf('"settings"=>[{"type"=>"'))
+        itemLine = itemLine.substring(itemLine.indexOf('['),itemLine.indexOf("}]}}"))
+
+        if(itemLine.includes('discount')) {
+        } // Discount Line
+        else {
+        start_date = itemLine.substring(itemLine.indexOf('start_date')+14,itemLine.indexOf('nights')-4)
+        numberNight++;
+
+        createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+        issue = false;
+        replacedSnapshotPriceText = replacedSnapshotPriceText.replace('"settings"=>[{"type"=>')
+} // Not a Discount Line
+} // End While
+
+} // End Snapshot 2, Pricing history is Empty
+    else{ //Pricing history is not Empty, Snapshot 2
+
+
     while (replacedSnapshotPriceText.includes('"settings"=>[{"type"=>')) {
 
     replacedSnapshotPriceText = replacedSnapshotPriceText.replace('start_date','X-X');
@@ -2620,9 +2814,10 @@ else {
 
     numberNight++;
 
-    createNightBarsInsert (start_date,numberNight,alterationNumber);
+    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+    issue = false;
 } // Normal Type Snapshot
-
+}  //Pricing history is not Empty, Snapshot 2
 
 
     }
@@ -2665,7 +2860,8 @@ if (insertedPricingText.includes('"WEEKLY_PRICE"')) {
                 nightReplacedText = nightReplacedText.replace('nights','X-X');
 
                     numberNight++;
-                    createNightBarsInsert (start_date,numberNight,alterationNumber);
+                    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+                    issue = false;
             }
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"WEEKLY_PRICE"','X-X')
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('WEEKLY_PRICE_period','X-X')
@@ -2700,7 +2896,8 @@ else if (insertedPricingText.includes('"MONTHLY_PRICE"')) {
                 nightReplacedText = nightReplacedText.replace('nights','X-X');
 
                     numberNight++;
-                    createNightBarsInsert (start_date,numberNight,alterationNumber);
+                    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+                    issue = false;
             }
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('"MONTHLY_PRICE"','X-X')
         allDailyPriceReplacedText = allDailyPriceReplacedText.replace('MONTHLY_PRICE_period','X-X')
@@ -2730,7 +2927,8 @@ else {
     nightReplacedText = nightReplacedText.replace('[{"type":','X-X');   
 
 
-    createNightBarsInsert (start_date,numberNight,alterationNumber);
+    createNightBarsInsert (start_date,numberNight,alterationNumber,issue);
+    issue = false;
 
 
 } // while contains Start_date to create nights
@@ -3517,8 +3715,56 @@ else { // If not weekly / Monthly Price
 
 
 
-
 // Normal, Snapshot 2
+
+// Checking if Pricing history is empty or not - Snapshot 2
+  if(emptyPricingHistory == true) { // If Snapshot 2, Pricing history is Empty
+
+    while(dailyPriceSnapshot2ReplacedText.includes('"settings"=>[{"type"=>')) {
+        var itemLine = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('"settings"=>[{"type"=>"'))
+        itemLine = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('['),dailyPriceSnapshot2ReplacedText.indexOf("}]}}"))
+
+        if(itemLine.includes('discount')) {
+        } // Discount Line
+        else {
+        start_date = itemLine.substring(itemLine.indexOf('start_date')+14,itemLine.indexOf('nights')-4)
+        type = itemLine.substring(itemLine.indexOf('"')+9,itemLine.indexOf('start_date')-4)
+        type = adjustTypePrice(type);
+
+        exact_amount_micros_usd = parseFloat(itemLine.substring(itemLine.indexOf('original_amount_usd') + 22, itemLine.indexOf('applied_amount_usd')-3));
+        amount_micros_usd = exact_amount_micros_usd.toFixed(2);
+        original_amount_micro_listing = (exact_amount_micros_usd * listingCurrencyRate).toFixed(2);
+        guest_amount_micros = (exact_amount_micros_usd * guestCurrencyRate).toFixed(2);
+        
+        var original_amount_listing = listingCurrencySymbol + " " + original_amount_micro_listing; 
+        var amount_usd =  "$ " + amount_micros_usd;
+        guest_amount_micros = guestCurrencySymbol +" "+ guest_amount_micros; 
+    var counter = 1;   
+        while (numberNight >= counter) {
+      
+      if (document.getElementById(alterationNumber + "DateListing"+counter).textContent === start_date) {
+   
+        createNightlyPriceInsert (counter,type,original_amount_listing,amount_usd,guest_amount_micros,alterationNumber)
+
+        break;
+      }
+      else {
+        counter= counter +1;
+      }
+    } // while number of nights
+
+        }// No discount line
+
+        dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('}]}}',"")
+        dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('"settings"=>[{"type"=>',"")
+        dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('nights',"")
+        dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date',"")
+    }// end While Includes Type
+
+  }
+
+
+  else{ //If Pricing History is not empty - Snapshot 2
     while (dailyPriceSnapshot2ReplacedText.includes('"settings"=>[{"type"=>')) {
 
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('start_date','X-X');
@@ -3535,11 +3781,15 @@ if(checkPricing_History.length >1) {
 type = dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('"settings"=>[{"type"=>') +23,dailyPriceSnapshot2ReplacedText.indexOf('start_date')-4);
  
 
-    type = adjustTypePrice(type);
-
+   
 
 
     exact_amount_micros_usd = parseFloat(dailyPriceSnapshot2ReplacedText.substring(dailyPriceSnapshot2ReplacedText.indexOf('original_amount_usd') +22,dailyPriceSnapshot2ReplacedText.indexOf('applied_amount_usd')-3));
+    
+
+     type = adjustTypePrice(type);
+
+
     amount_micros_usd = exact_amount_micros_usd.toFixed(2);
     original_amount_micro_listing = (exact_amount_micros_usd * listingCurrencyRate).toFixed(2);
     guest_amount_micros = (exact_amount_micros_usd * guestCurrencyRate).toFixed(2);
@@ -3551,6 +3801,10 @@ if(checkPricing_History.length <1) {
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('"settings"=>[{"type"=>', "X-X");
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('original_amount_usd', "X-X");
     dailyPriceSnapshot2ReplacedText = dailyPriceSnapshot2ReplacedText.replace('applied_amount_usd', "X-X");
+
+
+
+
 
     var original_amount_listing = listingCurrencySymbol + " " + original_amount_micro_listing; 
     var amount_usd =  "$ " + amount_micros_usd;
@@ -3572,6 +3826,7 @@ if(checkPricing_History.length <1) {
       }
     } // while number of nights
   } // while includes
+} // End If Pricing History is not empty
 
 } // End If not monthly / weekly price
 
@@ -4050,7 +4305,85 @@ else { // If not Monthly / Weekly price
 
 
 /* Daily Discounts */
+if(emptyPricingHistory==true) {
+if(replacedSnapshotPriceText.includes('"DAILY_DISCOUNT"')){ // Text includes Discount
+    while(replacedSnapshotPriceText.includes('DAILY_DISCOUNT')) {
+      var eachDiscountLine = replacedSnapshotPriceText.substring(replacedSnapshotPriceText.indexOf('DAILY_DISCOUNT'));
+      eachDiscountLine = eachDiscountLine.substring(eachDiscountLine.indexOf('"details"=>{')+15,eachDiscountLine.indexOf('}'));
+      discountNight = eachDiscountLine.substring(eachDiscountLine.indexOf('start_date')+14);
+      discountNight = discountNight.substring(0,10);
+      
+      var discountType = eachDiscountLine.substring(eachDiscountLine.indexOf('type"=>"')+8,eachDiscountLine.indexOf('min_length')-4)
+      
+        discountType = discountType.toLowerCase();
+      discountType = discountType.replace(/_/g," ");
+      discountType = discountType.charAt(0).toUpperCase() + discountType.slice(1);
+      discountTypeID= discountType.replace(/ /g,"");
+
+      var discountTypeLength = ""
+      if (insertedPricingText.includes('"min_length"')) {
+        var discountMinLength = parseFloat(insertedPricingText.substring(insertedPricingText.indexOf('"min_length"')+14, insertedPricingText.indexOf('max_length')-3))
+      }
+      else {
+        var discountMinLength = 0;
+      }
+      discountTypeLength = convertDiscountName(numberNight,discountType,discountTypeLength,discountMinLength);
+
+
+    var discountAmountUSD = parseFloat(eachDiscountLine.substring(eachDiscountLine.indexOf('amount_usd')+13,eachDiscountLine.indexOf('start_date')-3));
+    discountAmountUSD = discountAmountUSD.toFixed(2);
+
+
+    counter = 1;
+
+   while (numberNight >= counter) {
+      
+      if (document.getElementById(alterationNumber + "DateListing"+counter).textContent === discountNight) {
+    var discountPercentage = document.getElementById(alterationNumber + "dailyUSD" + counter).innerText;
+    discountPercentage = discountPercentage.substring(discountPercentage.indexOf(" ")+1)
+    discountPercentage = Math.abs(discountAmountUSD) / (parseFloat(discountPercentage)) *100; 
+    discountPercentage = discountPercentage.toFixed(0)
+    break
+}
+    else {
+        counter++;
+    }
+    break
+}
+    var discountAmountListing = listingCurrencySymbol + " " + (discountAmountUSD * listingCurrencyRate).toFixed(2);
+    var discountAmountGuest = guestCurrencySymbol + " " + (discountAmountUSD * guestCurrencyRate).toFixed(2);
+    discountAmountUSD = "$ " + discountAmountUSD;
+
+     
+    // Finding Date, creating element
+      counter = 1;
+   while (numberNight >= counter) {
+      
+      if (document.getElementById(alterationNumber + "DateListing"+counter).textContent === discountNight) {
+       
+createDiscountInsert(alterationNumber,counter,discountTypeID,discountPercentage,discountTypeLength,discountAmountListing,discountAmountUSD,discountAmountGuest)
+
+        counter = counter + numberNight;
+
+      }
+      else {
+        counter= counter +1;
+      }
+    }
+
+
+
+      replacedSnapshotPriceText = replacedSnapshotPriceText.replace('"DAILY_DISCOUNT"',"");
+    }
+} // End if Text includes Discount
+} //If Empty Pricing History
+
+
+
+
+else{ //If Not Empty Pricing History
 if (insertedPricingText.includes(':"DAILY_DISCOUNT"')) {
+
     var replacedInsertedPricingText = insertedPricingText.substring(insertedPricingText.indexOf(':"DAILY_DISCOUNT"')-2, insertedPricingText.indexOf('[{"type"'));
 
     while (replacedInsertedPricingText.includes(':"DAILY_DISCOUNT"')) {
@@ -4119,7 +4452,6 @@ createDiscountInsert(alterationNumber,counter,discountTypeID,discountPercentage,
 
 
         counter = counter + numberNight;
- 
 
       }
       else {
@@ -4130,6 +4462,7 @@ createDiscountInsert(alterationNumber,counter,discountTypeID,discountPercentage,
 
     }
     }
+} // End If not Empty Pricing History
 
 
 /* Extra guest fee */
