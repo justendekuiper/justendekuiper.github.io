@@ -103,8 +103,7 @@ html, body{
 }
 
 #EntreeField {
-	margin-left: 5%;
-	margin-top: 50px;
+	margin-top:50px;
 	width: 80%;
 	border-radius: 10px;
 	height: 50px;    
@@ -115,6 +114,7 @@ html, body{
 	min-width: 40%;
 	overflow-y: scroll;
      resize: vertical;
+     font-size: 0.7vw;
 }
 
 #EntreeField:focus{
@@ -143,21 +143,42 @@ html, body{
 #ButtonEntreeField {
 	border-radius: 5px;
     width: 10vw;
-    margin-left: 32%;
+    margin-left: 4%;
     margin-top: 15px;
     background-color: #118488;
     border: solid black 0.5px;
     height: 3vh;
-    display: block;
+    display: inline-block;
     outline: none;
     color: white;
     font-size: 0.9vw;
-
 }
 
 #ButtonEntreeField:hover {
 	background-color: #0e767a;
 }
+
+
+#ButtonEntreeFieldClear{
+	border-radius: 5px;
+    width: 10vw;
+    margin-left: 5%;
+    margin-top: 15px;
+    background-color: #118488;
+    border: solid black 0.5px;
+    height: 3vh;
+    display: inline-block;
+    outline: none;
+    color: white;
+    font-size: 0.9vw;
+}
+
+#ButtonEntreeFieldClear:hover {
+	background-color: #0e767a;
+}
+
+
+
 #buttonsDiv{
 	display: inline-block;
 	position: absolute;

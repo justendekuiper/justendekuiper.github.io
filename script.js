@@ -1632,7 +1632,10 @@ function createDiscountInsert(alterationNumber,counter,discountTypeID,discountPe
  
 }
 
-
+    /* Clearing Text in EntreeField */
+    function cleartext() {
+        document.getElementById('EntreeField').value = ""
+    }
 
 
 
