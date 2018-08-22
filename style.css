@@ -1081,7 +1081,17 @@ display: inline-block;
 
 
 
+.definitionType {
+	font-size: 1.1vw;
+    border-bottom: solid #e0e0e0 0.1vh;
+    padding: 1vh 0 1vh 0;
+}
 
+.definitionDiv {
+	position: relative;
+    top: 5vh;
+    left: 0.7vw;
+}
 
 #test {
 	position: relative;

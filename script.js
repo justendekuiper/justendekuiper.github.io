@@ -123,6 +123,19 @@ document.getElementById("borderDivOutputField").style.display = "block";
   else {
         object.style.display = "none";
 }
+
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+
 }
 
 
@@ -195,6 +208,18 @@ document.getElementById("borderDivOutputField").style.display = "block";
   else {
         object.style.display = "none";
 }
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+
 }
   
 
@@ -266,6 +291,19 @@ document.getElementById("borderDivOutputField").style.display = "block";
      if (object.style.display ==="none") {
         object.style.display = "block";
      }
+
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+     document.getElementById(e+ 'definitionDiv').style.display = 'block';
  
 }
 
@@ -318,6 +356,19 @@ document.getElementById("borderDivOutputField").style.display = "block";
         object.style.display = "block";
      }
  
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+     document.getElementById(e+ 'definitionDiv').style.display = 'block';
+
 }
 
 
@@ -367,6 +418,19 @@ document.getElementById("borderDivOutputField").style.display = "block";
      if (object.style.display ==="none") {
         object.style.display = "block";
      }
+
+     var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+     document.getElementById(e+ 'definitionDiv').style.display = 'block';
  }
 
 
@@ -1651,6 +1715,20 @@ arrowOutput.setAttribute('src', 'images/arrowLeft.png');
 arrowOutput.id = "arrowOutput";
 document.getElementById('DivOutputField').appendChild(arrowOutput);
 document.getElementById('arrowOutput').ondragstart = function() { return false; };
+
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+
+
 
 
 
@@ -4661,9 +4739,87 @@ while (numberNight >= counter) {
         document.getElementById(alterationNumber + 'airbnbFeeGuestType').append(percentageAirbnbFeeGuest)
 
 
+
+
+        // Declaring definition of Prices
+        counter = 1;
+        var allPriceTypes = [];
+        while (counter <= numberNight) {
+            var priceType = (document.getElementById(alterationNumber +'dailyType' + counter).innerText);
+
+            var countArray=allPriceTypes.length;
+            var existsInArray = false;
+
+            if(countArray == 0){
+                allPriceTypes.push(priceType);
+            }
+            else{
+                for(var i=0;i<countArray;i++)
+                {
+                 if(allPriceTypes[i]===priceType){
+                    existsInArray = true;
+                 }
+             }
+
+                 if(existsInArray == false){
+                 allPriceTypes.push(priceType);
+                 }
+             } //end if not 0 in array
+            counter++;
+        }
+
+        // Returning Values in Array
+        var definitionDiv = document.createElement('div');
+        definitionDiv.className = "definitionDiv";
+        definitionDiv.id = alterationNumber +'definitionDiv';
+        definitionDiv.style.display = 'none';
+        document.getElementById('DivRightField').appendChild(definitionDiv);
+
+
+
+        var countArray=allPriceTypes.length;
+        for (var i=0;i<countArray;i++) {
+            if(allPriceTypes[i] === "Base Price") {
+               var definitionType = document.createElement('div');
+                definitionType.className = "definitionType";
+                var definitionTypeNode = document.createTextNode('Base Price — The price is taken from the base price as set up in the Pricing Settings > Nightly Price')
+                definitionType.appendChild(definitionTypeNode);
+                document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
+            }
+            else if (allPriceTypes[i] === "Weekend Pricing") {
+               var definitionType = document.createElement('div');
+                definitionType.className = "definitionType";
+                var definitionTypeNode = document.createTextNode('Weekend Pricing — The price is taken from weekend price as set up in the Pricing Settings > Extra Charges')
+                definitionType.appendChild(definitionTypeNode);
+                document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
+            }
+            else if (allPriceTypes[i] === "Smart Pricing") {
+               var definitionType = document.createElement('div');
+                definitionType.className = "definitionType";
+                var definitionTypeNode = document.createTextNode("Smart Pricing — The price is calculated base on the smart price's minimum and maximum rate as set up in the Pricing Settings > Nightly Price")
+                definitionType.appendChild(definitionTypeNode);
+                document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
+            }
+            else if (allPriceTypes[i] === "Custom Price") {
+               var definitionType = document.createElement('div');
+                definitionType.className = "definitionType";
+                var definitionTypeNode = document.createTextNode("Custom Price — The price based on what the host selected this night to cost, which is set in the calendar")
+                definitionType.appendChild(definitionTypeNode);
+                document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
+            }
+            else if (allPriceTypes[i] === "Custom monthly") {
+               var definitionType = document.createElement('div');
+                definitionType.className = "definitionType";
+                var definitionTypeNode = document.createTextNode("Custom monthly — The price is set per Month, as a seasonal pricing, and taken from the Pricing Settings > Length-of-stay discounts")
+                definitionType.appendChild(definitionTypeNode);
+                document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
+            }
+
+        }
+
+
+
 alterationNumber++;
-
-
 
  }//While — Looping through Alterations
 
