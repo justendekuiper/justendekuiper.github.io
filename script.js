@@ -1709,7 +1709,7 @@ function transformtext() {
 
 $("#DivMenuField").children(":not(#borderDivMenuField)").remove();
 $("#DivOutputField").children(":not(#borderDivOutputField)").remove();
-$("#DivRightField").children(":not(#borderDivOutputField)").remove();
+$("#DivRightField").children(":not(#borderDivRightField)").remove();
 
 var arrowOutput = document.createElement('img')
 arrowOutput.setAttribute('src', 'images/arrowLeft.png');
