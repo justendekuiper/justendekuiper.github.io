@@ -1,0 +1,143 @@
+#howToUse{
+	font-size: 14.3px;
+}
+#DivEntreeField{
+     width: 360.5px;
+}
+
+#EntreeField {
+    font-size: 8.3px;
+    width: 400px;
+    }
+
+
+#requestFeedbackText {
+    font-size: 25px;
+}
+
+.Dropdown {
+font-size: 19px;
+}
+
+#arrowOutput {
+    width: 180px;
+}
+
+#ButtonEntreeField {
+    width: 120px;
+    font-size: 10.8px;
+    margin-left: 14.4px;
+}
+
+#ButtonEntreeFieldClear {
+    width: 120px;
+    font-size: 10.8px;
+    margin-left: 18px;
+    }
+
+
+.definitionType {
+	font-size: 13.2px;
+	padding: 1vh 9.6px 1vh 9.6px;
+}
+
+.monthDivFirst {
+	left: 96px;
+     width: 120px;
+     font-size: 16px;
+ }
+
+ .PricingHeaderBarListing {
+     margin-left: 15.3px;
+     width: 307.4px;
+ }
+
+ .PricingHeaderBarGuest {
+     margin-left: 15.3px;
+     width: 307.4px;
+ }
+
+ .PricingHeaderBarUsd {
+     margin-left: 15.3px;
+     width: 307.4px;
+ }
+
+
+ .PricingHeaderNightCount {
+     font-size: 14px;
+ }
+
+
+.PricingHeaderHostNightPrice {
+     font-size: 17px;
+ }
+
+
+ .PricingHeaderNightDate {
+     font-size: 14.5px;
+ }
+
+
+.dailyType{
+     font-size: 14.4px;
+}
+
+.dailyListing {
+	font-size: 14.4px;
+}
+
+.discountDiv{
+	font-size: 15.5px;
+}
+
+.extraGuestDiv {
+	font-size: 15.7px;
+}
+
+.moreInfoExtraGuest {
+     font-size: 14.4px;
+ }
+
+.CleaningFeeType{
+	font-size: 14.4px;
+}
+
+.CleaningFeePrice{
+	font-size: 17px;
+}
+
+.headerFeesType{
+	font-size: 14.4px;	
+}
+
+.headerFeesAmount{
+	font-size: 17px;
+}
+
+.airbnbFeeListingType {
+     font-size: 17px;
+ }
+
+ .airbnbFeeListingAmount{
+     font-size: 17px;
+ }
+.airbnbFeeGuestType {
+     font-size: 17px;
+ }
+
+ .airbnbFeeGuestAmount{
+     font-size: 17px;
+ }
+
+ .expandSpecifyTypePrice{
+     width: 54px;
+    font-size: 13.4px;
+ }
+
+ .amenityImage{
+ 	width:15.4px;
+ }
+
+ .amenityName{
+ 	font-size: 14.4px;
+ }
