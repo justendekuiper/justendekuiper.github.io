@@ -3317,11 +3317,11 @@ if (insertedPricingText.includes('"PASS_THROUGH_SERVICE_CHARGE"')) {
 
             //Creating total for Header with Tax Guest
             if (insertedPricingText.includes('VALUE_ADDED_TAX_GUEST')) {
-            var totalFeesGuest = guestCurrencySymbol + " " + (((taxAmountGuest * 100).toFixed(2)/100) + ((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100));
+            var totalFeesGuest = guestCurrencySymbol + " " + (((taxAmountGuest * 100).toFixed(2)/100) + ((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100)).toFixed(2);
 
         }
         else {
-            var totalFeesGuest = guestCurrencySymbol + " "  + (((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100));     
+            var totalFeesGuest = guestCurrencySymbol + " "  + (((airbnbFeeGuestAmount * 100).toFixed(2)/100) + ((beyondFeeGuest * 100).toFixed(2)/100)).toFixed(2);     
         }
         
             var totalHeaderFeesTypeGuestInsert = document.createElement('div')
@@ -4693,7 +4693,8 @@ while (numberNight >= counter) {
             totalAmountListing = totalAmountListing + amountNightCounter;
             i++
         }
-        if ($(alterationNumber + '#cleaningFeePriceListing').length > 0) {
+
+        if ($("#" + alterationNumber + 'cleaningFeePriceListing').length > 0) {
            var cleaningFeeTotal = document.getElementById(alterationNumber + 'cleaningFeePriceListing').innerText;
         cleaningFeeTotal = parseFloat(cleaningFeeTotal.substring(cleaningFeeTotal.indexOf(" ")+1));
         }
@@ -4717,7 +4718,7 @@ while (numberNight >= counter) {
             totalAmountGuest = totalAmountGuest + amountNightCounter;
             i++
         }
-        if ($(alterationNumber + '#cleaningFeePriceGuest').length > 0) {
+        if ($('#' +alterationNumber + 'cleaningFeePriceGuest').length > 0) {
         var cleaningFeeTotal = document.getElementById(alterationNumber + 'cleaningFeePriceGuest').innerText
         cleaningFeeTotal = parseFloat(cleaningFeeTotal.substring(cleaningFeeTotal.indexOf(" ")+1))
 }
@@ -4773,36 +4774,61 @@ while (numberNight >= counter) {
             if(allPriceTypes[i] === "Base Price") {
                var definitionType = document.createElement('div');
                 definitionType.className = "definitionType";
-                var definitionTypeNode = document.createTextNode('Base Price — The price is taken from the base price as set up in the Pricing Settings > Nightly Price')
+                var definitionTypeNode = document.createTextNode('Base Price — The price is taken from the base price as set up in the Pricing Settings ➜ ')
                 definitionType.appendChild(definitionTypeNode);
+                definitionTypeNodeLink = document.createElement('a');
+                definitionTypeNodeLink.setAttribute('href',"https://admin.airbnb.com/manage-your-space/" + listingID + "/pricing/nightly-price");
+                definitionTypeNodeLink.innerHTML = 'Nightly Price';
+                definitionTypeNodeLink.setAttribute("target","_blank")
+                definitionType.appendChild(definitionTypeNodeLink);
                 document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
             }
             else if (allPriceTypes[i] === "Weekend Pricing") {
                var definitionType = document.createElement('div');
                 definitionType.className = "definitionType";
-                var definitionTypeNode = document.createTextNode('Weekend Pricing — The price is taken from weekend price as set up in the Pricing Settings > Extra Charges')
+                var definitionTypeNode = document.createTextNode('Weekend Pricing — The price is taken from weekend price as set up in the Pricing Settings ➜ ')
                 definitionType.appendChild(definitionTypeNode);
+                definitionTypeNodeLink = document.createElement('a');
+                definitionTypeNodeLink.setAttribute('href',"https://admin.airbnb.com/manage-your-space/" + listingID + "/pricing/extra-fees");
+                definitionTypeNodeLink.innerHTML = 'Extra Charges';
+                definitionTypeNodeLink.setAttribute("target","_blank")
+                definitionType.appendChild(definitionTypeNodeLink);
                 document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
             }
             else if (allPriceTypes[i] === "Smart Pricing") {
                var definitionType = document.createElement('div');
                 definitionType.className = "definitionType";
-                var definitionTypeNode = document.createTextNode("Smart Pricing — The price is calculated base on the smart price's minimum and maximum rate as set up in the Pricing Settings > Nightly Price")
+                var definitionTypeNode = document.createTextNode("Smart Pricing — The price is calculated base on the smart price's minimum and maximum rate as set up in the Pricing Settings ➜ ")
                 definitionType.appendChild(definitionTypeNode);
+                definitionTypeNodeLink = document.createElement('a');
+                definitionTypeNodeLink.setAttribute('href',"https://admin.airbnb.com/manage-your-space/" + listingID + "/pricing/nightly-price");
+                definitionTypeNodeLink.innerHTML = 'Nightly Price';
+                definitionTypeNodeLink.setAttribute("target","_blank")
+                definitionType.appendChild(definitionTypeNodeLink);
                 document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
             }
             else if (allPriceTypes[i] === "Custom Price") {
                var definitionType = document.createElement('div');
                 definitionType.className = "definitionType";
-                var definitionTypeNode = document.createTextNode("Custom Price — The price based on what the host selected this night to cost, which is set in the calendar")
+                var definitionTypeNode = document.createTextNode("Custom Price — The price based on what the host selected this night to cost, which is set in ➜ ")
                 definitionType.appendChild(definitionTypeNode);
+                definitionTypeNodeLink = document.createElement('a');
+                definitionTypeNodeLink.setAttribute('href',"https://admin.airbnb.com/multicalendar/" + listingID );
+                definitionTypeNodeLink.innerHTML = 'the calendar';
+                definitionTypeNodeLink.setAttribute("target","_blank")
+                definitionType.appendChild(definitionTypeNodeLink);
                 document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
             }
             else if (allPriceTypes[i] === "Custom monthly") {
                var definitionType = document.createElement('div');
                 definitionType.className = "definitionType";
-                var definitionTypeNode = document.createTextNode("Custom monthly — The price is set per Month, as a seasonal pricing, and taken from the Pricing Settings > Length-of-stay discounts")
+                var definitionTypeNode = document.createTextNode("Custom monthly — The price is set per Month, as a seasonal pricing, and taken from the Pricing Settings ➜ ")
                 definitionType.appendChild(definitionTypeNode);
+                definitionTypeNodeLink = document.createElement('a');
+                definitionTypeNodeLink.setAttribute('href',"https://admin.airbnb.com/manage-your-space/" + listingID + "/pricing/discounts");
+                definitionTypeNodeLink.innerHTML = 'Length-of-stay discounts';
+                definitionTypeNodeLink.setAttribute("target","_blank")
+                definitionType.appendChild(definitionTypeNodeLink);
                 document.getElementById(alterationNumber + 'definitionDiv').appendChild(definitionType);
             }
 
