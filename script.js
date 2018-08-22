@@ -1709,6 +1709,7 @@ function transformtext() {
 
 $("#DivMenuField").children(":not(#borderDivMenuField)").remove();
 $("#DivOutputField").children(":not(#borderDivOutputField)").remove();
+$("#DivRightField").children(":not(#borderDivOutputField)").remove();
 
 var arrowOutput = document.createElement('img')
 arrowOutput.setAttribute('src', 'images/arrowLeft.png');
@@ -1716,17 +1717,7 @@ arrowOutput.id = "arrowOutput";
 document.getElementById('DivOutputField').appendChild(arrowOutput);
 document.getElementById('arrowOutput').ondragstart = function() { return false; };
 
-var divRightField = document.getElementById('DivRightField')
- if (divRightField.hasChildNodes()) {
-     // Get all children of node
-     var children = divRightField.childNodes;               
 
-     // Loop through the children
-     for(var c=0; c < children.length; c++) {
-      if(children[c].style) {
-       children[c].style.display = 'none';
-     } } }
-     document.getElementById('borderDivRightField').style.display= 'block';
 
 
 
