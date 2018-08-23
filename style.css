@@ -502,6 +502,9 @@ table, tr, td {
 }
 
 
+.priceSpecifyDivSelected{
+	border: 0.15vw solid #8D2748 !important;
+}
 
 .expandSpecifyTypePrice{
 	display: inline-block;

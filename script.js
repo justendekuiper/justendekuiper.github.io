@@ -77,7 +77,7 @@ var link = "https://mail.google.com/mail/u/0/?view=cm&fs=1&to=justen.dekuiper@ai
 
 function adjustBorderPriceSpecify(){
 $('.priceSpecifyDiv').each(function(i, obj) {
-   obj.style.border = "solid #118488 0.13vw";
+   obj.classList.remove("priceSpecifyDivSelected");
 });
 }
 
@@ -276,7 +276,7 @@ function ClickPricingBar(e) {
 }
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.15vw solid #8D2748";
+obj.classList.add('priceSpecifyDivSelected');
 document.getElementById("borderDivOutputField").style.display = "block";
 
     var object = document.getElementById(e +'DivPricingDetails');
@@ -341,7 +341,7 @@ var divRightField = document.getElementById('DivRightField')
 
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.15vw solid #8D2748";
+obj.classList.add('priceSpecifyDivSelected');
 document.getElementById("borderDivOutputField").style.display = "block";
 
     var object = document.getElementById(e +'DivPricingDetails');
@@ -404,7 +404,7 @@ var divRightField = document.getElementById('DivRightField')
 
 
 adjustBorderPriceSpecify();
-obj.style.border = "0.15vw solid #8D2748";
+obj.classList.add('priceSpecifyDivSelected');
 document.getElementById("borderDivOutputField").style.display = "block";
 
      var object = document.getElementById(e +'DivPricingDetails');

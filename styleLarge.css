@@ -8,6 +8,7 @@
 #EntreeField {
     font-size: 8.3px;
     width: 400px;
+	padding-left: 5px;
     }
 
 
@@ -73,6 +74,16 @@ font-size: 19px;
  }
 
 
+.PricingHeaderUSDNightPrice {
+     font-size: 17px;
+ }
+
+
+.PricingHeaderGuestNightPrice {
+     font-size: 17px;
+ }
+
+
  .PricingHeaderNightDate {
      font-size: 14.5px;
  }
@@ -83,6 +94,14 @@ font-size: 19px;
 }
 
 .dailyListing {
+	font-size: 14.4px;
+}
+
+.dailyUSD {
+	font-size: 14.4px;
+}
+
+.dailyGuest {
 	font-size: 14.4px;
 }
 
@@ -118,12 +137,28 @@ font-size: 19px;
      font-size: 17px;
  }
 
+.taxListingType{
+	font-size: 17px;
+}
+
+.taxListingAmount{
+	font-size: 17px;
+}
+
  .airbnbFeeListingAmount{
      font-size: 17px;
  }
 .airbnbFeeGuestType {
      font-size: 17px;
  }
+
+.taxGuestType{
+	font-size: 17px;
+}
+
+.taxGuestAmount {
+	font-size: 17px;
+}
 
  .airbnbFeeGuestAmount{
      font-size: 17px;
@@ -132,6 +167,7 @@ font-size: 19px;
  .expandSpecifyTypePrice{
      width: 54px;
     font-size: 13.4px;
+    float: left;
  }
 
  .amenityImage{
@@ -140,4 +176,27 @@ font-size: 19px;
 
  .amenityName{
  	font-size: 14.4px;
+ }
+
+ .priceSpecifyDiv {
+ 	padding-left: 4.8px;
+ 	height: 17px;
+     left: 8vw;
+     width: 90px;
+     border: 1.5px solid rgb(17, 132, 136)
+ }
+
+.priceSpecifyDivSelected{
+	border: 1.5px solid #8D2748 !important;
+}
+
+ .expandSpecifyCurrencyPrice{
+ 	font-size: 13px;
+    float: left;
+ }
+
+ .alterationButton{
+ 	width: 120px;
+	font-size: 15.7px;
+	margin: 3vh 50% 1vh 10%;;
  }
