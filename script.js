@@ -714,127 +714,6 @@ function noAlterationContent(alterationNumber){
 
 
 
-        // Creating Booking Details Inner
-
-    function createBookingDetailsInner(alterationNumber) {
-        var detailsTable = document.createElement('table');
-        detailsTable.className = "tables";
-        detailsTable.id = alterationNumber + "BookingDetailsTable";
-        document.getElementById(alterationNumber + 'BookingDetails').appendChild(detailsTable);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationCode = document.createElement('td');
-        var reservationCodeNode = document.createTextNode('Reservation code');
-        reservationCode.appendChild(reservationCodeNode);
-        reservationCode.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCode);
-
-
-        var reservationCodeData = document.createElement('td');
-        var reservationCodeDataNode = document.createTextNode('');
-        reservationCodeData.appendChild(reservationCodeDataNode);
-        reservationCodeData.className = "DataTable";
-        reservationCodeData.id = alterationNumber + "reservation_code";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCodeData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationCreated = document.createElement('td');
-        var reservationCreatedNode = document.createTextNode('Created at');
-        reservationCreated.appendChild(reservationCreatedNode);
-        reservationCreated.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCreated);
-
-        var reservationCreatedData = document.createElement('td');
-        var reservationCreatedDataNode = document.createTextNode('');
-        reservationCreatedData.appendChild(reservationCreatedDataNode);
-        reservationCreatedData.className = "DataTable";
-        reservationCreatedData.id = alterationNumber + "created_at";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCreatedData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationPending = document.createElement('td');
-        var reservationPendingNode = document.createTextNode('Pending Began at');
-        reservationPending.appendChild(reservationPendingNode);
-        reservationPending.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationPending);
-
-        var reservationPendingData = document.createElement('td');
-        var reservationPendingDataNode = document.createTextNode('');
-        reservationPendingData.appendChild(reservationPendingDataNode);
-        reservationPendingData.className = "DataTable";
-        reservationPendingData.id = alterationNumber + "pending_began_at";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationPendingData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationPendingExpires = document.createElement('td');
-        var reservationPendingExpiresNode = document.createTextNode('Pending Began at');
-        reservationPendingExpires.appendChild(reservationPendingExpiresNode);
-        reservationPendingExpires.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationPendingExpires);
-
-        var reservationPendingExpiresData = document.createElement('td');
-        var reservationPendingExpiresDataNode = document.createTextNode('');
-        reservationPendingExpiresData.appendChild(reservationPendingExpiresDataNode);
-        reservationPendingExpiresData.className = "DataTable";
-        reservationPendingExpiresData.id = alterationNumber + "pending_expires_at";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationPendingExpiresData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationResponded = document.createElement('td');
-        var reservationRespondedNode = document.createTextNode('Host Responded at');
-        reservationResponded.appendChild(reservationRespondedNode);
-        reservationResponded.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationResponded);
-
-        var reservationRespondedData = document.createElement('td');
-        var reservationRespondedDataNode = document.createTextNode('');
-        reservationRespondedData.appendChild(reservationRespondedDataNode);
-        reservationRespondedData.className = "DataTable";
-        reservationRespondedData.id = alterationNumber + "host_Responded_at";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationRespondedData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationCanceled = document.createElement('td');
-        var reservationCanceledNode = document.createTextNode('Canceled at');
-        reservationCanceled.appendChild(reservationCanceledNode);
-        reservationCanceled.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCanceled);
-
-        var reservationCanceledData = document.createElement('td');
-        var reservationCanceledDataNode = document.createTextNode('');
-        reservationCanceledData.appendChild(reservationCanceledDataNode);
-        reservationCanceledData.className = "DataTable";
-        reservationCanceledData.id = alterationNumber + "canceled_at";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCanceledData);
-
-        var tablerow = document.createElement('tr')
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(tablerow)
-
-        var reservationCancelPolicy = document.createElement('td');
-        var reservationCancelPolicyNode = document.createTextNode('Cancellation Policy');
-        reservationCancelPolicy.appendChild(reservationCancelPolicyNode);
-        reservationCancelPolicy.className = "NameTable";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCancelPolicy);
-
-        var reservationCancelPolicyData = document.createElement('td');
-        var reservationCancelPolicyDataNode = document.createTextNode('');
-        reservationCancelPolicyData.appendChild(reservationCancelPolicyDataNode);
-        reservationCancelPolicyData.className = "DataTable";
-        reservationCancelPolicyData.id = alterationNumber + "cancel_policy";
-        document.getElementById(alterationNumber + 'BookingDetailsTable').appendChild(reservationCancelPolicyData);
-}
 
 
 
@@ -852,6 +731,552 @@ else {
 }
 }
 
+
+function convertInstantBookRequirement(instantBookRequirement) {
+    if(instantBookRequirement == "0") {
+        return "Instant book is not allowed";
+    }
+    else if(instantBookRequirement == "1"){
+        return "Instant book is allowed for experienced guests";
+    }
+    else if(instantBookRequirement == "2"){
+        return "Instant book is allowed for any guests";
+    }
+    else if(instantBookRequirement == "3"){
+        return "Instant book is allowed for social connections";
+    }
+    else if(instantBookRequirement == "4"){
+        return "Instant book is allowed for guests with government ID";
+    }
+    else if(instantBookRequirement == "5"){
+        return "Instant book is allowed for guests with high ratings";
+    }
+    else if(instantBookRequirement == "6"){
+        return "Instant book is allowed for guests with high ratings and government ID";
+    }
+    else if(instantBookRequirement == "7"){
+        return "Instant book is allowed for experienced guests with government ID";
+    }
+    else {
+        return "N/A";
+    }
+}
+
+
+
+function convertCancellationPolicy(cancel_policy_raw){
+            if (cancel_policy_raw == "3") {
+          return "Flexible";
+        }
+        else if (cancel_policy_raw == "0") {
+        return "Deprecated Full Refund Before Arrival";
+        }
+        else if (cancel_policy_raw == "1") {
+        return "Full Refund between 5-75 day cancellation";
+        }
+        else if (cancel_policy_raw == "2") {
+        return "Full First 5 days None,Last 5 -75 days otherwise, ";
+        }
+        else if (cancel_policy_raw == "4") {
+        return "Moderate";
+        }
+        else if (cancel_policy_raw == "5") {
+        return "Strict";
+        }
+        else if (cancel_policy_raw == "44") {
+        return "Strict with Grace Period";
+        }
+        else if (cancel_policy_raw == "6") {
+        return "Super Strict 30";
+        }
+        else if (cancel_policy_raw == "7") {
+        return "No Refund";
+        }
+        else if (cancel_policy_raw == "8") {
+        return "Long Term";
+        }
+        else if (cancel_policy_raw == "9") {
+        return "Super Strict 60";
+        }
+        else if (cancel_policy_raw == "10") {
+        return "New Flexible";
+        }
+        else if (cancel_policy_raw == "11") {
+        return "New Moderate";
+        }
+        else if (cancel_policy_raw == "12") {
+        return "New Strict";
+        }
+        else if (cancel_policy_raw == "13") {
+        return "New Super Strict 30";
+        }
+        else if (cancel_policy_raw == "14") {
+        return "New Super Strict 60";
+        }
+        else if (cancel_policy_raw == "15") {
+        return "New Long Term";
+        }
+        else if (cancel_policy_raw == "40") {
+        return "Beyond Moderate";
+        }
+        else if (cancel_policy_raw == "41") {
+        return "Beyond Super Strict 95";
+        }
+        else if (cancel_policy_raw == "42") {
+        return "Beyond Super Strict 125";
+        }
+        else if (cancel_policy_raw == "43") {
+        return "No Refund";
+        }
+        else if (cancel_policy_raw == "44") {
+        return "48hr Grace Period Strict with 14 day cut off";
+        }
+        else if (cancel_policy_raw == "45") {
+        return "48 hr Grace Period Strict with mobile";
+        }
+        else if (cancel_policy_raw == "46") {
+        return "48hr Grace Period Strict Full Refund on mobile";
+        }
+        else if (cancel_policy_raw == "51") {
+        return "Tiered Pricing Non Refundable";
+        }
+        else if (cancel_policy_raw == "16") {
+        return "(Test) Flexible Grace Period";
+        }
+        else if (cancel_policy_raw == "17") {
+        return "(Test)Moderate Grace Period";
+        }
+        else if (cancel_policy_raw == "18") {
+        return "Strict Grace Period";
+        }
+        else if (cancel_policy_raw == "19") {
+        return "(Test) Super Strict 30 Grace Period";
+        }
+        else if (cancel_policy_raw == "20") {
+        return "(Test) Super Strict 60 Grace Period";
+        }
+        else if (cancel_policy_raw == "21") {
+        return "(Test) Long Term Grace Period";
+        }
+        else if (cancel_policy_raw == "22") {
+        return "(Test) Flexible No Refunds";
+        }
+        else if (cancel_policy_raw == "23") {
+        return "(Test) Moderate No Refunds";
+        }
+        else if (cancel_policy_raw == "24") {
+        return "(Test) Strict No Refunds";
+        }
+        else if (cancel_policy_raw == "25") {
+        return "(Test) Super Strict 30 No Refunds";
+        }
+        else if (cancel_policy_raw == "26") {
+        return "(Test) SUperstrict 60 No Refunds";
+        }
+        else if (cancel_policy_raw == "27") {
+        return "(Test) Long Term No Refunds";
+        }
+        else if (cancel_policy_raw == "28") {
+        return "(Test) Flexible Full Refunds";
+        }
+        else if (cancel_policy_raw == "29") {
+        return "(Test) Moderate Full Refunds";
+        }
+        else if (cancel_policy_raw == "30") {
+        return "(Test) Strict Full Refunds";
+        }
+        else if (cancel_policy_raw == "31") {
+        return "(Test) Super Strict 30 Full Refunds";
+        }
+        else if (cancel_policy_raw == "32") {
+        return "(Test) Super Strict 60 Full Refunds";
+        }
+        else if (cancel_policy_raw == "33") {
+        return "(Test) Long Term Full Refunds";
+        }
+        else if (cancel_policy_raw == "34") {
+        return "(Test) New Flexible FUll Refunds";
+        }
+        else if (cancel_policy_raw == "35") {
+        return "(Test) New Moderate Full Refunds";
+        }
+        else if (cancel_policy_raw == "36") {
+        return "(Test) New Strict Full Refunds";
+        }
+        else if (cancel_policy_raw == "37") {
+        return "(Test) New Super Strict 30 Full Refunds";
+        }
+        else if (cancel_policy_raw == "38") {
+        return "(Test) New Super Strict 60 Full Refunds";
+        }
+        else if (cancel_policy_raw == "39") {
+        return "(Test)New Long Term Full Refunds";
+        }
+        else {
+            return cancel_policy_raw
+          }
+      };
+
+
+
+function createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency){
+//Listin Icon
+    //OuterDiv Listing
+    var listingOuterDiv = document.createElement('div');
+    listingOuterDiv.className = 'listingOuterDiv';
+    listingOuterDiv.setAttribute('onclick',"window.open('https://admin.airbnb.com/rooms/"+ listingID+"');")
+    //Image of Listing
+    var listingImage = document.createElement('img');
+    listingImage.src = "images/listingIcon.png";
+    listingImage.className = 'listingImage';
+    //ID of Listing
+    var listingIDDiv = document.createElement('div');
+    listingIDNode = document.createTextNode(listingID);
+    listingIDDiv.appendChild(listingIDNode);
+    listingIDDiv.className = 'listingID';
+    //Appending all Items
+    listingOuterDiv.appendChild(listingImage);
+    listingOuterDiv.appendChild(listingIDDiv);
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(listingOuterDiv);
+
+
+
+
+    //Reservation Code
+    var reservationCodeDiv = document.createElement('div');
+    var reservationCodeLink = document.createElement('a');
+    reservationCodeDiv.setAttribute('onclick',"window.open('https://nova.airbnb.tools/reservations/"+ reservation_code+"');")
+    var reservationCodeNode = document.createTextNode(reservation_code);
+    reservationCodeDiv.appendChild(reservationCodeNode);
+    reservationCodeDiv.className = "reservationCode";
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(reservationCodeDiv);
+
+
+
+//GUEST Div
+    //OuterDiv
+    var guestDivOuter = document.createElement('div');
+    guestDivOuter.className = "guestDivOuter";
+    //InnerDivName
+    var guestDivName = document.createElement('div')
+    var guestDivNameNode = document.createTextNode(nameGuest);
+    guestDivName.appendChild(guestDivNameNode);
+    guestDivName.className = 'guestDivName';
+    //InnerDivNova
+    guestDivNova = document.createElement('div');
+    guestDivNova.setAttribute('onclick',"window.open('https://nova.airbnb.tools/profiles/"+ guestID+"');")
+    guestDivNovaLinkText = document.createTextNode('Nova');
+    guestDivNova.appendChild(guestDivNovaLinkText);
+    guestDivNova.className = 'guestDivNova divNova';
+    //InnerDivPublic
+    guestDivPublic = document.createElement('div');
+    guestDivPublic.setAttribute('onclick',"window.open('https://admin.airbnb.com/users/show/"+ guestID+"');")
+    guestDivPublicLinkText = document.createTextNode('Public');
+    guestDivPublic.appendChild(guestDivPublicLinkText);
+    guestDivPublic.className = 'guestDivPublic divPublic';
+    //Creating in Document
+    guestDivOuter.appendChild(guestDivName);
+    guestDivOuter.appendChild(guestDivNova);
+    guestDivOuter.appendChild(guestDivPublic);
+
+
+//HOST Div
+    //OuterDiv
+    var hostDivOuter = document.createElement('div');
+    hostDivOuter.className = "hostDivOuter";
+    //InnerDivName
+    var hostDivName = document.createElement('div')
+    var hostDivNameNode = document.createTextNode(nameHost);
+    hostDivName.appendChild(hostDivNameNode);
+    hostDivName.className = 'hostDivName';
+    //InnerDivNova
+    hostDivNova = document.createElement('div');
+    guestDivPublic.setAttribute('onclick',"window.open('https://nova.airbnb.tools/profiles/"+ hostID+"');")
+    hostDivNovaLinkText = document.createTextNode('Nova');
+    hostDivNova.appendChild(hostDivNovaLinkText);
+    hostDivNova.className = 'hostDivNova divNova';
+    //InnerDivPublic
+    hostDivPublic = document.createElement('div');
+    hostDivPublic.setAttribute('onclick',"window.open('https://admin.airbnb.com/users/show/"+ hostID+"');")
+    hostDivPublicLinkText = document.createTextNode('Public');
+    hostDivPublic.appendChild(hostDivPublicLinkText);
+    hostDivPublic.className = 'hostDivPublic divPublic';
+    //Creating in Document
+    hostDivOuter.appendChild(hostDivName);
+    hostDivOuter.appendChild(hostDivNova);
+    hostDivOuter.appendChild(hostDivPublic);
+
+
+// HOST AND GUEST IN DIV
+    var usersDiv = document.createElement('div')
+    usersDiv.className = 'usersDiv';
+    usersDiv.appendChild(guestDivOuter);
+    usersDiv.appendChild(hostDivOuter);
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(usersDiv);
+
+
+// Timeframe Outer Div
+    var timeframeOuterDiv = document.createElement('div');
+    timeframeOuterDiv.className = 'timeframeOuterDiv';
+
+
+// Created at
+    //outer
+    var createdAtDiv = document.createElement('div');
+    createdAtDiv.className = 'createdAtDiv itemTimeDiv';
+    //type
+    createdAtDivType = document.createElement('div');
+    createdAtDivTypeNode = document.createTextNode('Created at');
+    createdAtDivType.appendChild(createdAtDivTypeNode);
+    createdAtDivType.className = 'timeframeType'
+    //Line
+    var createdAtLine = document.createElement('div');
+    createdAtLine.className = 'timeframeLine';
+    //data
+    var createdAtData = document.createElement('div');
+    createdAtData.className = 'timeframeData';
+    createdAtDataNode = document.createTextNode(created_at);
+    createdAtData.appendChild(createdAtDataNode);
+    //appending Data
+    createdAtDiv.appendChild(createdAtDivType);
+    createdAtDiv.appendChild(createdAtLine);
+    createdAtDiv.appendChild(createdAtData);
+
+
+// Pending Began at
+    //outer
+    var pendingBeganAtDiv = document.createElement('div');
+    pendingBeganAtDiv.className = 'pendingBeganAtDiv itemTimeDiv';
+    //type
+    pendingBeganAtDivType = document.createElement('div');
+    pendingBeganAtDivTypeNode = document.createTextNode('Pending Began at');
+    pendingBeganAtDivType.appendChild(pendingBeganAtDivTypeNode);
+    pendingBeganAtDivType.className = 'timeframeType'
+    //Line
+    var pendingBeganAtLine = document.createElement('div');
+    pendingBeganAtLine.className = 'timeframeLine';
+    //data
+    var pendingBeganAtData = document.createElement('div');
+    pendingBeganAtData.className = 'timeframeData';
+    pendingBeganAtDataNode = document.createTextNode(pending_began_at);
+    pendingBeganAtData.appendChild(pendingBeganAtDataNode);
+    //appending Data
+    pendingBeganAtDiv.appendChild(pendingBeganAtDivType);
+    pendingBeganAtDiv.appendChild(pendingBeganAtLine);
+    pendingBeganAtDiv.appendChild(pendingBeganAtData);
+
+
+// Pending Expires at
+    //outer
+    var pendingExpiresAtDiv = document.createElement('div');
+    pendingExpiresAtDiv.className = 'pendingExpiresAtDiv itemTimeDiv';
+    //type
+    pendingExpiresAtDivType = document.createElement('div');
+    pendingExpiresAtDivTypeNode = document.createTextNode('Pneding Expires at');
+    pendingExpiresAtDivType.appendChild(pendingExpiresAtDivTypeNode);
+    pendingExpiresAtDivType.className = 'timeframeType'
+    //Line
+    var pendingExpiresAtLine = document.createElement('div');
+    pendingExpiresAtLine.className = 'timeframeLine';
+    //data
+    var pendingExpiresAtData = document.createElement('div');
+    pendingExpiresAtData.className = 'timeframeData';
+    pendingExpiresAtDataNode = document.createTextNode(pending_expires_at);
+    pendingExpiresAtData.appendChild(pendingExpiresAtDataNode);
+    //appending Data
+    pendingExpiresAtDiv.appendChild(pendingExpiresAtDivType);
+    pendingExpiresAtDiv.appendChild(pendingExpiresAtLine);
+    pendingExpiresAtDiv.appendChild(pendingExpiresAtData);
+
+
+// Host responded at
+    //outer
+    var hostRespondedAtDiv = document.createElement('div');
+    hostRespondedAtDiv.className = 'hostRespondedAtDiv itemTimeDiv';
+    //type
+    hostRespondedAtDivType = document.createElement('div');
+    hostRespondedAtDivTypeNode = document.createTextNode('Host Responded at');
+    hostRespondedAtDivType.appendChild(hostRespondedAtDivTypeNode);
+    hostRespondedAtDivType.className = 'timeframeType'
+    //Line
+    var hostRespondedAtLine = document.createElement('div');
+    hostRespondedAtLine.className = 'timeframeLine';
+    //data
+    var hostRespondedAtData = document.createElement('div');
+    hostRespondedAtData.className = 'timeframeData';
+    hostRespondedAtDataNode = document.createTextNode(host_Responded_at);
+    hostRespondedAtData.appendChild(hostRespondedAtDataNode);
+    //appending Data
+    hostRespondedAtDiv.appendChild(hostRespondedAtDivType);
+    hostRespondedAtDiv.appendChild(hostRespondedAtLine);
+    hostRespondedAtDiv.appendChild(hostRespondedAtData);
+
+
+// Cancelled at
+    //outer
+    var cancelledAtDiv = document.createElement('div');
+    cancelledAtDiv.className = 'cancelledAtDiv itemTimeDiv';
+    //type
+    cancelledAtDivType = document.createElement('div');
+    cancelledAtDivTypeNode = document.createTextNode('Cancelled at');
+    cancelledAtDivType.appendChild(cancelledAtDivTypeNode);
+    cancelledAtDivType.className = 'timeframeType'
+    //Line
+    var cancelledAtLine = document.createElement('div');
+    cancelledAtLine.className = 'timeframeLine';
+    //data
+    var cancelledAtData = document.createElement('div');
+    cancelledAtData.className = 'timeframeData';
+    cancelledAtDataNode = document.createTextNode(canceled_at);
+    cancelledAtData.appendChild(cancelledAtDataNode);
+    //appending Data
+    cancelledAtDiv.appendChild(cancelledAtDivType);
+    cancelledAtDiv.appendChild(cancelledAtLine);
+    cancelledAtDiv.appendChild(cancelledAtData);
+
+
+// Reso Details
+    var reservationDetailsDiv = document.createElement('div');
+    reservationDetailsDiv.className = 'reservationDetailsDiv';
+
+    //Instant Book
+    var instantBookRequirementDiv = document.createElement('div');
+    var instantBookRequirementNode = document.createTextNode(instantBookRequirement);
+    instantBookRequirementDiv.appendChild(instantBookRequirementNode);
+    instantBookRequirementDiv.className = 'instantBookRequirement'
+
+    //Guests
+    var numberOfGuestsDiv = document.createElement('div');
+    if(numberOfGuests == 1){
+    var numberOfGuestsNode = document.createTextNode(numberOfGuests + ' guest');   
+    }
+    else{  
+    var numberOfGuestsNode = document.createTextNode(numberOfGuests + ' guests');
+    }
+    numberOfGuestsDiv.appendChild(numberOfGuestsNode);
+    numberOfGuestsDiv.className = 'numberOfGuests';
+    
+    //Nights
+    var numberOfNightsDiv = document.createElement('div');
+    if(numberOfNights == 1){
+    var numberOfNightsNode = document.createTextNode(numberOfNights + ' night');
+}
+else{
+    var numberOfNightsNode = document.createTextNode(numberOfNights + ' nights');
+    }
+    numberOfNightsDiv.appendChild(numberOfNightsNode);
+    numberOfNightsDiv.className = 'numberOfNights';
+    
+    //Cancellation Policy
+    var cancellationPolicy = document.createElement('div');
+    var cancellationPolicyNode = document.createTextNode(cancel_policy + " cancellation policy");
+    cancellationPolicy.appendChild(cancellationPolicyNode);
+    cancellationPolicy.className = 'cancellationPolicy';
+    
+    //Check-in
+    var checkinDiv = document.createElement('div');
+    checkinDiv.className = 'checkinDiv';
+    var checkinType = document.createElement('div');
+    var checkinTypeNode = document.createTextNode('Check in')
+    checkinType.appendChild(checkinTypeNode)
+    checkinType.className = 'checkType'
+    var checkinData = document.createElement('div');
+    var checkinDataNode = document.createTextNode(checkinTime)
+    checkinData.appendChild(checkinDataNode);
+    checkinData.className = 'checkData';
+    checkinDiv.appendChild(checkinType);
+    checkinDiv.appendChild(checkinData);
+   
+    //Check-out
+    var checkoutDiv = document.createElement('div');
+    checkoutDiv.className = 'checkoutDiv';
+    var checkoutType = document.createElement('div');
+    var checkoutTypeNode = document.createTextNode('Check out')
+    checkoutType.appendChild(checkoutTypeNode)
+    checkoutType.className = 'checkType'
+    var checkoutData = document.createElement('div');
+    var checkoutDataNode = document.createTextNode(checkoutTime)
+    checkoutData.appendChild(checkoutDataNode);
+    checkoutData.className = 'checkData';
+    checkoutDiv.appendChild(checkoutType);
+    checkoutDiv.appendChild(checkoutData);
+    
+    //Reviews Blocked
+    var reviewsBlockedDiv = document.createElement('div');
+    var reviewsBlockedNode = document.createTextNode(reviewsBlocked)
+    reviewsBlockedDiv.appendChild(reviewsBlockedNode);
+    reviewsBlockedDiv.className = 'reviewsBlocked';
+
+    // Appending Reservation details
+    reservationDetailsDiv.appendChild(instantBookRequirementDiv);
+    reservationDetailsDiv.appendChild(numberOfGuestsDiv);
+    reservationDetailsDiv.appendChild(numberOfNightsDiv);
+    reservationDetailsDiv.appendChild(cancellationPolicy);
+    reservationDetailsDiv.appendChild(checkinDiv);
+    reservationDetailsDiv.appendChild(checkoutDiv);
+    reservationDetailsDiv.appendChild(reviewsBlockedDiv);
+
+
+
+
+// Price FX Rate Data
+    var fxRateDetails = document.createElement('div');
+    fxRateDetails.className = 'FxRateDetails';
+
+    //USD
+    var usdFxRateDiv = document.createElement('div');
+    var usdFxRateNode = document.createTextNode('1 USD');
+    usdFxRateDiv.appendChild(usdFxRateNode);
+    usdFxRateDiv.className = 'usdFxRate'
+  // Arrows
+  var arrowLeftImage = document.createElement('img');
+  arrowLeftImage.className = 'arrowLeftImage';
+  arrowLeftImage.src = 'images/ArrowLeft1.png';
+  var arrowRightImage = document.createElement('img');
+  arrowRightImage.className = 'arrowRightImage';
+  arrowRightImage.src = 'images/ArrowRight.png';
+    //Guest
+    var guestFxRateDiv = document.createElement('div');
+    guestFxRateDiv.className = 'guestFxRateDiv'
+    var guestFxRateTypeDiv = document.createElement('div');
+    var guestFxRateTypeNode = document.createTextNode('Guest');
+    guestFxRateTypeDiv.appendChild(guestFxRateTypeNode);
+    var guestFxRateDataDiv = document.createElement('div');
+    var guestFxRateDataNode = document.createTextNode(guestCurrencyRate + " " + guestCurrency);
+    guestFxRateDataDiv.appendChild(guestFxRateDataNode);
+    guestFxRateDiv.appendChild(guestFxRateTypeDiv);
+    guestFxRateDiv.appendChild(guestFxRateDataDiv);
+    //Host
+    var hostFxRateDiv = document.createElement('div');
+    hostFxRateDiv.className = 'hostFxRateDiv'
+    var hostFxRateTypeDiv = document.createElement('div');
+    var hostFxRateTypeNode = document.createTextNode('Host');
+    hostFxRateTypeDiv.appendChild(hostFxRateTypeNode);
+    var hostFxRateDataDiv = document.createElement('div');
+    var hostFxRateDataNode = document.createTextNode(hostCurrencyRate + " " + hostCurrency);
+    hostFxRateDataDiv.appendChild(hostFxRateDataNode);
+    hostFxRateDiv.appendChild(hostFxRateTypeDiv);
+    hostFxRateDiv.appendChild(hostFxRateDataDiv);
+    //Adding Elements to FX Rate Data
+    fxRateDetails.appendChild(usdFxRateDiv);
+    fxRateDetails.appendChild(arrowLeftImage);
+    fxRateDetails.appendChild(arrowRightImage);
+    fxRateDetails.appendChild(guestFxRateDiv);
+    fxRateDetails.appendChild(hostFxRateDiv);
+
+
+// Adding Booking Details in Document
+    timeframeOuterDiv.appendChild(createdAtDiv)
+    timeframeOuterDiv.appendChild(pendingBeganAtDiv)
+    timeframeOuterDiv.appendChild(pendingExpiresAtDiv)
+    timeframeOuterDiv.appendChild(hostRespondedAtDiv)
+    timeframeOuterDiv.appendChild(cancelledAtDiv)
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(timeframeOuterDiv);
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(reservationDetailsDiv);
+    document.getElementById(alterationNumber + 'BookingDetails').appendChild(fxRateDetails);
+
+
+};
 
 
 
@@ -1774,7 +2199,6 @@ else {
     createAlterationButton(alterationNumber,alterationTotal)
 }
     createDropdownMenu(alterationNumber);
-    createBookingDetailsInner(alterationNumber);
 
 
 
@@ -1789,253 +2213,136 @@ else {
 
 
 
+/* Reservation Details Pulling Data */
+
+var reservation_code = snapshotText.substring(snapshotText.indexOf("confirmation_code") + 19,snapshotText.indexOf("coupon_id")-2);
+
+var nameFirstGuest = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+nameFirstGuest = nameFirstGuest.substring(nameFirstGuest.indexOf('available_hosting_count')+10)
+nameFirstGuest = nameFirstGuest.substring(nameFirstGuest.indexOf('first_name')-5);
+nameFirstGuest = nameFirstGuest.substring(nameFirstGuest.indexOf('first_name')+12,nameFirstGuest.indexOf('hosting_count')-2);
+
+var nameLastGuest = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+nameLastGuest = nameLastGuest.substring(nameLastGuest.indexOf('available_hosting_count')+10)
+nameLastGuest = nameLastGuest.substring(nameLastGuest.indexOf('last_name')-4);
+nameLastGuest = nameLastGuest.substring(nameLastGuest.indexOf('last_name')+11, nameLastGuest.indexOf('market')-2);
+
+nameGuest = nameFirstGuest + " " + nameLastGuest;
 
 
-/* Reservation Code */
-var reservationCodeData = document.getElementById(alterationNumber + "reservation_code")
-while (reservationCodeData.hasChildNodes()) {
-    reservationCodeData.removeChild(reservationCodeData.lastChild);
-}
-if (snapshotText.includes("confirmation_code")&&snapshotText.includes("coupon_id")) {
-  var reservation_code = snapshotText.substring(snapshotText.indexOf("confirmation_code") + 19,snapshotText.indexOf("coupon_id")-2);
-  reservationCode= reservation_code
+var nameFirstHost = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+nameFirstHost = nameFirstHost.substring(nameFirstHost.indexOf('first_name')-5);
+nameFirstHost = nameFirstHost.substring(nameFirstHost.indexOf('first_name')+12,nameFirstHost.indexOf('hosting_count')-2);
 
-  var linkCodeInsert = document.createElement('a');
-  var linkCodeNode = document.createTextNode(reservation_code);
-  linkCodeInsert.appendChild(linkCodeNode);
-  linkCodeInsert.title = reservation_code;
-  linkCodeInsert.setAttribute("target","_blank")
-  linkCodeInsert.href = "https://nova.airbnb.tools/reservations/" + reservation_code;
+var nameLastHost = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+nameLastHost = nameLastHost.substring(nameLastHost.indexOf('last_name')-4);
+nameLastHost = nameLastHost.substring(nameLastHost.indexOf('last_name')+11, nameLastHost.indexOf('market')-2);
+
+nameHost = nameFirstHost + " " + nameLastHost;
+
+
+var listingID = snapshotText.substring(snapshotText.indexOf('hypothetical_rank'),snapshotText.indexOf('instant_book_lead_time'));
+listingID = listingID.substring(listingID.indexOf('id')+4,listingID.indexOf('instant_book')-2);
+
+
+
+
+var guestID = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+guestID = guestID.substring(guestID.indexOf('available_hosting_count')+10)
+guestID = guestID.substring(guestID.indexOf('facebook_id')+20);
+guestID = guestID.substring(guestID.indexOf('id')+4,guestID.indexOf('initial_ip')-2);
+
+var hostID = snapshotText.substring(snapshotText.indexOf('available_hosting_count')+15);
+hostID = hostID.substring(hostID.indexOf('facebook_id')+20);
+hostID = hostID.substring(hostID.indexOf('id')+4,hostID.indexOf('initial_ip')-2);
+
+
+var created_at = insertedtoptext.substring(insertedtoptext.indexOf("created_at") + 12,insertedtoptext.indexOf("currency_fee")-12) + " at " + insertedtoptext.substring(insertedtoptext.indexOf("created_at") + 23,insertedtoptext.indexOf("currency_fee")-3);
+
+var pending_began_at = snapshotText.substring(snapshotText.indexOf("pending_began_at") + 18,snapshotText.indexOf("pending_expires_at")-12) + " at " + snapshotText.substring(snapshotText.indexOf("pending_began_at") + 29,snapshotText.indexOf("pending_expires_at")-3);
+
+var pending_expires_at = snapshotText.substring(snapshotText.indexOf("pending_expires_at") + 20,snapshotText.indexOf("price_version_count")-12) + " at " + snapshotText.substring(snapshotText.indexOf("pending_expires_at") + 31,snapshotText.indexOf("price_version_count")-3);
+
+if (snapshotText.substring(snapshotText.indexOf("host_responded_at") + 18, snapshotText.indexOf("host_responded_at") + 22) == "NULL") {
+    var host_Responded_at = "N/A";
 }
 else {
-  reservation_code="";
+    var host_Responded_at = snapshotText.substring(snapshotText.indexOf("host_responded_at") + 18,snapshotText.indexOf("host_vat_country")-11) + " at " + snapshotText.substring(snapshotText.indexOf("host_responded_at") + 29,snapshotText.indexOf("host_vat_country")-2);
 }
-document.getElementById(alterationNumber + "reservation_code").appendChild(linkCodeInsert);
 
 
-
-/* Created at */
-if (insertedtoptext.includes("created_at")&&insertedtoptext.includes("currency_fee")) {
-  var created_at = insertedtoptext.substring(insertedtoptext.indexOf("created_at") + 12,insertedtoptext.indexOf("currency_fee")-12) + " at " + insertedtoptext.substring(insertedtoptext.indexOf("created_at") + 23,insertedtoptext.indexOf("currency_fee")-3);
+if (snapshotText.substring(snapshotText.indexOf("canceled_at") + 12,snapshotText.indexOf("canceled_at")+16)=="NULL") {
+    var canceled_at = "N/A";
 }
 else {
-  created_at="";
-}
-document.getElementById(alterationNumber + "created_at").innerText = created_at;
-
-
-/* Pending Began at */
-if (snapshotText.includes("pending_began_at")&&snapshotText.includes("pending_expires_at")) {
-  var pending_began_at = snapshotText.substring(snapshotText.indexOf("pending_began_at") + 18,snapshotText.indexOf("pending_expires_at")-12) + " at " + snapshotText.substring(snapshotText.indexOf("pending_began_at") + 29,snapshotText.indexOf("pending_expires_at")-3);
-}
-else {
-  pending_began_at="";
-}
-document.getElementById(alterationNumber + "pending_began_at").innerText = pending_began_at;
-
-
-/* Pending Expired at */
-if (snapshotText.includes("pending_expires_at")&&snapshotText.includes("price_version_count")) {
-  var pending_expires_at = snapshotText.substring(snapshotText.indexOf("pending_expires_at") + 20,snapshotText.indexOf("price_version_count")-12) + " at " + snapshotText.substring(snapshotText.indexOf("pending_expires_at") + 31,snapshotText.indexOf("price_version_count")-3);
-}
-else {
-  pending_expires_at="";
-}
-document.getElementById(alterationNumber + "pending_expires_at").innerText = pending_expires_at;
-
-
-/* Host responded at */
-if (snapshotText.includes("host_responded_at")&&snapshotText.includes("host_vat_country")) {
-      if (snapshotText.substring(snapshotText.indexOf("host_responded_at") + 18, snapshotText.indexOf("host_responded_at") + 22) == "NULL") {
-      var host_Responded_at = "N/A";
-      }
-        else {
-          var host_Responded_at = snapshotText.substring(snapshotText.indexOf("host_responded_at") + 18,snapshotText.indexOf("host_vat_country")-11) + " at " + snapshotText.substring(snapshotText.indexOf("host_responded_at") + 29,snapshotText.indexOf("host_vat_country")-2);
-        }
-    }
-    else {
-      host_Responded_at="";
-    }
-document.getElementById(alterationNumber + "host_Responded_at").innerText = host_Responded_at;
-
-
-/* Cancelled at */
-if (snapshotText.includes("canceled_at")&&snapshotText.includes("cancellation_guest_fee")) {
-    if (snapshotText.substring(snapshotText.indexOf("canceled_at") + 12,snapshotText.indexOf("canceled_at")+16)=="NULL") {
-      var canceled_at = "N/A";
-    }
-      else {
     var canceled_at = snapshotText.substring(snapshotText.indexOf("canceled_at") + 12,snapshotText.indexOf("cancellation_guest_fee")-11) + " at " + snapshotText.substring(snapshotText.indexOf("canceled_at") + 23,snapshotText.indexOf("cancellation_guest_fee")-2);
-    }
-  }
-  else {
-    canceled_at="";
-  }
-document.getElementById(alterationNumber + "canceled_at").innerText = canceled_at;
+}
 
 
-/* Cancellation Policy */
-var cancel_policy;
+var instantBookRequirement = snapshotText.substring(snapshotText.indexOf('instant_booking_allowed')-2);
+instantBookRequirement = instantBookRequirement.substring(instantBookRequirement.indexOf('instant_booking_allowed')+26,instantBookRequirement.indexOf('is_generic')-2);
+instantBookRequirement = convertInstantBookRequirement(instantBookRequirement);
 
-if (snapshotText.includes("cancel_policy")) {
 
-        var cancel_policy_raw = snapshotText.substring(snapshotText.indexOf("cancel_policy") + 15,snapshotText.indexOf("canceled_at")-2);
-        
-        if (cancel_policy_raw == "3") {
-          cancel_policy = "Flexible";
-        }
-        else if (cancel_policy_raw == "0") {
-        cancel_policy = "Deprecated Full Refund Before Arrival";
-        }
-        else if (cancel_policy_raw == "1") {
-        cancel_policy = "Full Refund between 5-75 day cancellation";
-        }
-        else if (cancel_policy_raw == "2") {
-        cancel_policy = "Full First 5 days None,Last 5 -75 days otherwise, ";
-        }
-        else if (cancel_policy_raw == "4") {
-        cancel_policy = "Moderate";
-        }
-        else if (cancel_policy_raw == "5") {
-        cancel_policy = "Strict";
-        }
-        else if (cancel_policy_raw == "44") {
-        cancel_policy = "Strict with Grace Period";
-        }
-        else if (cancel_policy_raw == "6") {
-        cancel_policy = "Super Strict 30";
-        }
-        else if (cancel_policy_raw == "7") {
-        cancel_policy = "No Refund";
-        }
-        else if (cancel_policy_raw == "8") {
-        cancel_policy = "Long Term";
-        }
-        else if (cancel_policy_raw == "9") {
-        cancel_policy = "Super Strict 60";
-        }
-        else if (cancel_policy_raw == "10") {
-        cancel_policy = "New Flexible";
-        }
-        else if (cancel_policy_raw == "11") {
-        cancel_policy = "New Moderate";
-        }
-        else if (cancel_policy_raw == "12") {
-        cancel_policy = "New Strict";
-        }
-        else if (cancel_policy_raw == "13") {
-        cancel_policy = "New Super Strict 30";
-        }
-        else if (cancel_policy_raw == "14") {
-        cancel_policy = "New Super Strict 60";
-        }
-        else if (cancel_policy_raw == "15") {
-        cancel_policy = "New Long Term";
-        }
-        else if (cancel_policy_raw == "40") {
-        cancel_policy = "Beyond Moderate";
-        }
-        else if (cancel_policy_raw == "41") {
-        cancel_policy = "Beyond Super Strict 95";
-        }
-        else if (cancel_policy_raw == "42") {
-        cancel_policy = "Beyond Super Strict 125";
-        }
-        else if (cancel_policy_raw == "43") {
-        cancel_policy = "No Refund";
-        }
-        else if (cancel_policy_raw == "44") {
-        cancel_policy = "48hr Grace Period Strict with 14 day cut off";
-        }
-        else if (cancel_policy_raw == "45") {
-        cancel_policy = "48 hr Grace Period Strict with mobile";
-        }
-        else if (cancel_policy_raw == "46") {
-        cancel_policy = "48hr Grace Period Strict Full Refund on mobile";
-        }
-        else if (cancel_policy_raw == "51") {
-        cancel_policy = "Tiered Pricing Non Refundable";
-        }
-        else if (cancel_policy_raw == "16") {
-        cancel_policy = "(Test) Flexible Grace Period";
-        }
-        else if (cancel_policy_raw == "17") {
-        cancel_policy = "(Test)Moderate Grace Period";
-        }
-        else if (cancel_policy_raw == "18") {
-        cancel_policy = "Strict Grace Period";
-        }
-        else if (cancel_policy_raw == "19") {
-        cancel_policy = "(Test) Super Strict 30 Grace Period";
-        }
-        else if (cancel_policy_raw == "20") {
-        cancel_policy = "(Test) Super Strict 60 Grace Period";
-        }
-        else if (cancel_policy_raw == "21") {
-        cancel_policy = "(Test) Long Term Grace Period";
-        }
-        else if (cancel_policy_raw == "22") {
-        cancel_policy = "(Test) Flexible No Refunds";
-        }
-        else if (cancel_policy_raw == "23") {
-        cancel_policy = "(Test) Moderate No Refunds";
-        }
-        else if (cancel_policy_raw == "24") {
-        cancel_policy = "(Test) Strict No Refunds";
-        }
-        else if (cancel_policy_raw == "25") {
-        cancel_policy = "(Test) Super Strict 30 No Refunds";
-        }
-        else if (cancel_policy_raw == "26") {
-        cancel_policy = "(Test) SUperstrict 60 No Refunds";
-        }
-        else if (cancel_policy_raw == "27") {
-        cancel_policy = "(Test) Long Term No Refunds";
-        }
-        else if (cancel_policy_raw == "28") {
-        cancel_policy = "(Test) Flexible Full Refunds";
-        }
-        else if (cancel_policy_raw == "29") {
-        cancel_policy = "(Test) Moderate Full Refunds";
-        }
-        else if (cancel_policy_raw == "30") {
-        cancel_policy = "(Test) Strict Full Refunds";
-        }
-        else if (cancel_policy_raw == "31") {
-        cancel_policy = "(Test) Super Strict 30 Full Refunds";
-        }
-        else if (cancel_policy_raw == "32") {
-        cancel_policy = "(Test) Super Strict 60 Full Refunds";
-        }
-        else if (cancel_policy_raw == "33") {
-        cancel_policy = "(Test) Long Term Full Refunds";
-        }
-        else if (cancel_policy_raw == "34") {
-        cancel_policy = "(Test) New Flexible FUll Refunds";
-        }
-        else if (cancel_policy_raw == "35") {
-        cancel_policy = "(Test) New Moderate Full Refunds";
-        }
-        else if (cancel_policy_raw == "36") {
-        cancel_policy = "(Test) New Strict Full Refunds";
-        }
-        else if (cancel_policy_raw == "37") {
-        cancel_policy = "(Test) New Super Strict 30 Full Refunds";
-        }
-        else if (cancel_policy_raw == "38") {
-        cancel_policy = "(Test) New Super Strict 60 Full Refunds";
-        }
-        else if (cancel_policy_raw == "39") {
-        cancel_policy = "(Test)New Long Term Full Refunds";
-        }
-        else {
-            cancel_policy = cancel_policy_raw
-          }
-      }
-    else {
-    cancel_policy="";
- }
-	document.getElementById(alterationNumber + "cancel_policy").innerText = cancel_policy;
+var numberOfGuests = snapshotText.substring(snapshotText.indexOf('number_of_guests')-2);
+numberOfGuests = numberOfGuests.substring(numberOfGuests.indexOf('number_of_guests')+18,numberOfGuests.indexOf('original_payment2_id')-2);
+
+var numberOfNights = snapshotText.substring(snapshotText.indexOf('lock_version')+10);
+numberOfNights = numberOfNights.substring(numberOfNights.indexOf('nights')+8,numberOfNights.indexOf('number_of_guests')-2);
+
+var cancel_policy_raw = snapshotText.substring(snapshotText.indexOf("cancel_policy") + 15,snapshotText.indexOf("canceled_at")-2);
+cancel_policy = convertCancellationPolicy(cancel_policy_raw);
+
+var checkinTime = snapshotText.substring(snapshotText.indexOf('check_in_time')-2);
+checkinTime = checkinTime.substring(checkinTime.indexOf('check_in_time')+15,checkinTime.indexOf('check_out_time')-2);
+if(checkinTime == "0"){
+    checkinTime = "Flexible";
+}
+else{
+checkinTime = checkinTime + ":00";
+}
+
+var checkoutTime = snapshotText.substring(snapshotText.indexOf('check_out_time')-2);
+checkoutTime = checkoutTime.substring(checkoutTime.indexOf('check_out_time')+16,checkoutTime.indexOf('city')-2);
+if(checkoutTime == "0") {
+    checkoutTime = "Flexible";
+}
+else{
+checkoutTime = checkoutTime + ":00";
+}
+
+
+var reviewsBlocked = snapshotText.substring(snapshotText.indexOf('block_reviews')-2);
+reviewsBlocked = reviewsBlocked.substring(reviewsBlocked.indexOf('block_reviews')+15,reviewsBlocked.indexOf('cancel_policy')-2)
+if(reviewsBlocked == "false"){
+    reviewsBlocked = "The reviews are not blocked";
+}
+else{
+    reviewsBlocked = "The reviews are blocked";
+}
+
+
+
+var guestCurrencyRate = snapshotText.substring(snapshotText.indexOf('guest_currency_rate')-2);
+guestCurrencyRate = guestCurrencyRate.substring(guestCurrencyRate.indexOf('guest_currency_rate')+21,guestCurrencyRate.indexOf('guest_currency_spread')-2)
+
+var hostCurrencyRate = snapshotText.substring(snapshotText.indexOf('host_currency_rate')-2);
+hostCurrencyRate = hostCurrencyRate.substring(hostCurrencyRate.indexOf('host_currency_rate')+20, hostCurrencyRate.indexOf('host_fee')-2);
+
+
+var guestCurrency = snapshotText.substring(snapshotText.indexOf('guest_currency')-2);
+guestCurrency = guestCurrency.substring(guestCurrency.indexOf('guest_currency')+16,guestCurrency.indexOf('guest_currency_rate')-2)
+
+var hostCurrency = snapshotText.substring(snapshotText.indexOf('guest_currency')-2);
+hostCurrency = hostCurrency.substring(hostCurrency.indexOf('host_currency')+15,hostCurrency.indexOf('host_currency_rate')-2)
+
+
+
+
+createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency);
+
+
+
 
 
 /* Listing Details */
