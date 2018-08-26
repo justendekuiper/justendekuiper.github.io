@@ -1016,7 +1016,6 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
 
     //Reservation Code
     var reservationCodeDiv = document.createElement('div');
-    var reservationCodeLink = document.createElement('a');
     reservationCodeDiv.setAttribute('onclick',"window.open('https://nova.airbnb.tools/reservations/"+ reservation_code+"');")
     var reservationCodeNode = document.createTextNode(reservation_code);
     reservationCodeDiv.appendChild(reservationCodeNode);
@@ -1335,6 +1334,18 @@ else{
     fxRateDetails.appendChild(arrowRightImage);
     fxRateDetails.appendChild(guestFxRateDiv);
     fxRateDetails.appendChild(hostFxRateDiv);
+    // FX Link
+    var createdAt = created_at.substring(0,created_at.indexOf(' '));
+    createdAtYear = createdAt.substring(0,4);
+    createdAtMonth = createdAt.substring(5,7);
+    createdAtDay = createdAt.substring(8,10);
+    var fxRateLink = document.createElement('div')
+    fxRateLink.setAttribute('onclick',"window.open('https://admin.airbnb.com/admin/general/exchange_rates?date=" + createdAtMonth + '%2F' + createdAtDay + '%2F' + createdAtYear +"');")
+    fxRateLink.className = 'fxRateLink';
+    fxRateLinkNode = document.createTextNode('View the exchange rate by Airbnb on ' + createdAtYear +'-' + createdAtMonth +'-'+ createdAtDay);
+    fxRateLink.appendChild(fxRateLinkNode);
+    fxRateDetails.appendChild(fxRateLink);
+
 
 
 // Adding Booking Details in Document

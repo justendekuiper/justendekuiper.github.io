@@ -425,7 +425,7 @@ html, body{
     margin-left: 27vw;
      margin-bottom: 1vh;
     background-color: #edefed;
-    padding: 1vw 1vh 1vw 1vh;
+    padding: 0.5vh 0.5vw;
 	cursor: pointer;
      color: #118488;
      border-radius: 5px;
@@ -719,6 +719,24 @@ html, body{
 	margin-left: 35.3vw;
     z-index: 1;
 }
+
+.fxRateLink{
+	position: relative;
+    width: 25vw;
+    background: #edefed;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 19.5vw;
+    margin-top: 3vh;
+    padding: 0.5vh 0;
+    cursor: pointer;
+    color: #118488;
+}
+
+.fxRateLink:hover {
+	background-color: #dbdedb;
+}
+
 .checkinDiv{
 	position: relative;
     width: 25vw;
