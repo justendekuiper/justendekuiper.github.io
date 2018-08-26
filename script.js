@@ -151,6 +151,7 @@ ClickPricingBarHeaderListing(e,listingSpecify);
    var specifyBarListing = document.getElementById(e + 'listingPriceDiv');
     var specifyBarUsd = document.getElementById(e + 'usdPriceDiv');
     var specifyBarGuest = document.getElementById(e + 'guestPriceDiv');
+    var specifyBarRaw = document.getElementById(e + 'rawSnapshotDiv');
  
 
  
@@ -175,6 +176,13 @@ ClickPricingBarHeaderListing(e,listingSpecify);
     }
   else {
         specifyBarGuest.style.display = "none";
+}
+ 
+    if (specifyBarRaw.style.display === "none") {
+        specifyBarRaw.style.display = "block";
+    }
+  else {
+        specifyBarRaw.style.display = "none";
 }
 
 }
@@ -432,6 +440,70 @@ document.getElementById("borderDivOutputField").style.display = "block";
      document.getElementById('borderDivRightField').style.display= 'block';
      document.getElementById(e+ 'definitionDiv').style.display = 'block';
  }
+
+
+
+//Onclick night bar Expand Raw Snapshots
+    function ClickPricingBarHeaderRaw(e,obj){
+   var outputArea = document.getElementById('DivOutputField');
+ 
+ if (outputArea.hasChildNodes()) {
+     // Get all children of node
+     var children = outputArea.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }}
+
+
+   var outputAreaPrice = document.getElementById(e +'OverviewNights');
+ 
+ if (outputAreaPrice.hasChildNodes()) {
+     // Get all children of node
+     var children = outputAreaPrice.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+      }
+     }
+}
+
+
+adjustBorderPriceSpecify();
+obj.classList.add('priceSpecifyDivSelected');
+document.getElementById("borderDivOutputField").style.display = "block";
+
+    var object = document.getElementById(e +'DivPricingDetails');
+
+    if (object.style.display === "none") {
+        object.style.display = "block";
+    }
+
+
+    var object = document.getElementById(e + 'rawSnapshotContainer')
+     if (object.style.display ==="none") {
+        object.style.display = "block";
+     }
+ 
+var divRightField = document.getElementById('DivRightField')
+ if (divRightField.hasChildNodes()) {
+     // Get all children of node
+     var children = divRightField.childNodes;               
+
+     // Loop through the children
+     for(var c=0; c < children.length; c++) {
+      if(children[c].style) {
+       children[c].style.display = 'none';
+     } } }
+     document.getElementById('borderDivRightField').style.display= 'block';
+     document.getElementById(e+ 'definitionDiv').style.display = 'block';
+
+}
 
 
 /* DEPRICATED 
@@ -3046,6 +3118,45 @@ var guestCurrencySymbol = changeCurrencyToSymbol(guestCurrency);
     document.getElementById(alterationNumber + 'expandImgGuest').ondragstart = function() { return false; };
 
 
+// Creating Raw Snapshot Specify Header
+    var rawSnapshotDiv = document.createElement("div");
+    var rawSnapshotContent = document.createElement("div")
+
+    var rawSnapshotTextDiv = document.createElement('div');
+    rawSnapshotTextDiv.className = "expandSpecifyTypePrice expandRawSnapshot";
+    var rawSnapshotTextNode = document.createTextNode("Raw Snapshots")
+    rawSnapshotTextDiv.appendChild(rawSnapshotTextNode);
+
+
+    rawSnapshotDiv.appendChild(rawSnapshotTextDiv);
+
+
+    rawSnapshotDiv.style.display = "none";
+    rawSnapshotDiv.id = alterationNumber + "rawSnapshotDiv";
+    rawSnapshotDiv.className = "rawSnapshotDiv priceSpecifyDiv";
+    rawSnapshotContent.id = alterationNumber + "rawSnapshotContent"
+    rawSnapshotContent.className =  "rawSnapshotContent"
+    rawSnapshotDiv.setAttribute("onclick","ClickPricingBarHeaderRaw("+alterationNumber+",this);");
+
+    var rawSnapshotContainer = document.createElement('div');
+    rawSnapshotContainer.className = "rawSnapshotContainer"
+    rawSnapshotContainer.id = alterationNumber + "rawSnapshotContainer"
+    rawSnapshotContainer.style.display = "none";
+
+    document.getElementById(alterationNumber + "guestPriceDiv").after(rawSnapshotDiv);
+
+
+    document.getElementById(alterationNumber + "OverviewNights").appendChild(rawSnapshotContainer)
+
+
+    document.getElementById(alterationNumber + "rawSnapshotContainer").appendChild(rawSnapshotContent);
+
+
+
+
+
+
+
 
     /*Nights Special Offer Base Price */
 
@@ -5141,6 +5252,61 @@ while (numberNight >= counter) {
 
         }
 
+
+
+
+
+// Raw Snapshots Display
+    
+    var insertedPricingText = snapshotText.substring(snapshotText.indexOf("pricing_snapshot_data") ,snapshotText.indexOf("admin_points")+15); 
+
+if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
+    
+    //Pricing_History can be Empty, checking if not. If so, take data from line_items
+    var checkPricing_History = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history')+25,insertedPricingText.indexOf("admin_points")-6)
+
+    if(checkPricing_History.length >1){
+        var SnapshotPriceText = insertedPricingText.substring(insertedPricingText.indexOf('pricing_history'), insertedPricingText.indexOf('admin_points'));
+
+    SnapshotPriceText = SnapshotPriceText.replace(/{"type"=>"/g, '\n');
+    SnapshotPriceText = SnapshotPriceText.replace(/_/g, ' ');
+    SnapshotPriceText = SnapshotPriceText.replace(/"/g, '');
+    SnapshotPriceText = SnapshotPriceText.replace(/,/g, ' ');
+
+
+    }
+    else { // If Empty
+        var SnapshotPriceText = insertedPricingText.substring(insertedPricingText.indexOf('line_items'), insertedPricingText.indexOf('guest_fee_reservation_stamp'));
+    SnapshotPriceText = SnapshotPriceText.replace(/\[{"type"=>"/g, ' ');
+    SnapshotPriceText = SnapshotPriceText.replace(/{"type"=>"/g, '\n');
+    SnapshotPriceText = SnapshotPriceText.replace(/"/g, '');
+    SnapshotPriceText = SnapshotPriceText.replace(/,/g, ' ');
+    SnapshotPriceText = SnapshotPriceText.replace(/_/g, ' ');
+
+    }
+}
+/* Snapshot Type 1 */
+  else {
+    var SnapshotPriceText = insertedPricingText;
+    SnapshotPriceText = SnapshotPriceText.replace(/payment_pricing_item_meta":{"type":"/g, '\n');
+    SnapshotPriceText = SnapshotPriceText.replace(/_/g, ' ');
+    SnapshotPriceText = SnapshotPriceText.replace(/"/g, '');
+    SnapshotPriceText = SnapshotPriceText.replace(/,/g, ' ');
+
+} 
+
+
+    var snapshotRaw = document.createElement('div')
+    snapshotRaw.className= 'snapshotRaw';
+    snapshotRaw.id = alterationNumber + 'snapshotRaw';
+    var snapshotRawNode = document.createTextNode(SnapshotPriceText);
+    snapshotRaw.appendChild(snapshotRawNode);
+    document.getElementById(alterationNumber + 'rawSnapshotContent').appendChild(snapshotRaw);
+
+$('#'+alterationNumber+'snapshotRaw').html($('#'+alterationNumber+'snapshotRaw').html().replace(/\n\\*/g,"</p><p>"));
+//document.getElementById(alterationNumber + 'snapshotRaw').replace(/\n\\*/g,"</p><p>");
+
+//(document.getElementById(alterationNumber+'snapshotRaw').html((document.getElementById(alterationNumber+'snapshotRaw')).html().replace(/<br>\\*/g,"</p><p>")));
 
 
 alterationNumber++;

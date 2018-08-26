@@ -387,21 +387,27 @@ html, body{
 	position: relative;
 	padding-top: 10px;
 	margin: 0px 0px 0px 0px;
-	font-size: 1.3vw;
+	font-size: 1.1vw;
 }
 
 
 .listingOuterDiv {
 	position: absolute;
     margin-left: 84%;
-    width: 15%;
+    width: 5vw;
     cursor: pointer;
+    border-radius: 5px;
 }
 
+.listingOuterDiv:hover {
+    background-color: #edefeda3;
+}
+
+
 .listingImage {
-	width: 3vw;
+    width: 3vw;
     position: relative;
-    margin-left: 3.5vw;
+    margin-left: 1vw;
 }
 
 .listingID{
@@ -827,11 +833,9 @@ html, body{
 
 
 
-.guestPriceDiv {
+.rawSnapshotDiv {
 	margin-bottom: 1.3vh !important;
 }
-
-
 
 .priceSpecifyDiv {
 	position: relative;
@@ -865,6 +869,10 @@ html, body{
 	position: relative;
 	font-size: 1.1vw;
 	width: 60%;
+}
+
+.expandRawSnapshot{
+	width: 100% !important;
 }
 
 .expandSpecifyCurrencyPrice {
@@ -1331,6 +1339,11 @@ display: inline-block;
 }
 
 
+
+.snapshotRaw {
+	font-size: 0.9vw;
+	padding: 4vh 1vw;
+}
 
 
 /* Lising Details */
