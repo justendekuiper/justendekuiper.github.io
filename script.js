@@ -1028,6 +1028,11 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     //OuterDiv
     var guestDivOuter = document.createElement('div');
     guestDivOuter.className = "guestDivOuter";
+    // Guest 
+    var guestDivIndicate = document.createElement('div');
+    var guestDivIndicateNode = document.createTextNode('Guest')
+    guestDivIndicate.appendChild(guestDivIndicateNode);
+    guestDivIndicate.className = 'guestDivIndicate';
     //InnerDivName
     var guestDivName = document.createElement('div')
     var guestDivNameNode = document.createTextNode(nameGuest);
@@ -1046,6 +1051,7 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     guestDivPublic.appendChild(guestDivPublicLinkText);
     guestDivPublic.className = 'guestDivPublic divPublic';
     //Creating in Document
+    guestDivOuter.appendChild(guestDivIndicate);
     guestDivOuter.appendChild(guestDivName);
     guestDivOuter.appendChild(guestDivNova);
     guestDivOuter.appendChild(guestDivPublic);
@@ -1055,6 +1061,11 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     //OuterDiv
     var hostDivOuter = document.createElement('div');
     hostDivOuter.className = "hostDivOuter";
+    // Host 
+    var hostDivIndicate = document.createElement('div');
+    var hostDivIndicateNode = document.createTextNode('Host')
+    hostDivIndicate.appendChild(hostDivIndicateNode);
+    hostDivIndicate.className = 'hostDivIndicate';
     //InnerDivName
     var hostDivName = document.createElement('div')
     var hostDivNameNode = document.createTextNode(nameHost);
@@ -1073,6 +1084,7 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     hostDivPublic.appendChild(hostDivPublicLinkText);
     hostDivPublic.className = 'hostDivPublic divPublic';
     //Creating in Document
+    hostDivOuter.appendChild(hostDivIndicate);
     hostDivOuter.appendChild(hostDivName);
     hostDivOuter.appendChild(hostDivNova);
     hostDivOuter.appendChild(hostDivPublic);
@@ -2378,8 +2390,11 @@ cancel_policy = convertCancellationPolicy(cancel_policy_raw);
 
 var checkinTime = snapshotText.substring(snapshotText.indexOf('check_in_time')-2);
 checkinTime = checkinTime.substring(checkinTime.indexOf('check_in_time')+15,checkinTime.indexOf('check_out_time')-2);
-if(checkinTime == "0"){
+if(checkinTime == "0" || checkinTime == '-1'){
     checkinTime = "Flexible";
+}
+else if (checkinTime == 'NULL' || checkinTime == 'ULL' || checkinTime == 'LL' || checkinTime == 'UL' || checkinTime == 'LL' || checkinTime == 'ULL') {
+  checkinTime = "Not Set"
 }
 else{
 checkinTime = checkinTime + ":00";
@@ -2387,8 +2402,11 @@ checkinTime = checkinTime + ":00";
 
 var checkoutTime = snapshotText.substring(snapshotText.indexOf('check_out_time')-2);
 checkoutTime = checkoutTime.substring(checkoutTime.indexOf('check_out_time')+16,checkoutTime.indexOf('city')-2);
-if(checkoutTime == "0") {
+if(checkoutTime == "0" || checkinTime == '-1') {
     checkoutTime = "Flexible";
+}
+else if (checkoutTime == 'NULL' || checkoutTime == 'ULL' || checkoutTime == 'LL' || checkoutTime == 'UL' || checkoutTime == 'LL' || checkoutTime == 'ULL') {
+  checkoutTime = "Not Set"
 }
 else{
 checkoutTime = checkoutTime + ":00";
@@ -4579,7 +4597,7 @@ if (insertedPricingText.includes('"WEEKLY_PRICE"')) {
       discountPercentage = convertDiscountPercentage(discountPercentage);
 
       var discountTypeID = "Lengthofstaydiscount";
-      var discountTypeLength = "WEEKLY Discount";
+      var discountTypeLength = "Weekly Discount";
 
         var counter =1;
 
@@ -5314,7 +5332,7 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
     snapshotRaw.appendChild(snapshotRawNode);
     document.getElementById(alterationNumber + 'rawSnapshotContent').appendChild(snapshotRaw);
 
-$('#'+alterationNumber+'snapshotRaw').html($('#'+alterationNumber+'snapshotRaw').html().replace(/\n\\*/g,"</p><p>"));
+$('#'+alterationNumber+'snapshotRaw').html($('#'+alterationNumber+'snapshotRaw').html().replace(/\n\\*/g,'</p> <span style="visibility:hidden;">.</span> <p>'));
 //document.getElementById(alterationNumber + 'snapshotRaw').replace(/\n\\*/g,"</p><p>");
 
 //(document.getElementById(alterationNumber+'snapshotRaw').html((document.getElementById(alterationNumber+'snapshotRaw')).html().replace(/<br>\\*/g,"</p><p>")));

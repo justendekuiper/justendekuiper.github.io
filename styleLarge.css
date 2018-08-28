@@ -203,5 +203,185 @@ font-size: 19px;
  .alterationButton{
  	width: 120px;
 	font-size: 15.7px;
+    padding: 0.5vh 2.4px 0.5vh 2.4px;
 	margin: 3vh 50% 1vh 10%;;
  }
+
+
+
+
+
+
+
+
+.BookingDetails{
+    font-size: 13.4px;
+}
+
+
+.listingOuterDiv {
+    margin-left: 645.6px;
+    width: 60px;
+}
+
+
+.listingImage {
+    width: 36px;
+    position: relative;
+    margin-left: 12px;
+}
+
+
+.reservationCode {
+    width: 120px;
+    margin-left: 324.2px;
+     margin-bottom: 1vh;
+    background-color: #edefed;
+    padding: 0.5vh 5.2px;
+}
+
+
+.guestDivOuter {
+    width: 168.1px;
+    left: 168.1px;
+}
+
+
+.guestDivIndicate{
+    font-size: 16px;
+}
+
+
+.hostDivIndicate{
+    font-size: 16px;
+}
+
+
+
+.divNova {
+    width: 83.5px;
+}
+
+
+
+.divPublic {
+    width: 83.5px;
+}
+
+
+.hostDivOuter {
+    width: 168.1px;
+    margin-left: 287.5px;
+    left:0px;
+}
+
+
+
+.timeframeOuterDiv {
+    width: 456.4px;
+    margin-left: 156.1px;
+}
+
+
+.timeframeType{
+    width: 192.1px;
+    margin-right: 6px;
+}
+
+.timeframeLine {
+    width: 60px
+}
+
+
+.timeframeData{
+    width: 192.1px;
+    margin-left: 6px;
+}
+
+
+
+.instantBookRequirement{
+    width: 300.3px;
+    margin-left: 234.2px;
+}
+
+.numberOfGuests{
+    width: 144.1px;
+    padding: 6px 0;
+    margin-left: 234.2px;
+}
+
+.numberOfNights{
+    width: 144.1px;
+    padding: 6px 0;
+    margin-left: 12px;
+}
+
+.cancellationPolicy {
+    width: 300px;
+    margin-left: 234.2px;
+}
+
+
+
+.usdFxRate{
+    width: 120px;
+    margin-left: 324.3px;
+}
+
+
+
+
+.guestFxRateDiv{
+    width: 120.1px;
+    padding: 6px 0;
+    margin-left: 204.2px;
+}
+
+.hostFxRateDiv{
+    width: 120.1px;
+    padding: 6px 0;
+    border-radius: 5px;
+    margin-left: 120.1px;
+}
+
+.arrowLeftImage{
+    top: 1.8vh;
+    width: 60px;
+    margin-left: 283.4px;
+}
+
+.arrowRightImage{
+    top: 1.8vh;
+    width: 60px;
+    margin-left: 424px;
+}
+
+.fxRateLink{
+    width: 300.3px;
+    margin-left: 235px;
+}
+
+
+
+.checkinDiv{
+    width: 300.3px;
+    margin-left: 235px;
+}
+
+.checkoutDiv{
+    width: 300.3px;
+    margin-left: 235px;
+}
+
+
+
+.reviewsBlocked{
+    width: 300.3px;
+    margin-left: 234.2px;
+}
+
+.snapshotRaw{    
+    font-size: 10.8px;
+    padding: 4vh 41.5px;   
+}
