@@ -2499,7 +2499,9 @@ checkinDate = checkinDate.substring(checkinDate.indexOf('start_date')+12,checkin
 
 var checkoutDate = snapshotText.substring(snapshotText.indexOf('end_date')-4);
 checkoutDate = checkoutDate.substring(checkoutDate.indexOf('end_date')+10,checkoutDate.indexOf('error_flag')-2);
-
+if((checkoutDate.length)>12){
+  checkoutDate="";
+}
 
 
 createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency,checkinDate,checkoutDate);
