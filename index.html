@@ -8,6 +8,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="script.js"></script>
 
+
 <link rel="icon" type="image/png" href="AirbnbLogo.ico">
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel='stylesheet' media='screen and (min-width: 1200px)' href='styleLarge.css' />
@@ -70,7 +71,11 @@
 <!-- Output Area -->
 <div id="DivOutputField"> 
 <div id="borderDivOutputField"></div>
-
+<div id="map"></div>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9zMgngKoB0gZIiN0zmO0rvrmpG59MoEo&callback=initMap">
+</script>
 </div>
 
 <!-- Right Area -->

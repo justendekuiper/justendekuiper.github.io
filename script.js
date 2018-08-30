@@ -13,6 +13,23 @@ $(window).scroll(function() {
 
 
 
+function initMap() {
+  var myLatLng = {lat: -25.363, lng: 131.044};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+}
+
+
+
 $(document).ready(function(){
   var input = document.getElementById("EntreeField");
 
@@ -716,6 +733,10 @@ function noAlterationContent(alterationNumber){
         headerListingDetails.className =  'HeaderListingDetails';
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(headerListingDetails)
 
+        var locationListing = document.createElement('div')
+        locationListing.id = alterationNumber + 'locationListing';
+        locationListing.className =  'locationListing';
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(locationListing)
 
 
         var divIconListingGuests = document.createElement('div');
@@ -766,21 +787,47 @@ function noAlterationContent(alterationNumber){
         divIconListingBaths.appendChild(divIconListingBathsData);
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(divIconListingBaths);
 
+        var createListingDescriptionHeader = document.createElement('div');
+        var createListingDescriptionHeaderNode = document.createTextNode('Description');
+        createListingDescriptionHeader.appendChild(createListingDescriptionHeaderNode);
+        createListingDescriptionHeader.className = 'listingHeader';
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingDescriptionHeader);
+
 
         var createListingDescription = document.createElement('div');
         createListingDescription.id = alterationNumber + "DescriptionListingDetails";
         createListingDescription.className =  "DescriptionListingDetails";
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingDescription);
 
+        var createListingAmenitiesHeader = document.createElement('div');
+        var createListingAmenitiesHeaderNode = document.createTextNode('Amenities');
+        createListingAmenitiesHeader.appendChild(createListingAmenitiesHeaderNode);
+        createListingAmenitiesHeader.className = 'listingHeader';
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingAmenitiesHeader);
+
+
         var createListingAmenities = document.createElement('div');
         createListingAmenities.id = alterationNumber + "AmenitiesData"
         createListingAmenities.className = "AmenitiesData"
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingAmenities);
 
+        var createListingRulesHeader = document.createElement('div');
+        var createListingRulesHeaderNode = document.createTextNode('House Rules');
+        createListingRulesHeader.appendChild(createListingRulesHeaderNode);
+        createListingRulesHeader.className = 'listingHeader';
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingRulesHeader);
+
+
         var createListingRules = document.createElement('div');
         createListingRules.id = alterationNumber + "HouseRulesListingDetails"
         createListingRules.className =  "HouseRulesListingDetails"
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingRules);
+
+
+        var createListingMap = document.createElement('div');
+        createListingMap.id= alterationNumber + "listingMap";
+        createListingMap.className = "listingMap";
+        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingMap);
     }
 
 
@@ -991,7 +1038,7 @@ function convertCancellationPolicy(cancel_policy_raw){
 
 
 
-function createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency){
+function createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency,checkinDate,checkoutDate){
 //Listin Icon
     //OuterDiv Listing
     var listingOuterDiv = document.createElement('div');
@@ -1264,7 +1311,7 @@ else{
     checkinType.appendChild(checkinTypeNode)
     checkinType.className = 'checkType'
     var checkinData = document.createElement('div');
-    var checkinDataNode = document.createTextNode(checkinTime)
+    var checkinDataNode = document.createTextNode(checkinDate + " at " +checkinTime)
     checkinData.appendChild(checkinDataNode);
     checkinData.className = 'checkData';
     checkinDiv.appendChild(checkinType);
@@ -1278,7 +1325,7 @@ else{
     checkoutType.appendChild(checkoutTypeNode)
     checkoutType.className = 'checkType'
     var checkoutData = document.createElement('div');
-    var checkoutDataNode = document.createTextNode(checkoutTime)
+    var checkoutDataNode = document.createTextNode(checkoutDate + " at " +checkoutTime)
     checkoutData.appendChild(checkoutDataNode);
     checkoutData.className = 'checkData';
     checkoutDiv.appendChild(checkoutType);
@@ -1682,7 +1729,7 @@ function createNightlyPriceInsert (counter,type,original_amount_listing,amount_u
 
 
 // Extra Guest insert
-function createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsIncluded,extraGuestsNumber,listingCurrencySymbol,extraGuestsPriceListing,extra_guest_fee_Listing,extra_guest_fee_USD,guestCurrencySymbol,extraGuestsPriceGuest,extra_guest_fee_Guest,alterationNumber) {
+function createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsIncluded,extraGuestsNumber,listingCurrencySymbol,extraGuestsPriceListing,extra_guest_fee_Listing,extra_guest_fee_USD,guestCurrencySymbol,extraGuestsPriceGuest,extra_guest_fee_Guest,alterationNumber,extraGuestFeeUSDNotApplied,extraGuestFeeGuestNotApplied,extraGuestFeeListingNotApplied) {
            // Listing
         var divExtraGuestInsert = document.createElement("div");
         divExtraGuestInsert.className="extraGuestDiv";
@@ -1749,7 +1796,12 @@ function createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsInclude
         document.getElementById(alterationNumber + 'moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
+        if(extraGuestsPriceListing > 0) {
         moreInfoExtraGuestInclNode = document.createTextNode (listingCurrencySymbol +" " + extraGuestsPriceListing)
+      }
+      else{
+        moreInfoExtraGuestInclNode = document.createTextNode (listingCurrencySymbol +" " + extraGuestFeeListingNotApplied)
+      }
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
         document.getElementById(alterationNumber + 'moreInfoExtraGuestListing'+counter).appendChild(moreInfoExtraGuestInclInsert);
@@ -1851,7 +1903,12 @@ function createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsInclude
         document.getElementById(alterationNumber + 'moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
 
         var moreInfoExtraGuestInclInsert = document.createElement('div');
+        if(extraGuestsPriceGuest >0) {
         moreInfoExtraGuestInclNode = document.createTextNode (guestCurrencySymbol +" " + extraGuestsPriceGuest)
+      }
+      else{
+        moreInfoExtraGuestInclNode = document.createTextNode (guestCurrencySymbol +" " + extraGuestFeeGuestNotApplied)
+      }
         moreInfoExtraGuestInclInsert.appendChild(moreInfoExtraGuestInclNode)
         moreInfoExtraGuestInclInsert.className = "dataInfoExtraGuest";
         document.getElementById(alterationNumber + 'moreInfoExtraGuestGuest'+counter).appendChild(moreInfoExtraGuestInclInsert);
@@ -2437,10 +2494,15 @@ guestCurrency = guestCurrency.substring(guestCurrency.indexOf('guest_currency')+
 var hostCurrency = snapshotText.substring(snapshotText.indexOf('guest_currency')-2);
 hostCurrency = hostCurrency.substring(hostCurrency.indexOf('host_currency')+15,hostCurrency.indexOf('host_currency_rate')-2)
 
+var checkinDate = snapshotText.substring(snapshotText.indexOf('start_date')-4);
+checkinDate = checkinDate.substring(checkinDate.indexOf('start_date')+12,checkinDate.indexOf('status')-2);
+
+var checkoutDate = snapshotText.substring(snapshotText.indexOf('end_date')-4);
+checkoutDate = checkoutDate.substring(checkoutDate.indexOf('end_date')+10,checkoutDate.indexOf('error_flag')-2);
 
 
 
-createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency);
+createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency,checkinDate,checkoutDate);
 
 
 
@@ -2503,6 +2565,12 @@ listingTitle = listingTitle.substring(listingTitle.indexOf('monthly_price_native
 listingTitle = listingTitle.substring(listingTitle.indexOf('name')+6);
 document.getElementById(alterationNumber + "HeaderListingDetails").innerText = listingTitle;
 
+/* Listing Location */
+var listingLocation = snapshotText.substring(snapshotText.indexOf('are_children_allowed'));
+listingLocation = listingLocation.substring(listingLocation.indexOf('check_out_time'),listingLocation.indexOf('craigslist_provide_reminder'));
+listingLocation = listingLocation.substring(listingLocation.indexOf('city')+6,listingLocation.indexOf('city_native')-2);
+document.getElementById(alterationNumber + "locationListing").innerText = listingLocation;
+
 
 
 /* Listing Icon Numbers */
@@ -2527,7 +2595,7 @@ document.getElementById(alterationNumber + "ListingBaths").innerText = ListingBa
 
 /* Listing Description */
 var listingDescription = snapshotText.substring(snapshotText.indexOf('craigslist_provide_reminder'),snapshotText.indexOf('dist_to_train'));
-listingDescription = listingDescription.substring(listingDescription.indexOf('deleted_at'),listingDescription.indexOf('directions'));
+listingDescription = listingDescription.substring(listingDescription.indexOf('deleted_at'),listingDescription.indexOf('directions')-2);
 listingDescription = listingDescription.substring(listingDescription.indexOf('description') +13);
 document.getElementById(alterationNumber + "DescriptionListingDetails").innerText = listingDescription;
 
@@ -2611,9 +2679,31 @@ while (amenitiesTotal.includes(" -")) {
 
 /* Listing House Rules */
 var listingHouseRules = snapshotText.substring(snapshotText.indexOf('has_premium_override'),snapshotText.indexOf('hypothetical_rank')+17);
-var listingHouseRules = listingHouseRules.substring(listingHouseRules.indexOf('house_rules')+12,listingHouseRules.indexOf('hypothetical_rank')-1);
+var listingHouseRules = listingHouseRules.substring(listingHouseRules.indexOf('house_rules')+13,listingHouseRules.indexOf('hypothetical_rank')-1);
 document.getElementById(alterationNumber + "HouseRulesListingDetails").innerText = listingHouseRules;
 
+
+/* Google Maps */
+function initMap() {
+  var myLatLng = {lat: -25.363, lng: 131.044};
+
+  var map = new google.maps.Map(document.getElementById(alterationNumber + "listingMap"), {
+    zoom: 4,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Location of the Listing'
+  });
+}
+/*
+        var createListingMapScript = document.createElement("script");
+        createListingMapScript.type = "text/javascript";
+        createListingMapScript.defer = true;
+        createListingMapScript.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC9zMgngKoB0gZIiN0zmO0rvrmpG59MoEo&callback=initMap";
+        $("#" + alterationNumber + 'DivListingDetails').append(createListingMapScript);
 
 
 
@@ -2659,6 +2749,10 @@ if (insertedPricingText.includes("guest_fee_reservation_stamp")) {
         var listingCurrency = SnapshotPriceText.substring(SnapshotPriceText.indexOf('"listing_currency":"')+20,SnapshotPriceText.indexOf('"listing_currency":"')+23);
         var guestCurrency = insertedtoptext.substring(insertedtoptext.indexOf('guest_currency')-1);
         guestCurrency = guestCurrency.substring(guestCurrency.indexOf('guest_currency')+16, guestCurrency.indexOf('guest_currency_rate')-2);
+
+        var listingCurrencyRate = snapshotText.substring(snapshotText.indexOf('host_currency_rate')-10,snapshotText.indexOf('host_fee_revenue_cents')-2)
+        listingCurrencyRate = parseFloat(listingCurrencyRate.substring(listingCurrencyRate.indexOf('host_currency_rate')+20,listingCurrencyRate.indexOf('host_fee')-2))
+        var guestCurrencyRate = parseFloat(snapshotText.substring(snapshotText.indexOf('guest_currency_rate')+21,snapshotText.indexOf('guest_currency_spread')-2))
 
 }  /* End of If - Checking Snapshot Type */
 
@@ -5000,8 +5094,15 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
     extra_guest_fee_Listing = listingCurrencySymbol + " " + (parseFloat((extra_guest_fee_Listing)/numberNight) / 1000000).toFixed(2); 
  
     var extra_guest_fee_USD = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('amount_micro_usd')+18,replacedExtraGuestFeeText.indexOf('start_date')-2);
+    if(extra_guest_fee_USD > 0) {
     extra_guest_fee_USD =  "$ " + (parseFloat((extra_guest_fee_USD) / 1000000)/numberNight).toFixed(2); 
-
+    var extraGuestFeeUSDNotApplied =  extra_guest_fee_USD;
+}
+else{
+  var extraGuestFeeUSDNotApplied = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('price_per_extra_guest_per_night_micro_guest')+45,replacedExtraGuestFeeText.indexOf('}}}'));
+  extraGuestFeeUSDNotApplied = parseFloat(extraGuestFeeUSDNotApplied / 1000000).toFixed(2);
+  extra_guest_fee_USD = "$ " + (parseFloat((extra_guest_fee_USD) / 1000000)/numberNight).toFixed(2); 
+}
 
 
     var extraGuestsIncluded = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('number_of_guests_included')+27,replacedExtraGuestFeeText.indexOf('number_of_extra_guests')-2);
@@ -5009,25 +5110,29 @@ if (insertedPricingText.includes('"type":"EXTRA_GUEST_FEE"')) {
     var extraGuestsPriceGuest = parseFloat(replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('guest_amount_micros')+21,replacedExtraGuestFeeText.indexOf('host_amount_currency')-2));
         if(extraGuestsPriceGuest >0) {
             extraGuestsPriceGuest = (parseFloat(extraGuestsPriceGuest)/1000000 / numberNight / extraGuestsNumber).toFixed(2);
+            var extraGuestFeeGuestNotApplied = extraGuestsPriceGuest;
         }
         else {
             extraGuestsPriceGuest = extraGuestsPriceGuest.toFixed(2);
+            var extraGuestFeeGuestNotApplied = (extraGuestFeeUSDNotApplied * guestCurrencyRate).toFixed(2);
         }
+
     var extraGuestsPriceListing = replacedExtraGuestFeeText.substring(replacedExtraGuestFeeText.indexOf('host_amount_micros')-2);
     extraGuestsPriceListing = parseFloat(extraGuestsPriceListing.substring(extraGuestsPriceListing.indexOf('host_amount_micros')+20 , extraGuestsPriceListing.indexOf('id')-2));
         if(extraGuestsPriceListing >0) {
             extraGuestsPriceListing = (parseFloat(extraGuestsPriceListing)/1000000 / numberNight / extraGuestsNumber).toFixed(2);
+            var extraGuestFeeListingNotApplied = extraGuestsPriceListing
     }
     else {
         extraGuestsPriceListing = extraGuestsPriceListing.toFixed(2);
+        var extraGuestFeeListingNotApplied = (extraGuestFeeUSDNotApplied * listingCurrencyRate).toFixed(2);
     }
-
 
     var counter =1;
     while(numberNight >= counter) {
 
 
- createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsIncluded,extraGuestsNumber,listingCurrencySymbol,extraGuestsPriceListing,extra_guest_fee_Listing,extra_guest_fee_USD,guestCurrencySymbol,extraGuestsPriceGuest,extra_guest_fee_Guest,alterationNumber);
+ createExtraGuestInsert (counter,extra_guest_fee_type,extraGuestsIncluded,extraGuestsNumber,listingCurrencySymbol,extraGuestsPriceListing,extra_guest_fee_Listing,extra_guest_fee_USD,guestCurrencySymbol,extraGuestsPriceGuest,extra_guest_fee_Guest,alterationNumber,extraGuestFeeUSDNotApplied,extraGuestFeeGuestNotApplied,extraGuestFeeListingNotApplied);
 
         counter++;
 

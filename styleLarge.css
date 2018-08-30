@@ -17,6 +17,11 @@
     }
 
 
+.popupbuttons {
+    width: 52.7px;
+}
+
+
 #requestFeedbackText {
     font-size: 25px;
 }
@@ -48,7 +53,13 @@ font-size: 19px;
 }
 
 .monthDivFirst {
-	left: 96px;
+    left: 96px;
+     width: 120px;
+     font-size: 16px;
+ }
+
+.monthDiv {
+    left: 96px;
      width: 120px;
      font-size: 16px;
  }
@@ -385,3 +396,42 @@ font-size: 19px;
     font-size: 10.8px;
     padding: 4vh 41.5px;   
 }
+
+.locationListing{
+    font-size: 9.7px;
+}
+
+
+.linksListingDiv {
+    font-size: 15.3px;
+}
+
+.typeListingDetails{
+    font-size: 12.6px;
+    bottom:0.2vh;
+}
+
+
+.HeaderListingDetails {
+     font-size: 16px;
+}
+
+.listingHeader{
+     margin-left: 15.3px;
+    padding: 1.6vh 0 0.7vh 0;
+}
+
+
+.DescriptionListingDetails {
+     font-size: 14.4px;
+}
+
+
+.amenityName {    
+     font-size: 14.4px;
+}
+
+.HouseRulesListingDetails {
+     font-size: 14.4px;
+}
+

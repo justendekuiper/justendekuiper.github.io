@@ -153,6 +153,7 @@ html, body{
     outline: none;
     color: white;
     font-size: 0.9vw;
+    float: left;
 }
 
 #ButtonEntreeField:hover {
@@ -190,8 +191,7 @@ html, body{
 }
 
 .popupbuttons {
-	height: 60px;
-	width: 60px;
+    width: 4.4vw;
 	margin-top:50px;
 	margin-left:50px;
 	position: relative;
@@ -339,12 +339,11 @@ html, body{
     position: relative;
     width: 10vw;
     top: 20px;
-    height: 2.5vh;
     background-color: #118488;
     border-radius: 4px;
     margin: 3vh 0 1vh 10%;
     cursor: pointer;
-    padding: 0 0.2vw 0 0.2vw;
+    padding: 0.5vh 0.2vw 0.5vh 0.2vw;
     font-size: 1.3vw;
     vertical-align: middle;
     display: inline-block;
@@ -547,7 +546,7 @@ html, body{
 }
 
 .hostDivOuter:hover .hostDivName{
-	border-radius: 5px 5px 0 0;
+	border-radius: 0px 0px 0 0;
 }
 .hostDivOuter:hover  .hostDivNova{
 	visibility: visible;
@@ -560,7 +559,7 @@ html, body{
 }
 
 .guestDivOuter:hover .guestDivName{
-	border-radius: 5px 5px 0 0;
+	border-radius: 0px 0px 0 0;
 }
 
 .guestDivOuter:hover  .guestDivNova{
@@ -787,7 +786,8 @@ html, body{
 .checkData{
 	display: inline-block;
     width: 50%;
-     cursor: default;
+    cursor: default;
+    text-align: left;
 }
 
 .checkType{
@@ -1421,6 +1421,7 @@ display: inline-block;
     position: relative;
     left: 80%;
     width: 20%;
+    font-size: 1.3vw;
 }
 
 
@@ -1440,13 +1441,24 @@ display: inline-block;
 	font-size: 0.8em;
 	position: relative;
 	bottom:0.2vh;
+    color:#572533;;
 }
 
 .HeaderListingDetails {
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 1.3vw;
 	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-	margin: 2px 0px 20px 0px;
+	margin: 0.2vh 0;
+}
+.locationListing{
+    font-size: 0.8vw;
+    margin-bottom: 1vh;
+}
+
+.listingHeader{
+    font-weight: bold;
+    font-size: 1.3vw;
+    padding: 2.4vh 0 1vh 0;
 }
 
 
@@ -1474,10 +1486,8 @@ display: inline-block;
 
 
 .DescriptionListingDetails {
-	font-size: 16px;
+	font-size: 1.2vw;
 	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-	font-weight: normal;
-	margin: 20px 0px 30px 0px;
 }
 
 
@@ -1485,8 +1495,6 @@ display: inline-block;
 .AmenitiesData {
 	position: relative;
 	width: 100%;
-	margin-top:20px;
-	margin: 10px 20px 0px 0px;
 	display: block;
 }
 
@@ -1517,11 +1525,8 @@ display: inline-block;
 }
 
 .HouseRulesListingDetails {
-	margin: 1vh 0 1vh 0;
+    font-size: 1.2vw;
 }
-
-
-
 
 
 
