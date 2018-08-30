@@ -1048,6 +1048,22 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     var listingImage = document.createElement('img');
     listingImage.src = "images/listingIcon.png";
     listingImage.className = 'listingImage';
+    //Menu Bars
+    var listingMenuBars = document.createElement('div');
+    listingMenuBars.className = 'listingMenuBars';
+    //Menu Bar1
+    var listingMenuBar1 = document.createElement('div');
+    listingMenuBar1.className = 'listingMenuBar';
+    //Menu Bar2
+    var listingMenuBar2 = document.createElement('div');
+    listingMenuBar2.className = 'listingMenuBar';
+    //Menu Bar3
+    var listingMenuBar3 = document.createElement('div');
+    listingMenuBar3.className = 'listingMenuBar';
+    //appending Menus
+    listingMenuBars.appendChild(listingMenuBar1);
+    listingMenuBars.appendChild(listingMenuBar2);
+    listingMenuBars.appendChild(listingMenuBar3);
     //ID of Listing
     var listingIDDiv = document.createElement('div');
     listingIDNode = document.createTextNode(listingID);
@@ -1055,6 +1071,7 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     listingIDDiv.className = 'listingID';
     //Appending all Items
     listingOuterDiv.appendChild(listingImage);
+    listingOuterDiv.appendChild(listingMenuBars);
     listingOuterDiv.appendChild(listingIDDiv);
     document.getElementById(alterationNumber + 'BookingDetails').appendChild(listingOuterDiv);
 
