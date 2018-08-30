@@ -47,6 +47,27 @@ font-size: 19px;
     }
 
 
+#errorSnapshotDiv {
+    width: 480.7px;
+    margin: 3vh 0 0 144.2px;
+}
+
+#errorSnapshotHeader {
+    font-size: 16px;
+}
+
+#errorSnapshotText {
+    font-size: 15.3px;
+}
+
+#errorSnapshotSteps {
+    font-size: 14.4px;
+}
+
+
+
+
+
 .definitionType {
 	font-size: 13.2px;
 	padding: 1vh 9.6px 1vh 9.6px;

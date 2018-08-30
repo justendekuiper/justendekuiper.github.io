@@ -2321,6 +2321,60 @@ document.getElementById('arrowOutput').ondragstart = function() { return false; 
     var insertedtext = document.getElementById("EntreeField").value;
 
 
+// If not full snapshot inserted
+if(insertedtext.indexOf('admin_notes') > -1 && insertedtext.indexOf('visible_pictures') > -1){
+  //Snapshots correctly inserted
+}
+else{
+  document.getElementById('arrowOutput').style.display = 'none';
+
+  //creating error message
+  var errorSnapshotDiv = document.createElement('div');
+  errorSnapshotDiv.id = 'errorSnapshotDiv';
+
+  errorSnapshotHeader = document.createElement('div');
+  errorSnapshotHeader.id = 'errorSnapshotHeader';
+  errorSnapshotHeaderNode = document.createTextNode('Oops, Something went wrong here!')
+  errorSnapshotHeader.appendChild(errorSnapshotHeaderNode)
+
+  errorSnapshotText = document.createElement('div');
+  errorSnapshotText.id = 'errorSnapshotText';
+  errorSnapshotTextNode = document.createTextNode('There seems to be an issue with the snapshots that was pasted in the textbox. Please make sure to select all, copy all and paste all by following these steps:')
+  errorSnapshotText.appendChild(errorSnapshotTextNode);
+
+  errorSnapshotSteps = document.createElement('div');
+  errorSnapshotSteps.id = 'errorSnapshotSteps';
+  errorSnapshotStepsNode1 = document.createTextNode('1. Go to the snapshot page through Nova')
+  errorSnapshotStepsBreak1 = document.createElement('br');
+  errorSnapshotStepsNode2 = document.createTextNode('2. Select all the text by holding the CMD button (or Ctrl on windows) and by pressing the A button')
+  errorSnapshotStepsBreak2 = document.createElement('br');
+  errorSnapshotStepsNode3 = document.createTextNode('3. When all text is selected, hold the CMD button (or Ctrl on windows) and by pressing the C button')
+  errorSnapshotStepsBreak3 = document.createElement('br');
+  errorSnapshotStepsNode4 = document.createTextNode('4. Now go to this page, the Snapshot tool, and paste the text in the textfield box above. Then select the "View Snapshots" button')
+  errorSnapshotSteps.appendChild(errorSnapshotStepsNode1);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsBreak1);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsNode2);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsBreak2);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsNode3);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsBreak3);
+  errorSnapshotSteps.appendChild(errorSnapshotStepsNode4);
+
+
+  errorSnapshotDiv.appendChild(errorSnapshotHeader);
+  errorSnapshotDiv.appendChild(errorSnapshotText)
+  errorSnapshotDiv.appendChild(errorSnapshotSteps)
+
+  document.getElementById('DivOutputField').appendChild(errorSnapshotDiv);
+
+        $('html,body').animate({
+        scrollTop: $("#DivOutputField").offset().top},
+        'slow');
+  return;
+}
+
+
+
+
 
     var snapshotText = insertedtext.substring(insertedtext.indexOf("admin_notes"),insertedtext.indexOf("visible_pictures")+10)
 if(snapshotText.includes('Justen') || snapshotText.includes('justen') || snapshotText.includes('Aleksei') || snapshotText.includes('aleksei') ) {
