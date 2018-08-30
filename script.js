@@ -2358,7 +2358,7 @@ else{
   errorSnapshotSteps.appendChild(errorSnapshotStepsNode3);
   errorSnapshotSteps.appendChild(errorSnapshotStepsBreak3);
   errorSnapshotSteps.appendChild(errorSnapshotStepsNode4);
-
+  
 
   errorSnapshotDiv.appendChild(errorSnapshotHeader);
   errorSnapshotDiv.appendChild(errorSnapshotText)
