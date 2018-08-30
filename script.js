@@ -12,12 +12,15 @@ $(window).scroll(function() {
 });
 
 
+var lattitude = 1;
+var longtitude = 1;
+alterationNumber = 0
 
 function initMap() {
-  var myLatLng = {lat: -25.363, lng: 131.044};
+  var myLatLng = {lat: lattitude, lng: longtitude};
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+  var map = new google.maps.Map(document.getElementById(alterationNumber + 'map'), {
+    zoom: 15,
     center: myLatLng
   });
 
@@ -27,6 +30,8 @@ function initMap() {
     title: 'Hello World!'
   });
 }
+
+
 
 
 
@@ -822,12 +827,6 @@ function noAlterationContent(alterationNumber){
         createListingRules.id = alterationNumber + "HouseRulesListingDetails"
         createListingRules.className =  "HouseRulesListingDetails"
         document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingRules);
-
-
-        var createListingMap = document.createElement('div');
-        createListingMap.id= alterationNumber + "listingMap";
-        createListingMap.className = "listingMap";
-        document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createListingMap);
     }
 
 
@@ -2436,6 +2435,9 @@ else {
 
 
 
+
+
+
 /* Reservation Details Pulling Data */
 
 var reservation_code = snapshotText.substring(snapshotText.indexOf("confirmation_code") + 19,snapshotText.indexOf("coupon_id")-2);
@@ -2756,7 +2758,7 @@ var listingHouseRules = listingHouseRules.substring(listingHouseRules.indexOf('h
 document.getElementById(alterationNumber + "HouseRulesListingDetails").innerText = listingHouseRules;
 
 
-/* Google Maps */
+/* Google Maps 
 function initMap() {
   var myLatLng = {lat: -25.363, lng: 131.044};
 
@@ -5514,6 +5516,43 @@ $('#'+alterationNumber+'snapshotRaw').html($('#'+alterationNumber+'snapshotRaw')
 //document.getElementById(alterationNumber + 'snapshotRaw').replace(/\n\\*/g,"</p><p>");
 
 //(document.getElementById(alterationNumber+'snapshotRaw').html((document.getElementById(alterationNumber+'snapshotRaw')).html().replace(/<br>\\*/g,"</p><p>")));
+
+
+/* Google Maps */
+lattitude = snapshotText.substring(snapshotText.indexOf('are_children_allowed'));
+lattitude = lattitude.substring(lattitude.indexOf('is_weekly_price_prorated'));
+lattitude = lattitude.substring(lattitude.indexOf('lat')+5,lattitude.indexOf('listing_obj_type')-2);
+lattitude = parseFloat(lattitude)
+
+longtitude = snapshotText.substring(snapshotText.indexOf('are_children_allowed'));
+longtitude = longtitude.substring(longtitude.indexOf('listing_obj_type'));
+longtitude = longtitude.substring(longtitude.indexOf('lng')+5,longtitude.indexOf('locale')-2);
+longtitude = parseFloat(longtitude)
+
+var createMap = document.createElement('div');
+createMap.id = alterationNumber + 'map';
+createMap.className = 'maps'
+createMap.style.width = '51.2vw';
+createMap.style.height = '40vh';
+document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createMap)
+
+        var createListingMapScript = document.createElement("script");
+        createListingMapScript.type = "text/javascript";
+        createListingMapScript.defer = true;
+        createListingMapScript.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCivSX9T27Pc-3eM1shi6_ddzqGQp6qzxk&callback=initMap";
+        $("#" + alterationNumber + 'DivListingDetails').append(createListingMapScript);
+
+
+
+var createMapLinkDiv = document.createElement('div');
+var createMapLinkNode = document.createTextNode('View the location on Google Maps')
+createMapLinkDiv.appendChild(createMapLinkNode);
+createMapLinkDiv.setAttribute('onclick',"window.open('https://www.google.com/maps/?q="+lattitude+ "," + longtitude + "');")
+createMapLinkDiv.className= 'mapsLink';
+document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createMapLinkDiv)
+
+
+
 
 
 alterationNumber++;

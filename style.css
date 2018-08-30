@@ -1440,6 +1440,7 @@ display: inline-block;
     left: 80%;
     width: 20%;
     font-size: 1.3vw;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 }
 
 
@@ -1465,7 +1466,6 @@ display: inline-block;
 .HeaderListingDetails {
 	font-weight: bold;
 	font-size: 1.3vw;
-	font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 	margin: 0.2vh 0;
 }
 .locationListing{
@@ -1546,7 +1546,26 @@ display: inline-block;
     font-size: 1.2vw;
 }
 
+.maps {
+    margin: 4vh 0 2vh 0;
+}
 
+.mapsLink {
+    width: 20vw;
+    font-size: 1.3vw;
+    background: #edefed;
+    border-radius: 5px;
+    padding: 0.5vh 0.5vw;
+    margin-bottom: 5vh;
+    margin-left: 15.6vw;
+    cursor: pointer;
+    color: #118488;
+    text-align: center;
+}
+
+.mapsLink:hover {
+    background-color: #dbdedb;
+}
 
 .definitionType {
 	font-size: 1.1vw;
