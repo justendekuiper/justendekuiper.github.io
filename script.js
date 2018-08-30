@@ -1036,7 +1036,7 @@ function convertCancellationPolicy(cancel_policy_raw){
           }
       };
 
-
+ 
 
 function createReservationDetails(alterationNumber,reservation_code,nameGuest,nameHost,listingID,guestID,hostID,created_at,pending_began_at,pending_expires_at,host_Responded_at,canceled_at,instantBookRequirement,numberOfGuests,numberOfNights,cancel_policy,checkinTime,checkoutTime,reviewsBlocked,guestCurrencyRate,hostCurrencyRate,guestCurrency,hostCurrency,checkinDate,checkoutDate){
 //Listin Icon

@@ -62,7 +62,7 @@ html, body{
 	width: 17vw;
 	font-size: 1vw
 }
-
+ 
 
 
 /*Entree Field */
@@ -85,13 +85,9 @@ html, body{
 }
 
 #howToUse > h4 {
-	display: inline-block;
 	margin: 20px 0px 0px 0px;
 }
 
-#howToUse > p {
-	display: inline-block;
-}
 
 #DivEntreeField {
 	position: relative;
