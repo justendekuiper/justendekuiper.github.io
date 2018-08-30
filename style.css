@@ -1547,7 +1547,7 @@ display: inline-block;
 }
 
 .maps {
-    margin: 4vh 0 2vh 0;
+    margin: 4vh 0 0 0;
 }
 
 .mapsLink {
@@ -1561,6 +1561,7 @@ display: inline-block;
     cursor: pointer;
     color: #118488;
     text-align: center;
+    margin-top: 2vh;
 }
 
 .mapsLink:hover {

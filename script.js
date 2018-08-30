@@ -5519,6 +5519,8 @@ $('#'+alterationNumber+'snapshotRaw').html($('#'+alterationNumber+'snapshotRaw')
 
 
 /* Google Maps */
+
+if(alterationNumber == 0){
 lattitude = snapshotText.substring(snapshotText.indexOf('are_children_allowed'));
 lattitude = lattitude.substring(lattitude.indexOf('is_weekly_price_prorated'));
 lattitude = lattitude.substring(lattitude.indexOf('lat')+5,lattitude.indexOf('listing_obj_type')-2);
@@ -5541,7 +5543,7 @@ document.getElementById(alterationNumber + 'DivListingDetails').appendChild(crea
         createListingMapScript.defer = true;
         createListingMapScript.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCivSX9T27Pc-3eM1shi6_ddzqGQp6qzxk&callback=initMap";
         $("#" + alterationNumber + 'DivListingDetails').append(createListingMapScript);
-
+}
 
 
 var createMapLinkDiv = document.createElement('div');
