@@ -22,7 +22,7 @@ html, body{
 #requestFeedbackText {
 	text-align: center;
 	color: #118488;
-    font-size: 2vw;
+    font-size: 1.6vw;
 }
 
 
@@ -1566,6 +1566,11 @@ display: inline-block;
 
 .mapsLink:hover {
     background-color: #dbdedb;
+}
+
+.addressDiv{
+    font-size: 1.3vw;
+    margin: 0.5vh 0;
 }
 
 .definitionType {

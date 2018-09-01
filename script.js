@@ -1136,7 +1136,7 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     hostDivName.className = 'hostDivName';
     //InnerDivNova
     hostDivNova = document.createElement('div');
-    guestDivPublic.setAttribute('onclick',"window.open('https://nova.airbnb.tools/profiles/"+ hostID+"');")
+    hostDivNova.setAttribute('onclick',"window.open('https://nova.airbnb.tools/profiles/"+ hostID+"');")
     hostDivNovaLinkText = document.createTextNode('Nova');
     hostDivNova.appendChild(hostDivNovaLinkText);
     hostDivNova.className = 'hostDivNova divNova';
@@ -1218,7 +1218,7 @@ function createReservationDetails(alterationNumber,reservation_code,nameGuest,na
     pendingExpiresAtDiv.className = 'pendingExpiresAtDiv itemTimeDiv';
     //type
     pendingExpiresAtDivType = document.createElement('div');
-    pendingExpiresAtDivTypeNode = document.createTextNode('Pneding Expires at');
+    pendingExpiresAtDivTypeNode = document.createTextNode('Pending Expires at');
     pendingExpiresAtDivType.appendChild(pendingExpiresAtDivTypeNode);
     pendingExpiresAtDivType.className = 'timeframeType'
     //Line
@@ -2374,11 +2374,6 @@ else{
 
 
 
-
-    var snapshotText = insertedtext.substring(insertedtext.indexOf("admin_notes"),insertedtext.indexOf("visible_pictures")+10)
-if(snapshotText.includes('Justen') || snapshotText.includes('justen') || snapshotText.includes('Aleksei') || snapshotText.includes('aleksei') ) {
-    // alert("Awesome, that's a booking that involves the developer!");
-}
 
 
 
@@ -5544,6 +5539,17 @@ document.getElementById(alterationNumber + 'DivListingDetails').appendChild(crea
         createListingMapScript.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCivSX9T27Pc-3eM1shi6_ddzqGQp6qzxk&callback=initMap";
         $("#" + alterationNumber + 'DivListingDetails').append(createListingMapScript);
 }
+
+
+var address = snapshotText.substring(snapshotText.indexOf('formatted_address')-2);
+address = address.substring(address.indexOf('formatted_address') +19, address.indexOf('formatted_address_native')-2)
+
+
+var createAddressDiv = document.createElement('div');
+var createAddressNode = document.createTextNode(address);
+createAddressDiv.appendChild(createAddressNode);
+createAddressDiv.className = 'addressDiv'
+document.getElementById(alterationNumber + 'DivListingDetails').appendChild(createAddressDiv)
 
 
 var createMapLinkDiv = document.createElement('div');
